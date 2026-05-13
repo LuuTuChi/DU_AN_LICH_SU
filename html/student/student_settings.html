@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Cài đặt hệ thống — Sử Việt</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <style>
+        /* ── LAYOUT ── */
+        .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
+        .settings-card { background: var(--white); border-radius: var(--radius-md); padding: 24px; border: 1.5px solid var(--border); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; transition: 0.3s; }
+        .settings-card h3 { font-family: 'Playfair Display', serif; color: var(--maroon); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 700; color: var(--text-mid); margin-bottom: 6px; }
+        .form-control { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-family: 'Nunito', sans-serif; outline: none; background: transparent; color: inherit; }
+        .form-control:focus { border-color: var(--gold); }
+        
+        .btn-action { background: var(--maroon); color: white; border: none; padding: 10px 20px; border-radius: 99px; font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 13px; width: fit-content; }
+        .btn-action:hover { background: var(--maroon-dark); transform: translateY(-1px); }
+        
+        /* ── TOGGLE SWITCH (DARK MODE) ── */
+        .switch-group { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+        .switch { position: relative; display: inline-block; width: 40px; height: 20px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 20px; }
+        .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--maroon); }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* ── VÙNG NGUY HIỂM ── */
+        .danger-zone { border-color: #ffcccc; background: #fff5f5; }
+        .danger-zone h3 { color: #c0392b; }
+        .btn-danger-outline { background: transparent; color: #c0392b; border: 1px solid #c0392b; padding: 6px 12px; border-radius: 99px; font-size: 11px; font-weight: 600; cursor: pointer; margin-top: 10px; transition: 0.2s; width: fit-content; }
+        .btn-danger-outline:hover { background: #fee2e2; }
+
+        /* ── DARK MODE LOGIC (Áp dụng màu tối) ── */
+        body.dark-theme {
+            --cream: #121212;
+            --white: #1e1e1e;
+            --text-dark: #f5f5f5;
+            --text-mid: #dcdcdc;
+            --text-muted: #aaa;
+            --border: #333;
+            --maroon: #ff4d4d;
+        }
+        body.dark-theme .settings-card { background: #1e1e1e; border-color: #333; }
+        body.dark-theme .danger-zone { background: #2a1515; border-color: #442222; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="sidebar-icons">
+    <div class="icon-btn" onclick="location.href='student_dashboard.html'">
+        <span class="material-symbols-outlined">home</span>
+    </div>
+
+    <div class="icon-btn" onclick="location.href='student_profile.html'">
+        <span class="material-symbols-outlined">groups</span>
+    </div>
+
+    <div class="icon-btn active" onclick="location.href='student_settings.html'">
+        <span class="material-symbols-outlined">settings</span>
+    </div>
+    <div class="logout">
+         <a href="../login.html" class="icon-btn">
+           <span class="material-symbols-outlined">logout</span>
+         </a>
+       </div>
+</div>
+
+    <div class="sidebar-menu">
+        <div class="profile">
+            <div class="avatar" id="avatarEl">ẢNH</div>
+            <div class="name" id="nameEl">HỌ VÀ TÊN</div>
+        </div>
+        <ul class="menu">
+      <li class="active"><a href="student_settings.html">Cài đặt hệ thống</a></li>
+    </ul>
+    </div>
+
+    <div class="center">
+        <h2 class="page-title">CÀI ĐẶT HỆ THỐNG</h2>
+
+        <div class="settings-grid">
+            <div class="settings-card">
+                <h3><span class="material-symbols-outlined">lock</span> Đổi mật khẩu</h3>
+                <form id="passwordForm">
+                    <div class="form-group">
+                        <label>Mật khẩu hiện tại</label>
+                        <input type="password" class="form-control" name="old_pass" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu mới</label>
+                        <input type="password" class="form-control" name="new_pass" required>
+                    </div>
+                    <button type="submit" class="btn-action">Cập nhật mật khẩu</button>
+                </form>
+            </div>
+
+            <div class="settings-card">
+                <h3><span class="material-symbols-outlined">visibility</span> Quyền riêng tư</h3>
+                <div class="form-group">
+                    <label>Trạng thái trực tuyến</label>
+                    <select class="form-control">
+                        <option>Công khai với lớp học</option>
+                        <option>Ẩn với mọi người</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ngôn ngữ hệ thống</label>
+                    <select class="form-control">
+                        <option>Tiếng Việt</option>
+                        <option>English</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="settings-card danger-zone">
+                <h3><span class="material-symbols-outlined">gpp_maybe</span> Vùng nguy hiểm</h3>
+                <p style="font-size: 12px; color: #666; margin-bottom: 5px;">Hành động bên dưới không thể hoàn tác.</p>
+                
+                <button class="btn-action" style="background:#c0392b; margin-top: 10px;" onclick="location.href='../../php/logout.php'">Đăng xuất ngay</button>
+                
+                <button class="btn-danger-outline" onclick="confirmReset()">Xóa dữ liệu luyện tập</button>
+                <p style="font-size: 10px; color: #999; margin-top: 5px;">* Xóa điểm số và tiến độ học tập để làm lại bài cũ.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../js/load_profile.js"></script>
+<script>
+    // 1. Xử lý đổi mật khẩu
+    document.getElementById('passwordForm').onsubmit = function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        fetch('../../php/change_password.php', { method: 'POST', body: formData })
+        .then(r => r.json())
+        .then(data => alert(data.message));
+    };
+
+    // 2. Xử lý Xóa dữ liệu (Cảnh báo)
+    function confirmReset() {
+        if (confirm("Chi có chắc chắn muốn xóa toàn bộ tiến độ học tập không?")) {
+            alert("Hệ thống đã nhận yêu cầu xóa dữ liệu.");
+        }
+    }
+</script>
+</body>
+</html>

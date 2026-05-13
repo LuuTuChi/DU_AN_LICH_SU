@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sử Việt – Thư viện số đa phương tiện</title>
+  <link rel="stylesheet" href="../css/thuvien.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+        <defs><linearGradient id="gLogo" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#BF9B30"/>
+          <stop offset="50%" stop-color="#F9F1B7"/>
+          <stop offset="100%" stop-color="#BF9B30"/>
+        </linearGradient></defs>
+        <path d="M42,35 L33,38 L33,72 L42,68 Z" fill="url(#gLogo)"/>
+        <path d="M45,35 L36,38 L36,75 L45,71 Z" fill="url(#gLogo)" opacity=".8"/>
+        <path d="M48,35 C55,55 58,65 60,78 C65,60 75,40 88,22 L84,19 C72,37 62,57 58,72 C56,62 52,45 48,35Z" fill="url(#gLogo)"/>
+        <polygon points="88,16 90,21 96,21 91,25 93,31 88,27 83,31 85,25 80,21 86,21" fill="url(#gLogo)"/>
+      </svg>
+      <span class="logo-text">Sử<em>Việt</em></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Trang chủ</a></li>
+      <li><a href="gioithieu.html" class="nav-link">Về Sử Việt</a></li>
+      <li><a href="thuvien.html" class="nav-link active">Thư viện</a></li>
+      <li><a href="goidichvu.html" class="nav-link">Gói dịch vụ</a></li>
+      <li><a href="tintuc.html" class="nav-link">Tin tức</a></li>
+      <li><a href="hotro.html" class="nav-link">Hỗ trợ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="btn-login">Đăng nhập</a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<header class="page-hero">
+  <svg class="page-hero-star" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+    <polygon fill="#BF9B30" points="250,25 298,170 450,170 328,260 375,405 250,315 125,405 172,260 50,170 202,170"/>
+  </svg>
+  <div class="wrap" style="position:relative;z-index:2;text-align:center;">
+    <div class="page-hero-tag">THƯ VIỆN SỐ</div>
+    <h1>Hành Trình <em>Di Sản Số</em></h1>
+    <p>Khám phá kho học liệu mẫu tinh túy nhất từ công nghệ AR, AI và Cinema</p>
+  </div>
+  <svg class="page-hero-wave" viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,30 Q360,60 720,30 Q1080,0 1440,30 L1440,60 L0,60 Z" fill="#fdfcf0"/>
+  </svg>
+</header>
+
+<!-- NỘI DUNG THƯ VIỆN -->
+<section id="library" class="section">
+  <div class="wrap">
+    <h2 class="section-title">Học liệu mẫu Bài 6: Cách mạng tháng Tám</h2>
+    <div class="library-grid">
+
+      <div class="lib-card">
+        <div class="lib-visual" style="position:relative;">
+          <img src="https://img.youtube.com/vi/aTPwYfAIGSk/maxresdefault.jpg" alt="Video Bài 6"/>
+          <i class="fas fa-play-circle" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:50px;color:#BF9B30;"></i>
+        </div>
+        <div class="lib-content">
+          <span class="lib-tag">VIDEO BÀI GIẢNG</span>
+          <h3>Video giảng bài chi tiết</h3>
+          <p>Trải nghiệm cách truyền tải kiến thức bài 6 qua video bài giảng chuyên sâu trên kênh Sử Việt.</p>
+          <button class="btn-card" onclick="openModal('video','https://www.youtube.com/embed/aTPwYfAIGSk')">Xem thử ngay</button>
+        </div>
+      </div>
+
+      <div class="lib-card">
+        <div class="lib-visual">
+          <i class="fas fa-file-powerpoint" style="font-size:60px;color:#BF9B30;"></i>
+        </div>
+        <div class="lib-content">
+          <span class="lib-tag">CANVA PRESENTATION</span>
+          <h3>Slide bài giảng điện tử</h3>
+          <p>Khám phá bộ Slide thiết kế trên Canva với hiệu ứng sinh động về diễn biến Cách mạng tháng Tám.</p>
+          <button class="btn-card" onclick="openModal('video','https://www.canva.com/design/DAHEYJqbHnE/9YpP2lr5HY4xUcwUzyZZMQ/view?embed')">Xem Slide mẫu</button>
+        </div>
+      </div>
+
+      
+
+      <div class="lib-card">
+        <div class="lib-visual">
+          <i class="fas fa-vr-cardboard" style="font-size:60px;color:#BF9B30;"></i>
+        </div>
+        <div class="lib-content">
+          <span class="lib-tag">VR 360 EXPERIENCE</span>
+          <h3>VR Quảng trường Ba Đình</h3>
+          <p>Đứng tại Quảng trường Ba Đình lịch sử qua công nghệ thực tế ảo 360 độ độc quyền của Sử Việt.</p>
+          <button class="btn-card" onclick="openModal('3d','https://vr360.yoolife.vn/quang-truong-ba-dinh-zbdsc2149u275784/')">Vào không gian VR</button>
+        </div>
+      </div>
+
+      <div class="lib-card">
+        <div class="lib-visual">
+          <img src="../assets/tuyen-ngon-1.jpeg alt="Tư liệu gốc"/>
+        </div>
+        <div class="lib-content">
+          <span class="lib-tag">HISTORICAL ARCHIVE</span>
+          <h3>Kho ảnh tư liệu 1945</h3>
+          <p>Xem lại những tấm ảnh tư liệu đen trắng quý giá về ngày giành chính quyền tại Hà Nội và Huế.</p>
+          <button class="btn-card" onclick="openModal('image','../assets/tuyen-ngon-1.jpeg')">Xem kho ảnh</button>
+        </div>
+      </div>
+
+      <div class="lib-card" style="opacity:0.8; filter: grayscale(0.5);">
+        <div class="lib-visual" style="background:#1a1a1a;">
+          <i class="fas fa-lock" style="font-size:40px;color:#BF9B30;"></i>
+        </div>
+        <div class="lib-content">
+          <span class="lib-tag">PREMIUM ONLY</span>
+          <h3>Phòng luyện thi 40 câu</h3>
+          <p>Ngân hàng đề thi thử Bài 6 chuẩn cấu trúc THPT Quốc gia (Chỉ dành cho Sĩ tử VIP).</p>
+          <button class="btn-card" onclick="location.href='login.html'">Đăng nhập để mở</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- MODAL -->
+<div id="previewModal" class="modal">
+  <span class="close-modal" onclick="closeModal()">&times;</span>
+  <div class="modal-content" id="modalBody"></div>
+</div>
+
+<!-- FOOTER — không có foot-cta -->
+<footer class="footer">
+  <div class="foot-main">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <div class="foot-brand-logo">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+            <defs><linearGradient id="gFL" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#BF9B30"/>
+              <stop offset="50%" stop-color="#F9F1B7"/>
+              <stop offset="100%" stop-color="#BF9B30"/>
+            </linearGradient></defs>
+            <path d="M42,35 L33,38 L33,72 L42,68 Z" fill="url(#gFL)"/>
+            <path d="M45,35 L36,38 L36,75 L45,71 Z" fill="url(#gFL)" opacity=".8"/>
+            <path d="M48,35 C55,55 58,65 60,78 C65,60 75,40 88,22 L84,19 C72,37 62,57 58,72 C56,62 52,45 48,35Z" fill="url(#gFL)"/>
+            <polygon points="88,16 90,21 96,21 91,25 93,31 88,27 83,31 85,25 80,21 86,21" fill="url(#gFL)"/>
+          </svg>
+          <span class="foot-logo-text">Sử<em>Việt</em></span>
+        </div>
+        <p>Biến từng trang sử khô khan thành<br/>những thước phim <em>sống động</em>.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.53V6.78a4.85 4.85 0 01-1.02-.09z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>📚 Sản phẩm</h4>
+        <a href="thuvien.html">Thư viện bài học</a>
+        <a href="#">Battle Mode <span class="tag-new">MỚI</span></a>
+        <a href="#">Không gian VR/AR</a>
+        <a href="#">AI Tutor</a>
+        <a href="goidichvu.html">Gói Premium</a>
+      </div>
+      <div class="foot-col">
+        <h4>🏛 Về chúng tôi</h4>
+        <a href="gioithieu.html">Câu chuyện thương hiệu</a>
+        <a href="gioithieu.html#team">Đội ngũ phát triển</a>
+        <a href="gioithieu.html#roadmap">Lộ trình phát triển</a>
+        <a href="tintuc.html">Tin tức</a>
+      </div>
+      <div class="foot-col">
+        <h4>✉️ Liên hệ</h4>
+        <a href="mailto:support@suviet.vn">📧 support@suviet.vn</a>
+        <a href="tel:0123456789">📞 0123 456 789</a>
+        <span>📍 Hà Nội, Việt Nam</span>
+        <div style="margin-top:1rem">
+          <p style="color:rgba(249,241,183,.7);font-size:.83rem;margin-bottom:8px;">Nhận thông báo bài học mới</p>
+          <div class="nl-row">
+            <input type="email" placeholder="Email của bạn…"/>
+            <button type="button">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div class="wrap foot-bottom-inner">
+      <p>© 2025 <strong>Sử Việt</strong>. Bảo lưu mọi quyền.</p>
+      <p>Chính sách bảo mật · Điều khoản dịch vụ</p>
+      <p>Phát triển bởi <strong>NHÓM 2</strong> <span class="tag-edtech">EdTech for Future 🚀</span></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nb = document.getElementById('navbar');
+  window.addEventListener('scroll', () => nb.classList.toggle('scrolled', scrollY > 50));
+
+  document.getElementById('hamburger').addEventListener('click', function () {
+    this.classList.toggle('open');
+    document.querySelector('.nav-links').classList.toggle('open');
+  });
+
+  function openModal(type, url) {
+    const modal = document.getElementById('previewModal');
+    const body  = document.getElementById('modalBody');
+    body.innerHTML = '';
+    if (type === 'image') {
+      body.innerHTML = `<img src="${url}" style="width:100%;border-radius:15px;box-shadow:0 0 30px rgba(0,0,0,0.5);">`;
+    } else if (type === 'video' || type === '3d') {
+      body.innerHTML = `<iframe src="${url}" frameborder="0" allowfullscreen style="width:100%;height:500px;border-radius:15px;"></iframe>`;
+    }
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('previewModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+    document.getElementById('modalBody').innerHTML = '';
+  }
+
+  window.onclick = function (e) {
+    if (e.target === document.getElementById('previewModal')) closeModal();
+  };
+</script>
+</body>
+</html>

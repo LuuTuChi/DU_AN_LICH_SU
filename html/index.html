@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sử Việt – Ôn thi Lịch sử Lớp 12</title>
+  <link rel="stylesheet" href="../css/index.css"/>
+</head>
+<body>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+        <defs><linearGradient id="gLogo" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#BF9B30"/><stop offset="50%" stop-color="#F9F1B7"/><stop offset="100%" stop-color="#BF9B30"/>
+        </linearGradient></defs>
+        <path d="M42,35 L33,38 L33,72 L42,68 Z" fill="url(#gLogo)"/>
+        <path d="M45,35 L36,38 L36,75 L45,71 Z" fill="url(#gLogo)" opacity=".8"/>
+        <path d="M48,35 C55,55 58,65 60,78 C65,60 75,40 88,22 L84,19 C72,37 62,57 58,72 C56,62 52,45 48,35Z" fill="url(#gLogo)"/>
+        <polygon points="88,16 90,21 96,21 91,25 93,31 88,27 83,31 85,25 80,21 86,21" fill="url(#gLogo)"/>
+      </svg>
+      <span class="logo-text">Sử<em>Việt</em></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link active">Trang chủ</a></li>
+      <li><a href="gioithieu.html" class="nav-link">Về Sử Việt</a></li>
+      <li><a href="thuvien.html" class="nav-link">Thư viện</a></li>
+      <li><a href="goidichvu.html" class="nav-link">Gói dịch vụ</a></li>
+      <li><a href="tintuc.html" class="nav-link">Tin tức</a></li>
+      <li><a href="#" class="nav-link">Hỗ trợ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="btn-login">Đăng nhập</a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-beam b1"></div>
+  <div class="hero-beam b2"></div>
+
+  <!-- Ngôi sao 5 cánh lớn mờ làm nền -->
+  <svg style="position:absolute;right:-4%;top:50%;transform:translateY(-50%);width:620px;height:620px;opacity:0.055;z-index:0;pointer-events:none;"
+       viewBox="0 0 620 620" xmlns="http://www.w3.org/2000/svg">
+    <!-- Ngôi sao ngoài cùng — fill đặc -->
+    <polygon fill="#BF9B30"
+      points="310,30 370,210 560,210 410,325 468,505 310,390 152,505 210,325 60,210 250,210"/>
+    <!-- Ngôi sao lớp giữa — stroke -->
+    <polygon fill="none" stroke="#800000" stroke-width="3"
+      points="310,70 362,228 528,228 397,322 446,480 310,386 174,480 223,322 92,228 258,228"/>
+    <!-- Ngôi sao lớp trong — fill nhạt hơn -->
+    <polygon fill="#800000" opacity="0.4"
+      points="310,120 352,246 490,246 383,321 422,447 310,372 198,447 237,321 130,246 268,246"/>
+  </svg>
+
+  <div class="particles" id="particles"></div>
+
+  <div class="hero-grid">
+
+    <!-- ── Cột trái ── -->
+    <div class="hero-left">
+      <h1 class="hero-title">
+        <span class="ht-brand">Sử Việt</span>
+        <span class="ht-line1">Nâng tầm <em>hào khí</em></span>
+        <span class="ht-line2">Chinh phục tri thức</span>
+        <span class="ht-sub">✦ Chủ đề 3 · Lịch sử Lớp 12 ✦</span>
+      </h1>
+      <p class="hero-desc">
+        Biến từng trang sử thành thước phim sống động — học bằng
+        <strong>Trí tuệ nhân tạo</strong>, trải nghiệm bằng
+        <strong>Thực tế ảo VR/AR</strong>, chinh phục bằng
+        <strong>Đấu trường Battle Mode</strong>.
+      </p>
+      <div class="hero-btns">
+        <a href="#features" class="btn-primary">⚡ Khám phá ngay</a>
+        <a href="register.html" class="btn-outline">🏅 Ghi danh sĩ tử</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <span class="hstat-num"><span class="hstat-n" data-target="500">0</span>+</span>
+          <small>Sĩ tử đang học</small>
+        </div>
+        <div class="hstat-sep"></div>
+        <div class="hstat">
+          <span class="hstat-num"><span class="hstat-n" data-target="1000">0</span>+</span>
+          <small>Câu hỏi</small>
+        </div>
+        <div class="hstat-sep"></div>
+        <div class="hstat">
+          <span class="hstat-num"><span class="hstat-n" data-target="95">0</span>%</span>
+          <small>Tăng điểm</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Cột phải ── -->
+    <div class="hero-right">
+      <div class="halo halo-1"></div>
+      <div class="halo halo-2"></div>
+      <div class="halo halo-3"></div>
+
+      <div class="hero-visual">
+
+        <!-- Hàng cờ: [card 1945] [cờ] [card 1954] -->
+        <div class="flag-row">
+
+          <!-- Card trái -->
+          <div class="tl-side side-left">
+            <div class="tl-card" style="animation:floatCard 6s ease-in-out infinite;">
+              <span class="tl-yr">1945</span>
+              <div class="tl-txt">
+                <strong>Cách mạng Tháng Tám</strong>
+                <span>Khai sinh nước VNDCCH</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lá cờ -->
+          <div class="flag-wrap">
+            <div class="flag-pole"></div>
+            <div class="flag-cloth">
+              <svg viewBox="0 0 270 182" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="gF" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%"   stop-color="#9B1515"/>
+                    <stop offset="40%"  stop-color="#C0392B"/>
+                    <stop offset="100%" stop-color="#7a0000"/>
+                  </linearGradient>
+                  <linearGradient id="gS" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%"  stop-color="rgba(255,255,255,.14)"/>
+                    <stop offset="55%" stop-color="rgba(255,255,255,0)"/>
+                  </linearGradient>
+                  <filter id="sG">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <clipPath id="fC">
+                    <path d="M0,5 Q67,-7 135,7 Q202,20 270,5 L270,177 Q202,191 135,174 Q67,157 0,174 Z"/>
+                  </clipPath>
+                </defs>
+                <path d="M0,5 Q67,-7 135,7 Q202,20 270,5 L270,177 Q202,191 135,174 Q67,157 0,174 Z" fill="url(#gF)"/>
+                <path d="M0,5 Q67,-7 135,7 Q202,20 270,5 L270,87 Q202,99 135,87 Q67,75 0,87 Z" fill="url(#gS)"/>
+                <g filter="url(#sG)" clip-path="url(#fC)">
+                  <polygon fill="#F9F1B7" opacity=".97"
+                    points="135,33 141.8,54.1 164.4,54.1 147.3,66.6 154.1,87.7 135,75.2 115.9,87.7 122.7,66.6 105.6,54.1 128.2,54.1"/>
+                </g>
+                <path d="M0,5 Q67,-7 135,7 Q202,20 270,5 L270,177 Q202,191 135,174 Q67,157 0,174 Z" fill="none" stroke="rgba(191,155,48,.4)" stroke-width="1.5"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Card phải -->
+          <div class="tl-side side-right">
+            <div class="tl-card gold-border" style="animation:floatCard 5.5s 2s ease-in-out infinite;">
+              <span class="tl-yr">1954</span>
+              <div class="tl-txt">
+                <strong>Điện Biên Phủ</strong>
+                <span>Đánh bại thực dân Pháp</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /flag-row -->
+
+        <!-- Hộp ngày thống nhất -->
+        <div class="flag-date">
+          <span class="fd-label">Ngày thống nhất</span>
+          <span class="fd-main">30 · 4 · 1975</span>
+          <span class="fd-motto">Độc lập · Tự do · Hạnh phúc</span>
+        </div>
+
+      </div><!-- /hero-visual -->
+    </div><!-- /hero-right -->
+  </div><!-- /hero-grid -->
+</section>
+
+<section class="features-sec" id="features">
+  <div class="wrap">
+    <div class="sec-tag">CÔNG NGHỆ DẪN ĐẦU</div>
+    <h2 class="sec-title">Ba trụ cột đột phá</h2>
+    <p class="sec-sub">Hệ sinh thái học tập EdTech, tối ưu hóa trải nghiệm cho sĩ tử lớp 12</p>
+    <div class="feat-grid">
+      
+      <div class="feat-card">
+        <div class="feat-icon">🤖</div>
+        <h3>Trợ lý Sử Việt AI</h3>
+        <p>Tích hợp Gemini AI giải đáp kiến thức 24/7, hỗ trợ phân tích hình ảnh đề thi và giọng nói tiếng Việt tự nhiên.</p>
+        <span class="feat-tag">AI Gemini Flash</span>
+      </div>
+
+      <div class="feat-card feat-card--mid">
+        <div class="feat-icon">🥽</div>
+        <h3>Thực Tế Ảo 360°</h3>
+        <p style="color:rgba(255,255,255,.93)!important">
+          Đứng giữa Quảng trường Ba Đình lịch sử, tham quan di tích 48 Hàng Ngang và xoay mô hình 3D xe tăng 390.
+        </p>
+        <span class="feat-tag">Virtual Heritage</span>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">⚔️</div>
+        <h3>Đấu Trường Tri Thức</h3>
+        <p>Hệ thống trắc nghiệm tương tác vui nhộn giúp ôn tập Bài 6-7-8, tính điểm trực tiếp.</p>
+        <span class="feat-tag">Gamification Learning</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ STATS ══════════ -->
+<section class="stats-sec">
+  <div class="wrap">
+    <div class="stats-row">
+      <div class="st-card"><div class="st-n"><span data-target="500"  class="cnt">0</span>+</div><div class="st-l">Sĩ tử đang học</div></div>
+      <div class="st-card"><div class="st-n"><span data-target="1000" class="cnt">0</span>+</div><div class="st-l">Câu hỏi trắc nghiệm</div></div>
+      <div class="st-card"><div class="st-n"><span data-target="95"   class="cnt">0</span>%</div><div class="st-l">Học sinh tăng điểm</div></div>
+      <div class="st-card"><div class="st-n"><span data-target="3"    class="cnt">0</span></div> <div class="st-l">Bài học VR đặc sắc</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ LEADERBOARD ══════════ -->
+<section class="lb-sec" id="leaderboard">
+  <div class="wrap">
+    <div class="sec-tag">VINH DANH SĨ TỬ</div>
+    <h2 class="sec-title">Bảng xếp hạng tuần</h2>
+    <p class="sec-sub">Những sĩ tử đang dẫn đầu đấu trường tri thức</p>
+
+    <div class="podium" id="podiumIndex">
+        <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #BF9B30;">
+            Đang cập nhật bảng vàng...
+        </div>
+    </div>
+
+    <div class="lb-more"><a href="login.html">Đăng nhập để xem bảng xếp hạng đầy đủ →</a></div>
+  </div>
+</section>
+
+<!-- ══════════ PREMIUM ══════════ -->
+<section class="premium-sec">
+  <div class="wrap prem-inner">
+    <div class="prem-left">
+      <div class="sec-tag" style="text-align:left">ĐẶC QUYỀN SĨ TỬ VIP</div>
+      <h2 class="prem-title">Trở thành<br/><em>Sĩ tử VIP</em></h2>
+      <p>Mở khóa lộ trình chuyên sâu và kết nối trực tiếp cùng chuyên gia Lịch sử.</p>
+      <a href="register.html" class="btn-prem">✦ Nâng cấp VIP ngay</a>
+    </div>
+    <div class="price-card">
+      <div class="price-from">Trọn gói khóa học</div>
+      <div class="price-num">999.000<span>đ</span></div>
+      <div class="price-unit">/khóa học</div>
+      <ul class="price-list">
+        <li>✓ <b>Live-Review:</b> Học trực tuyến cùng giáo viên</li>
+        <li>✓ <b>Hỏi đáp chuyên gia:</b> Giải đáp 1:1 không giới hạn</li>
+        <li>✓ <b>AI:</b> Phân tích hình ảnh & Giọng nói nâng cao</li>
+        <li>✓ <b>Kho đề độc quyền:</b> 40 câu hỏi chuẩn cấu trúc thi</li>
+        <li>✓ <b>Báo cáo học tập:</b> Phân tích tiến độ học tập cá nhân</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PARTNERS ══════════ -->
+<section class="partners-sec" id="partners">
+  <div class="wrap">
+    <div class="sec-tag">BÁO CHÍ & ĐỐI TÁC</div>
+    <h2 class="sec-title">Được tin tưởng bởi</h2>
+    <p class="sec-sub">Các trường học và đơn vị truyền thông trên toàn quốc</p>
+    <div class="part-grid">
+      <div class="part-card"><div class="part-icon-wrap"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" class="part-svg"><rect width="60" height="60" rx="12" fill="#f5f0e0"/><rect x="8" y="14" width="44" height="6" rx="2" fill="#800000" opacity=".8"/><rect x="8" y="24" width="34" height="3" rx="1.5" fill="#BF9B30" opacity=".7"/><rect x="8" y="30" width="38" height="2" rx="1" fill="#BF9B30" opacity=".4"/><rect x="8" y="35" width="30" height="2" rx="1" fill="#BF9B30" opacity=".3"/><text x="30" y="53" text-anchor="middle" font-size="6" fill="#800000" font-weight="700" font-family="Georgia,serif">VnExpress</text></svg></div><div class="part-name">VnExpress</div><div class="part-type">Báo điện tử</div></div>
+      <div class="part-card"><div class="part-icon-wrap"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" class="part-svg"><rect width="60" height="60" rx="12" fill="#f5f0e0"/><circle cx="30" cy="26" r="14" fill="none" stroke="#800000" stroke-width="2" opacity=".7"/><circle cx="30" cy="26" r="8" fill="#800000" opacity=".15"/><polygon points="26,22 38,26 26,30" fill="#800000" opacity=".75"/><text x="30" y="52" text-anchor="middle" font-size="5.5" fill="#800000" font-weight="700" font-family="Georgia,serif">VTV Education</text></svg></div><div class="part-name">VTV Education</div><div class="part-type">Truyền hình giáo dục</div></div>
+      <div class="part-card"><div class="part-icon-wrap"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" class="part-svg"><rect width="60" height="60" rx="12" fill="#fffadc"/><polygon points="30,10 33.8,21.8 46.4,21.8 36.3,28.7 40.1,40.5 30,33.6 19.9,40.5 23.7,28.7 13.6,21.8 26.2,21.8" fill="#BF9B30" opacity=".9"/><text x="30" y="54" text-anchor="middle" font-size="5" fill="#800000" font-weight="700" font-family="Georgia,serif">Bộ GD &amp; ĐT</text></svg></div><div class="part-name">Bộ GD&amp;ĐT</div><div class="part-type">Cơ quan nhà nước</div></div>
+      <div class="part-card"><div class="part-icon-wrap"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" class="part-svg"><rect width="60" height="60" rx="12" fill="#f5f0e0"/><rect x="12" y="12" width="36" height="28" rx="3" fill="none" stroke="#800000" stroke-width="2" opacity=".7"/><rect x="16" y="16" width="28" height="4" rx="1" fill="#800000" opacity=".5"/><rect x="16" y="23" width="22" height="2.5" rx="1" fill="#BF9B30" opacity=".6"/><rect x="22" y="42" width="16" height="5" rx="1" fill="#800000" opacity=".3"/><text x="30" y="55" text-anchor="middle" font-size="5" fill="#800000" font-weight="700" font-family="Georgia,serif">NXB Giáo Dục</text></svg></div><div class="part-name">NXB Giáo Dục</div><div class="part-type">Xuất bản giáo dục</div></div>
+      <div class="part-card"><div class="part-icon-wrap"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" class="part-svg"><rect width="60" height="60" rx="12" fill="#f5f0e0"/><polygon points="30,10 52,26 8,26" fill="#800000" opacity=".7"/><rect x="12" y="26" width="36" height="22" fill="#800000" opacity=".14"/><rect x="12" y="26" width="36" height="22" fill="none" stroke="#800000" stroke-width="1.5" opacity=".5"/><rect x="23" y="34" width="14" height="14" rx="2" fill="#800000" opacity=".28"/><text x="30" y="56" text-anchor="middle" font-size="4.5" fill="#800000" font-weight="700" font-family="Georgia,serif">THCS Chu Văn An</text></svg></div><div class="part-name">THCS Chu Văn An</div><div class="part-type">Trường học</div></div>
+      <div class="part-card"><div class="part-icon-wrap"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" class="part-svg"><rect width="60" height="60" rx="12" fill="#f5f0e0"/><polygon points="30,10 52,26 8,26" fill="#800000" opacity=".7"/><rect x="12" y="26" width="36" height="22" fill="#800000" opacity=".14"/><rect x="12" y="26" width="36" height="22" fill="none" stroke="#800000" stroke-width="1.5" opacity=".5"/><rect x="23" y="34" width="14" height="14" rx="2" fill="#800000" opacity=".28"/><text x="30" y="56" text-anchor="middle" font-size="4.5" fill="#800000" font-weight="700" font-family="Georgia,serif">THCS Nguyễn Trãi</text></svg></div><div class="part-name">THCS Nguyễn Trãi</div><div class="part-type">Trường học</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer">
+  <div class="foot-cta">
+    <div class="wrap foot-cta-inner">
+      <div>
+        <p class="foot-cta-hl">Sẵn sàng chinh phục kỳ thi?</p>
+        <p class="foot-cta-sub">Tham gia cùng 500+ sĩ tử đang học mỗi ngày</p>
+      </div>
+      <a href="register.html" class="btn-register">Ghi danh miễn phí →</a>
+    </div>
+  </div>
+  <div class="foot-main">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <div class="foot-brand-logo">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+            <defs><linearGradient id="gFL" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#BF9B30"/><stop offset="50%" stop-color="#F9F1B7"/><stop offset="100%" stop-color="#BF9B30"/></linearGradient></defs>
+            <path d="M42,35 L33,38 L33,72 L42,68 Z" fill="url(#gFL)"/>
+            <path d="M45,35 L36,38 L36,75 L45,71 Z" fill="url(#gFL)" opacity=".8"/>
+            <path d="M48,35 C55,55 58,65 60,78 C65,60 75,40 88,22 L84,19 C72,37 62,57 58,72 C56,62 52,45 48,35Z" fill="url(#gFL)"/>
+            <polygon points="88,16 90,21 96,21 91,25 93,31 88,27 83,31 85,25 80,21 86,21" fill="url(#gFL)"/>
+          </svg>
+          <span class="foot-logo-text">Sử<em>Việt</em></span>
+        </div>
+        <p>Biến từng trang sử khô khan thành<br/>những thước phim <em>sống động</em>.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.53V6.78a4.85 4.85 0 01-1.02-.09z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>📚 Sản phẩm</h4>
+        <a href="#">Thư viện bài học</a>
+        <a href="#">Battle Mode <span class="tag-new">MỚI</span></a>
+        <a href="#">Không gian VR/AR</a>
+        <a href="#">AI Tutor</a>
+        <a href="#">Gói Premium</a>
+      </div>
+      <div class="foot-col">
+        <h4>🏛 Về chúng tôi</h4>
+        <a href="#">Câu chuyện thương hiệu</a>
+        <a href="#">Đội ngũ phát triển</a>
+        <a href="#">Lộ trình phát triển</a>
+        <a href="#">Tin tức</a>
+      </div>
+      <div class="foot-col">
+        <h4>✉️ Liên hệ</h4>
+        <a href="/cdn-cgi/l/email-protection#7b080e0b0b14090f3b080e0d121e0f550d15">📧 <span class="__cf_email__" data-cfemail="a5d6d0d5d5cad7d1e5d6d0d3ccc0d18bd3cb">[email&#160;protected]</span></a>
+        <a href="tel:0123456789">📞 0123 456 789</a>
+        <span>📍 Hà Nội, Việt Nam</span>
+        <div class="newsletter" style="margin-top:1rem">
+          <p>Nhận thông báo bài học mới</p>
+          <div class="nl-row">
+            <input type="email" placeholder="Email của bạn…"/>
+            <button>→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div class="wrap foot-bottom-inner">
+      <p>© 2025 <strong>Sử Việt</strong>. Bảo lưu mọi quyền.</p>
+      <p>Chính sách bảo mật · Điều khoản dịch vụ</p>
+      <p>Phát triển bởi <strong>NHÓM 2</strong> <span class="tag-edtech">EdTech for Future 🚀</span></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll
+  const nb = document.getElementById('navbar');
+  window.addEventListener('scroll', () => nb.classList.toggle('scrolled', scrollY > 50));
+
+  // Hamburger
+  document.getElementById('hamburger').addEventListener('click', function () {
+    this.classList.toggle('open');
+    document.querySelector('.nav-links').classList.toggle('open');
+  });
+
+  // Particles
+  const pc = document.getElementById('particles');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div'); p.className = 'particle';
+    const s = 1 + Math.random() * 2.4;
+    p.style.cssText = `left:${Math.random()*100}%;top:${100+Math.random()*20}%;width:${s}px;height:${s}px;animation-delay:${Math.random()*22}s;animation-duration:${16+Math.random()*18}s;opacity:${.18+Math.random()*.42}`;
+    pc.appendChild(p);
+  }
+
+  // Counter
+  const counted = new Set();
+  function countUp(sel) {
+    document.querySelectorAll(sel).forEach(el => {
+      if (counted.has(el)) return; counted.add(el);
+      const t = +el.dataset.target; let c = 0; const step = t / 70;
+      const tm = setInterval(() => {
+        c = Math.min(c + step, t);
+        el.textContent = Math.floor(c).toLocaleString('vi-VN');
+        if (c >= t) clearInterval(tm);
+      }, 18);
+    });
+  }
+
+  // Hero stats — chạy sau khi trang load xong
+  window.addEventListener('load', () => {
+    setTimeout(() => countUp('.hstat-n'), 400);
+  });
+
+  // Stats section — trigger khi scroll tới
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    if (e.target.dataset.cnt === '1') countUp('.cnt');
+  }), { threshold: 0.15 });
+  const ss = document.querySelector('.stats-sec');
+  if (ss) { ss.dataset.cnt = '1'; io.observe(ss); }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href="#features"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+<script>
+function loadPublicLeaderboard() {
+    fetch('../php/get_leaderboard.php')
+        .then(r => r.json())
+        .then(res => {
+            const container = document.getElementById('podiumIndex');
+            if (res.success && res.data.length > 0) {
+                // Sắp xếp hiển thị Podium: Hạng 2 - Hạng 1 - Hạng 3
+                const top3 = res.data.slice(0, 3);
+                const order = [1, 0, 2]; 
+                const rankClasses = ['pod-2', 'pod-1', 'pod-3'];
+                const medals = ['🥈', '🥇', '🥉'];
+                
+                let html = '';
+                order.forEach(idx => {
+                    const user = top3[idx];
+                    if (!user) return;
+                    
+                    html += `
+                        <div class="pod-card ${rankClasses[idx]}">
+                            ${idx === 0 ? '<div class="pod-crown">👑</div>' : ''}
+                            <div class="pod-rank">${idx + 1}</div>
+                            <div class="pod-ava">${user.fullname.charAt(0)}</div>
+                            <div class="pod-name">${user.fullname}</div>
+                            <div class="pod-score">${user.total_score} điểm</div>
+                            <div class="pod-medal">${medals[idx]} ${['Bạc', 'Vàng', 'Đồng'][idx]}</div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            }
+        })
+        .catch(err => console.error("Không tải được BXH khách:", err));
+}
+
+// Chạy ngay khi tải trang
+window.addEventListener('DOMContentLoaded', loadPublicLeaderboard);
+</script>
+</body>
+</html>

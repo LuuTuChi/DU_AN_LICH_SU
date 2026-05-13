@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Đăng ký – Sử Việt</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+
+  <div class="main-container">
+
+    <!-- FORM ĐĂNG KÝ -->
+    <div class="left-side">
+      <form id="regForm" class="form-card">
+
+        <!-- Logo — nền đỏ đậm giống trang chủ -->
+        <div class="logo-wrap">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+            <defs>
+              <linearGradient id="gG" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stop-color="#BF9B30"/>
+                <stop offset="50%"  stop-color="#F9F1B7"/>
+                <stop offset="100%" stop-color="#BF9B30"/>
+              </linearGradient>
+            </defs>
+            <path d="M42,35 L33,38 L33,72 L42,68 Z" fill="url(#gG)"/>
+            <path d="M45,35 L36,38 L36,75 L45,71 Z" fill="url(#gG)" opacity=".8"/>
+            <path d="M48,35 C55,55 58,65 60,78 C65,60 75,40 88,22 L84,19 C72,37 62,57 58,72 C56,62 52,45 48,35Z" fill="url(#gG)"/>
+            <polygon points="88,16 90,21 96,21 91,25 93,31 88,27 83,31 85,25 80,21 86,21" fill="url(#gG)"/>
+          </svg>
+          <span class="logo-text">Sử<em>Việt</em></span>
+        </div>
+
+        <h2>Đăng ký tài khoản</h2>
+        <div class="title-divider"></div>
+        <p class="form-sub">Gia nhập Sử Việt — bắt đầu hành trình chinh phục Lịch sử</p>
+
+        <!-- Họ tên + Tên đăng nhập -->
+        <div class="input-row">
+          <div class="field">
+            <label for="fullname">Họ và tên</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Nguyễn Văn A" required/>
+          </div>
+          <div class="field">
+            <label for="username">Tên đăng nhập</label>
+            <input type="text" id="username" name="username" placeholder="user123" required/>
+          </div>
+        </div>
+
+        <!-- Mật khẩu + Xác nhận -->
+        <div class="input-row">
+          <div class="field">
+            <label for="password">Mật khẩu</label>
+            <input type="password" id="password" name="password" placeholder="••••••••" required/>
+          </div>
+          <div class="field">
+            <label for="confirm_password">Xác nhận mật khẩu</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="••••••••" required/>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="field">
+          <label for="email">Địa chỉ Email</label>
+          <input type="email" id="email" name="email" placeholder="abc@gmail.com" required/>
+        </div>
+
+        <button type="submit" class="btn-register">Đăng ký ngay</button>
+
+        <div class="login-redirect">
+          Đã có tài khoản?
+          <a href="login.html" class="link-pretty">Đăng nhập tại đây</a>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- TRỐNG ĐỒNG — GIỮ NGUYÊN 100% -->
+    <div class="right-side">
+      <div class="drum-container">
+        <div class="drum-glow"></div>
+        <div class="bronze-drum"></div>
+        <div class="epic-title">
+          <span class="sub-text" id="bubbleText">Viết tiếp sử vàng</span>
+          <h1 class="main-text">HÀO KHÍ VIỆT</h1>
+          <div class="line-deco"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Xe tăng — giữ nguyên hiệu ứng -->
+    <img src="../assets/tank390.png" class="tank-unit" id="tankUnit" alt=""/>
+  </div>
+
+  <!-- Màn hình thành công -->
+  <div class="success-screen" id="successOverlay">
+    <div class="success-box">
+      <div class="icon-star">★</div>
+      <h3>Đăng ký thành công!</h3>
+      <p>Hệ thống đang chuyển sang trang đăng nhập...</p>
+    </div>
+  </div>
+  <a href="../html/index.html" class="back-to-guest" title="Quay về trang chủ">
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="19" y1="12" x2="5" y2="12"></line>
+    <polyline points="12 19 5 12 12 5"></polyline>
+  </svg>
+  <span>Trang khách</span>
+</a>
+
+  <script src="../js/auth.js"></script>
+</body>
+</html>

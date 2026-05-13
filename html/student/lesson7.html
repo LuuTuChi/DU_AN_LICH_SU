@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<title>Bài 7 – Kháng chiến chống thực dân Pháp (1945–1954)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+<link rel="stylesheet" href="../../css/lesson.css"/>
+<link rel="stylesheet" href="../../css/ai-style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- SIDEBAR ICONS -->
+  <div class="sidebar-icons">
+    <div class="icon-btn active" onclick="location.href='student_dashboard.html'">
+        <span class="material-symbols-outlined">home</span>
+    </div>
+
+    <div class="icon-btn" onclick="location.href='student_profile.html'">
+        <span class="material-symbols-outlined">groups</span>
+    </div>
+
+    <div class="icon-btn" onclick="location.href='student_settings.html'">
+        <span class="material-symbols-outlined">settings</span>
+    </div>
+
+    <div class="logout">
+        <div class="icon-btn" onclick="location.href='../../php/logout.php'">
+            <span class="material-symbols-outlined">logout</span>
+        </div>
+    </div>
+</div>
+
+  <!-- SIDEBAR MENU -->
+  <div class="sidebar-menu">
+    <div class="profile">
+      <div class="avatar" id="avatarEl">ẢNH</div>
+      <div class="name" id="nameEl">HỌ VÀ TÊN</div>
+    </div>
+    <ul class="menu">
+      <li class="active"><a href="../student/student_dashboard.html">Lộ trình của tôi</a></li>
+      <li><a href="../student/thuvienbaigiang.html">Thư viện bài giảng</a></li>
+      <li><a href="../student/khoahoc.html">Khóa học của bạn</a></li>
+      <li><a href="../student/luyenthi.html">Phòng luyện thi</a></li>
+      <li><a href="../student/bangxephang.html">Bảng xếp hạng</a></li>
+      <li><a href="../student/sotay.html">Sổ tay ghi chú</a></li>
+    </ul>
+  </div>
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <div class="lesson-header">
+      <a href="../student/student_dashboard.html" class="back-btn">&#8592; Quay lại</a>
+      <div>
+        <div class="lesson-meta">Lịch sử 12 · Chương II · Bài 7</div>
+        <h2>Kháng Chiến Chống Thực Dân Pháp (1945–1954)</h2>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="lesson-tools">
+      <button onclick="showTab(event,'video')">&#127916; Video bài giảng</button>
+      <button onclick="showTab(event,'ppt')">&#128209; PowerPoint</button>
+      <button onclick="showTab(event,'mindmap')">&#129504; Sơ đồ tư duy</button>
+      <button onclick="showTab(event,'media')">&#127902; Tư liệu &amp; Kho ảnh</button>
+      <button onclick="showTab(event,'keyword')">&#128273; Cẩm nang từ khóa</button>
+      <button onclick="showTab(event,'vr')">&#129509; VR / AR / 3D</button>
+      <button onclick="showTab(event,'flashcard')">&#127183; Flashcard</button>
+      <button onclick="showTab(event,'activity')">&#127908; Dự án</button>
+    </div>
+
+    <div class="lesson-area">
+
+      <!-- 1. VIDEO -->
+      <div id="video" class="lesson-content">
+        <div class="tab-card">
+          <div class="tab-card-header">
+            <span class="tab-card-icon">&#127916;</span>
+            <div>
+              <div class="tab-card-eyebrow">Bài giảng chính</div>
+              <div class="tab-card-title">Video giảng bài chi tiết — Bài 7</div>
+            </div>
+          </div>
+          <div class="tab-card-body">
+            <div class="video-main-frame">
+              <iframe src="https://www.youtube.com/embed/yMoyzFpY_hI" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. SLIDE -->
+      <div id="ppt" class="lesson-content">
+        <div class="tab-card">
+          <div class="tab-card-header">
+            <span class="tab-card-icon">&#128209;</span>
+            <div>
+              <div class="tab-card-eyebrow">Bài giảng điện tử</div>
+              <div class="tab-card-title">PowerPoint — Bài 7</div>
+            </div>
+          </div>
+          <div class="tab-card-body">
+            <div class="canva-wrap">
+              <iframe src="https://www.canva.com/design/DAHEgHF6qRo/L9NWYMSqqwGwH-Y7G37_qQ/view?embed" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="canva-note">
+              &#128161; Dùng phím ← → để chuyển slide. Nhấn nút toàn màn hình để xem đầy đủ.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. MINDMAP -->
+      <div id="mindmap" class="lesson-content">
+        <div class="tab-card">
+          <div class="tab-card-header">
+            <span class="tab-card-icon">&#129504;</span>
+            <div>
+              <div class="tab-card-eyebrow">Tổng kết kiến thức</div>
+              <div class="tab-card-title">Sơ đồ tư duy — Bài 7</div>
+            </div>
+          </div>
+          <div class="tab-card-body">
+            <div class="mindmap-cta">
+              <div class="mindmap-cta-icon">&#129504;</div>
+              <div class="mindmap-cta-title">Sơ đồ tư duy — Bài 7</div>
+              <p class="mindmap-cta-desc">Sơ đồ tư duy tổng kết toàn bộ kiến thức Kháng chiến chống Pháp 1945–1954.<br/>Nhấn nút bên dưới để mở và tương tác đầy đủ.</p>
+              <a href="https://mm.tt/map/3966451203?t=pSr7yvaeiP" target="_blank" rel="noopener" class="btn-mindmap">
+                &#128506; Mở sơ đồ tư duy đầy đủ
+              </a>
+              <div class="mindmap-cta-note">Mở trong tab mới · Miễn phí · Không cần đăng nhập</div>
+            </div>
+            <div class="canva-note" style="margin-top:12px;">
+              &#128161; Vào MindMeister để kéo di chuyển, phóng to/thu nhỏ và xem chi tiết từng nhánh.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. TƯ LIỆU -->
+      <div id="media" class="lesson-content">
+        <div class="tab-card">
+          <div class="tab-card-header">
+            <span class="tab-card-icon">&#127902;</span>
+            <div>
+              <div class="tab-card-eyebrow">Tư liệu lịch sử</div>
+              <div class="tab-card-title">Tư liệu &amp; Kho ảnh lịch sử</div>
+            </div>
+          </div>
+          <div class="tab-card-body">
+
+            <!-- 2 Podcast -->
+            <div class="section-label">&#127908; Podcast kể chuyện lịch sử</div>
+            <div class="spotify-card" style="margin-bottom:12px;">
+              <div class="spotify-icon">&#127911;</div>
+              <div class="spotify-info">
+                <div class="spotify-label">Spotify Podcast</div>
+                <div class="spotify-title">Kháng chiến chống Pháp — Tập 1</div>
+                <div class="spotify-desc">Tường thuật lại những ngày đầu kháng chiến toàn quốc 19/12/1946 và hành trình gian khổ bảo vệ nền độc lập.</div>
+              </div>
+              <a href="https://open.spotify.com/episode/20q0IRzw11u2HZzvYvk0IC?si=sQjQjjswQw6HexDO3xur4w&amp;t=46" target="_blank" rel="noopener" class="btn-spotify">
+                &#9654; Nghe ngay
+              </a>
+            </div>
+            <div class="spotify-card" style="margin-bottom:26px;">
+              <div class="spotify-icon">&#127911;</div>
+              <div class="spotify-info">
+                <div class="spotify-label">Spotify Podcast</div>
+                <div class="spotify-title">Chiến thắng Điện Biên Phủ — Tập 2</div>
+                <div class="spotify-desc">56 ngày đêm lịch sử tại lòng chảo Điện Biên Phủ — quyết định vận mệnh đất nước và buộc Pháp ký Hiệp định Giơ-ne-vơ.</div>
+              </div>
+              <a href="https://open.spotify.com/episode/0uRZbEEWPy5DNSirnB4EC5?si=iN4xbfuwRxKPPI-ATrzLmw&amp;t=21" target="_blank" rel="noopener" class="btn-spotify">
+                &#9654; Nghe ngay
+              </a>
+            </div>
+
+            <!-- 6 video -->
+            <div class="section-label">&#128241; Clip ngắn — Nguồn @kenhlichsudenho</div>
+            <div class="videos-3col">
+              <div class="video-card">
+                <div class="video-card-badge">TikTok</div>
+                <h4>Kháng chiến chống Pháp (P1)</h4>
+                <div class="video-ratio">
+                  <video controls><source src="../../assets/b7p1.mp4" type="video/mp4"/></video>
+                </div>
+              </div>
+              <div class="video-card">
+                <div class="video-card-badge">TikTok</div>
+                <h4>Kháng chiến chống Pháp (P2)</h4>
+                <div class="video-ratio">
+                  <video controls><source src="../../assets/b7p2.mp4" type="video/mp4"/></video>
+                </div>
+              </div>
+              <div class="video-card">
+                <div class="video-card-badge">TikTok</div>
+                <h4>Kháng chiến chống Pháp (P3)</h4>
+                <div class="video-ratio">
+                  <video controls><source src="../../assets/b7p3.mp4" type="video/mp4"/></video>
+                </div>
+              </div>
+              <div class="video-card">
+                <div class="video-card-badge">TikTok</div>
+                <h4>Kháng chiến chống Pháp (P4)</h4>
+                <div class="video-ratio">
+                  <video controls><source src="../../assets/b7p4.mp4" type="video/mp4"/></video>
+                </div>
+              </div>
+              <div class="video-card">
+                <div class="video-card-badge">TikTok</div>
+                <h4>Kháng chiến chống Pháp (P5)</h4>
+                <div class="video-ratio">
+                  <video controls><source src="../../assets/b7p5.mp4" type="video/mp4"/></video>
+                </div>
+              </div>
+              <div class="video-card">
+                <div class="video-card-badge">TikTok</div>
+                <h4>Kháng chiến chống Pháp (P6)</h4>
+                <div class="video-ratio">
+                  <video controls><source src="../../assets/b7p6.mp4" type="video/mp4"/></video>
+                </div>
+              </div>
+            </div>
+
+            <div class="section-label">&#127902; Video tư liệu lịch sử</div>
+            <div class="videos-3col" style="grid-template-columns:1fr 1fr;">
+              <div class="video-card">
+                <div class="video-card-badge">Tư liệu</div>
+                <h4>Video tư liệu Bài 7 (1)</h4>
+                <div class="video-ratio">
+                  <video controls><source src="../../assets/tulieuphap7_1.mp4" type="video/mp4"/></video>
+                </div>
+              </div>
+              <div class="video-card">
+                <div class="video-card-badge">Tư liệu</div>
+                <h4>Video tư liệu Bài 7 (2)</h4>
+                <div class="video-ratio">
+                  <video controls><source src="../../assets/tulieuphap7_2.mp4" type="video/mp4"/></video>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4 ảnh placeholder -->
+            <div class="section-label" style="margin-top:8px;">&#128247; Ảnh tư liệu lịch sử</div>
+            <div class="photos-4col">
+              <div class="photo-item">
+                <img src="../../assets/anh7.1.jpg" alt="Ảnh tư liệu 1" style="width:100%;height:180px;object-fit:cover;display:block;"/>
+                <div class="photo-caption">Nhân dân Nam Bộ mít tinh biểu thị quyết tâm kháng chiến chống thực dân Pháp xâm lược (1945)</div>
+              </div>
+              <div class="photo-item">
+                <img src="../../assets/anh7.2.gif" alt="Ảnh tư liệu 2" style="width:100%;height:180px;object-fit:cover;display:block;"/>
+                <div class="photo-caption">Đại hội đại biểu lần thứ II của Đảng Cộng sản Đông Dương ở Chiêm Hoá (Tuyên Quang).</div>
+              </div>
+              <div class="photo-item">
+                <img src="../../assets/anh7.3.jpg" alt="Ảnh tư liệu 3" style="width:100%;height:180px;object-fit:cover;display:block;"/>
+                <div class="photo-caption">Chủ tịch Hồ Chí Minh và Bộ Chính trị Trung ương Đảng quyết định chủ trương tác chiến Đông – Xuân 1953 – 1954.</div>
+              </div>
+              <div class="photo-item">
+                <img src="../../assets/anh7.4.jpg" alt="Ảnh tư liệu 4" style="width:100%;height:180px;object-fit:cover;display:block;"/>
+                <div class="photo-caption">Dân công dùng xe đạp thồ phục vụ chiến dịch Điện Biên Phủ.</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. TỪ KHÓA -->
+      <div id="keyword" class="lesson-content">
+        <div class="tab-card">
+          <div class="tab-card-header">
+            <span class="tab-card-icon">&#128273;</span>
+            <div>
+              <div class="tab-card-eyebrow">Ôn thi nhanh</div>
+              <div class="tab-card-title">Cẩm nang từ khóa vàng — Bài 7</div>
+            </div>
+          </div>
+          <div class="tab-card-body">
+            <div class="keyword-table-wrap">
+              <table class="keyword-table">
+                <thead>
+                  <tr>
+                    <th>Giai đoạn / Sự kiện</th>
+                    <th>Từ khóa</th>
+                    <th>&#9888;&#65039; Lưu ý &amp; Ý nghĩa</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="kw-hot">Bối cảnh sau CMT8 (1945)</span></td>
+                    <td>"Ngàn cân treo sợi tóc"</td>
+                    <td>3 loại giặc: Giặc đói, giặc dốt và giặc ngoại xâm (nguy hiểm nhất).</td>
+                  </tr>
+                  <tr>
+                    <td><span class="kw-hot">23/09/1945</span></td>
+                    <td>Pháp mở đầu xâm lược lần thứ hai</td>
+                    <td>Pháp đánh úp trụ sở UBND Nam Bộ tại Sài Gòn. Chỉ là khởi đầu xâm lược ở miền Nam, chưa phải toàn quốc.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="kw-hot">19/12/1946</span></td>
+                    <td>Kháng chiến toàn quốc bùng nổ</td>
+                    <td>Hồ Chí Minh ra "Lời kêu gọi toàn quốc kháng chiến". Mốc lan rộng ra cả nước.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="kw-hot">Đường lối kháng chiến</span></td>
+                    <td>Toàn dân, toàn diện, trường kỳ, tự lực cánh sinh</td>
+                    <td>4 trụ cột cốt lõi. "Tự lực cánh sinh" quan trọng nhất — không bị phụ thuộc bên ngoài.</td>
+                  </tr>
+                  <tr>
+                    <td>Chiến dịch Việt Bắc 1947</td>
+                    <td>"Phá tan âm mưu đánh nhanh thắng nhanh"</td>
+                    <td>Pháp buộc chuyển sang "đánh lâu dài". Ta bảo vệ cơ quan đầu não kháng chiến.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="kw-hot">Chiến dịch Biên giới 1950</span></td>
+                    <td>"Giành quyền chủ động chiến trường chính"</td>
+                    <td>Khai thông biên giới Việt–Trung. Ta chuyển từ thế phòng ngự sang thế tiến công.</td>
+                  </tr>
+                  <tr>
+                    <td>Đại hội II (1951)</td>
+                    <td>"Đảng Lao động Việt Nam"</td>
+                    <td>Đảng ra hoạt động công khai. Được gọi là "Đại hội kháng chiến thắng lợi".</td>
+                  </tr>
+                  <tr>
+                    <td>Kế hoạch Na-va (1953)</td>
+                    <td>"Kết thúc chiến tranh trong danh dự"</td>
+                    <td>Hy vọng cuối cùng của Pháp. Mỹ viện trợ tài chính và quân sự tối đa.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="kw-hot">Chiến dịch Điện Biên Phủ (1954)</span></td>
+                    <td>"Phá sản hoàn toàn kế hoạch Na-va"</td>
+                    <td>Thắng lợi quân sự lớn nhất, quyết định buộc Pháp ký Hiệp định Giơ-ne-vơ.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="kw-hot">Hiệp định Giơ-ne-vơ (1954)</span></td>
+                    <td>"Kết thúc ách thống trị của Pháp"</td>
+                    <td>Văn bản pháp lý quốc tế đầu tiên ghi nhận độc lập, chủ quyền, thống nhất và toàn vẹn lãnh thổ Việt Nam.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. VR / AR / 3D -->
+      <div id="vr" class="lesson-content">
+        <div class="tab-card">
+          <div class="tab-card-header">
+            <span class="tab-card-icon">&#129509;</span>
+            <div>
+              <div class="tab-card-eyebrow">Công nghệ cao · Phần đinh của web</div>
+              <div class="tab-card-title">Trải nghiệm VR / 3D — Di tích Điện Biên Phủ</div>
+            </div>
+          </div>
+          <div class="tab-card-body">
+
+            <div id="vrPicker">
+              <div class="vr-pick-title">Chọn không gian bạn muốn khám phá:</div>
+              <p class="vr-pick-desc">7 trải nghiệm thực tế ảo tại các di tích lịch sử Điện Biên Phủ — nhấn để tải.</p>
+              <div class="vr-pick-grid vr-pick-grid-7">
+
+                <div class="vr-pick-card vr-dien-bien" onclick="loadVR('sochihuy')">
+                  <div class="vr-qr">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&amp;data=https%3A%2F%2Fvr360.yoolife.vn%2Fso-chi-huy-chien-dich-ien-bien-phu-zmuseumc246u26822s3397&amp;bgcolor=ffffff&amp;color=800000" width="70" height="70" alt="QR"/>
+                    <div class="vr-qr-label">&#128241; Quét QR</div>
+                  </div>
+                  <div class="vr-pick-name">Sở chỉ huy chiến dịch</div>
+                  <div class="vr-pick-desc2">Nơi Đại tướng Võ Nguyên Giáp chỉ huy toàn bộ chiến dịch Điện Biên Phủ lịch sử</div>
+                  <div class="vr-pick-btn vr-btn-dien-bien">&#9654; Tham quan</div>
+                  <div class="vr-pick-hint">&#128225; Kéo chuột để nhìn xung quanh</div>
+                </div>
+
+                <div class="vr-pick-card vr-dien-bien" onclick="loadVR('panorama')">
+                  <div class="vr-qr">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&amp;data=https%3A%2F%2Fvr360.yoolife.vn%2Fbuc-tranh-panorama-chien-dich-ien-bien-phu-zbdsc239u26822s3330&amp;bgcolor=ffffff&amp;color=800000" width="70" height="70" alt="QR"/>
+                    <div class="vr-qr-label">&#128241; Quét QR</div>
+                  </div>
+                  <div class="vr-pick-name">Bức tranh Panorama</div>
+                  <div class="vr-pick-desc2">Bức tranh panorama khổng lồ tái hiện toàn cảnh chiến dịch Điện Biên Phủ lịch sử</div>
+                  <div class="vr-pick-btn vr-btn-dien-bien">&#9654; Tham quan</div>
+                  <div class="vr-pick-hint">&#128225; Kéo chuột để khám phá</div>
+                </div>
+
+                <div class="vr-pick-card vr-dien-bien" onclick="loadVR('doi1')">
+                  <div class="vr-qr">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&amp;data=https%3A%2F%2Fvr360.yoolife.vn%2Foi-d-ien-bien-phu-zbdsc224u26822s3045&amp;bgcolor=ffffff&amp;color=800000" width="70" height="70" alt="QR"/>
+                    <div class="vr-qr-label">&#128241; Quét QR</div>
+                  </div>
+                  <div class="vr-pick-name">Đồi D — Điện Biên Phủ</div>
+                  <div class="vr-pick-desc2">Khám phá đồi D — một trong các cứ điểm quan trọng trong chiến dịch lịch sử</div>
+                  <div class="vr-pick-btn vr-btn-dien-bien">&#9654; Tham quan</div>
+                  <div class="vr-pick-hint">&#128225; Kéo chuột để nhìn xung quanh</div>
+                </div>
+
+                <div class="vr-pick-card vr-dien-bien" onclick="loadVR('doi2')">
+                  <div class="vr-qr">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&amp;data=https%3A%2F%2Fvr360.yoolife.vn%2Foi-a-ien-bien-phu-zmuseumc234u26822s3165&amp;bgcolor=ffffff&amp;color=800000" width="70" height="70" alt="QR"/>
+                    <div class="vr-qr-label">&#128241; Quét QR</div>
+                  </div>
+                  <div class="vr-pick-name">Đồi A — Điện Biên Phủ</div>
+                  <div class="vr-pick-desc2">Tham quan đồi A — trung tâm phòng ngự của thực dân Pháp tại lòng chảo Điện Biên</div>
+                  <div class="vr-pick-btn vr-btn-dien-bien">&#9654; Tham quan</div>
+                  <div class="vr-pick-hint">&#128225; Kéo chuột để nhìn xung quanh</div>
+                </div>
+
+                <div class="vr-pick-card vr-dien-bien" onclick="loadVR('baotang1')">
+                  <div class="vr-qr">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&amp;data=https%3A%2F%2Fvr360.yoolife.vn%2Fd-dien-bien-bao-tang-chien-thang-dien-bien-phu-zbdsc1942u275784&amp;bgcolor=ffffff&amp;color=800000" width="70" height="70" alt="QR"/>
+                    <div class="vr-qr-label">&#128241; Quét QR</div>
+                  </div>
+                  <div class="vr-pick-name">Bảo tàng Chiến thắng (1)</div>
+                  <div class="vr-pick-desc2">Bảo tàng Chiến thắng Điện Biên Phủ — không gian lưu giữ ký ức hào hùng của dân tộc</div>
+                  <div class="vr-pick-btn vr-btn-dien-bien">&#9654; Tham quan</div>
+                  <div class="vr-pick-hint">&#128225; Kéo chuột để khám phá</div>
+                </div>
+
+                <div class="vr-pick-card vr-dien-bien" onclick="loadVR('baotang2')">
+                  <div class="vr-qr">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&amp;data=https%3A%2F%2Fvr360.yoolife.vn%2Fbao-tang-chien-thang-ien-bien-phu-ver-zmuseumc231u26822s3139&amp;bgcolor=ffffff&amp;color=800000" width="70" height="70" alt="QR"/>
+                    <div class="vr-qr-label">&#128241; Quét QR</div>
+                  </div>
+                  <div class="vr-pick-name">Bảo tàng Chiến thắng (2)</div>
+                  <div class="vr-pick-desc2">Tham quan bảo tàng chính với các hiện vật và tư liệu quý về chiến dịch lịch sử</div>
+                  <div class="vr-pick-btn vr-btn-dien-bien">&#9654; Tham quan</div>
+                  <div class="vr-pick-hint">&#128225; Kéo chuột để khám phá</div>
+                </div>
+
+                <div class="vr-pick-card vr-dien-bien" onclick="loadVR('hamchihuy')">
+                  <div class="vr-qr">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&amp;data=https%3A%2F%2Fvr360.yoolife.vn%2Fham-chi-huy-ien-bien-phu-zbdsc233u26822s3189&amp;bgcolor=ffffff&amp;color=800000" width="70" height="70" alt="QR"/>
+                    <div class="vr-qr-label">&#128241; Quét QR</div>
+                  </div>
+                  <div class="vr-pick-name">Hầm chỉ huy De Castries</div>
+                  <div class="vr-pick-desc2">Khám phá hầm chỉ huy nguyên bản — nơi tướng De Castries đầu hàng ngày 7/5/1954</div>
+                  <div class="vr-pick-btn vr-btn-dien-bien">&#9654; Tham quan</div>
+                  <div class="vr-pick-hint">&#128225; Kéo chuột để nhìn xung quanh</div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Player -->
+            <div id="vrPlayer" style="display:none;">
+              <div class="vr-player-bar">
+                <div id="vrPlayerLabel" class="vr-player-label"></div>
+                <button class="vr-back-btn" onclick="closeVR()">&#8592; Quay lại chọn</button>
+              </div>
+              <div class="vr-frame-wrap">
+                <iframe id="vrIframe" src="" allowfullscreen loading="lazy" title="VR viewer"></iframe>
+              </div>
+              <div id="vrNote" class="canva-note" style="margin-top:12px;"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. FLASHCARD -->
+      <div id="flashcard" class="lesson-content">
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Pháp mở đầu xâm lược VN lần 2 ở đâu, khi nào?</div><div class="flashcard-back">Sài Gòn, đêm 22 rạng sáng 23/9/1945</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Văn kiện bùng nổ kháng chiến toàn quốc 19/12/1946?</div><div class="flashcard-back">Lời kêu gọi toàn quốc kháng chiến (Hồ Chí Minh)</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">4 trụ cột của đường lối kháng chiến chống Pháp?</div><div class="flashcard-back">Toàn dân, toàn diện, trường kỳ, tự lực cánh sinh</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Ý nghĩa lớn nhất của chiến dịch Việt Bắc 1947?</div><div class="flashcard-back">Phá tan "đánh nhanh thắng nhanh", bảo vệ đầu não</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Sau 1947, Pháp buộc phải chuyển sang chiến thuật gì?</div><div class="flashcard-back">Đánh lâu dài (Nuôi chiến tranh bằng chiến tranh)</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Mục tiêu số 1 của chiến dịch Biên giới 1950?</div><div class="flashcard-back">Khai thông biên giới Việt–Trung để nhận viện trợ</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Bước ngoặt của chiến dịch Biên giới 1950 là gì?</div><div class="flashcard-back">Ta giành quyền chủ động trên chiến trường chính</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Tên gọi của Đảng từ sau Đại hội II (1951)?</div><div class="flashcard-back">Đảng Lao động Việt Nam</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Đại hội II (1951) có ý nghĩa gì đối với Đảng?</div><div class="flashcard-back">Đảng ra hoạt động công khai</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Mục tiêu cốt lõi của kế hoạch Na-va (1953)?</div><div class="flashcard-back">Xoay chuyển cục diện, "kết thúc chiến tranh trong danh dự"</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Mâu thuẫn "chí tử" trong kế hoạch Na-va là gì?</div><div class="flashcard-back">Tập trung lực lượng và Phân tán lực lượng</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Phương châm Đông Xuân 1953–1954 của ta là gì?</div><div class="flashcard-back">Đánh vào hướng quan trọng mà địch tương đối yếu</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Quyết định lịch sử của Võ Nguyên Giáp tại Điện Biên Phủ?</div><div class="flashcard-back">Chuyển "Đánh nhanh thắng nhanh" sang "Đánh chắc tiến chắc"</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Chiến dịch Điện Biên Phủ diễn ra trong bao lâu?</div><div class="flashcard-back">56 ngày đêm (13/3/1954 – 7/5/1954)</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Ý nghĩa quân sự lớn nhất của chiến thắng Điện Biên Phủ?</div><div class="flashcard-back">Phá sản hoàn toàn kế hoạch Na-va của Pháp–Mỹ</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Ngày ký kết Hiệp định Giơ-ne-vơ về Đông Dương?</div><div class="flashcard-back">21/07/1954</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Văn bản pháp lý quốc tế đầu tiên công nhận độc lập Việt Nam?</div><div class="flashcard-back">Hiệp định Giơ-ne-vơ 1954</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Nhân tố quyết định nhất thắng lợi chống Pháp?</div><div class="flashcard-back">Sự lãnh đạo đúng đắn của Đảng và Hồ Chí Minh</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Kết quả quan trọng nhất đối với miền Bắc sau 1954?</div><div class="flashcard-back">Hoàn toàn giải phóng, tiến lên Chủ nghĩa xã hội</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Chiến thắng Điện Biên Phủ cổ vũ phong trào gì trên thế giới?</div><div class="flashcard-back">Giải phóng dân tộc ở các nước thuộc địa (Á, Phi, Mỹ Latinh)</div></div></div>
+      </div>
+
+      <!-- 8. DỰ ÁN -->
+      <div id="activity" class="lesson-content">
+        <div class="tab-card">
+          <div class="tab-card-header">
+            <span class="tab-card-icon">&#127908;</span>
+            <div>
+              <div class="tab-card-eyebrow">Học sâu · Trải nghiệm</div>
+              <div class="tab-card-title">Dự án &amp; Hoạt động trải nghiệm</div>
+            </div>
+          </div>
+          <div class="tab-card-body">
+            <div class="activity-grid">
+              <div class="activity-card">
+                <span class="activity-icon">&#127897;</span>
+                <h4>Podcast Lịch sử</h4>
+                <p>Thu âm một tập podcast kể lại 56 ngày đêm Điện Biên Phủ qua lời nhân chứng tưởng tượng.</p>
+                <span class="activity-badge">Cá nhân / Nhóm</span>
+              </div>
+              <div class="activity-card">
+                <span class="activity-icon">&#128240;</span>
+                <h4>Tập làm phóng viên</h4>
+                <p>Viết bài báo tường thuật sự kiện 7/5/1954 như một phóng viên tại chỗ tại Điện Biên Phủ.</p>
+                <span class="activity-badge">Cá nhân</span>
+              </div>
+              <div class="activity-card">
+                <span class="activity-icon">&#128211;</span>
+                <h4>Nhật ký lịch sử</h4>
+                <p>Viết nhật ký từ góc nhìn của một chiến sĩ trong 56 ngày đêm chiến đấu tại Điện Biên Phủ.</p>
+                <span class="activity-badge">Cá nhân</span>
+              </div>
+              <div class="activity-card activity-card-full">
+                <span class="activity-icon">&#128444;</span>
+                <h4>Template Poster — Tự tóm tắt bài theo cách riêng</h4>
+                <p>Tải template poster Bài 7, điền thông tin và trang trí theo phong cách của bạn. Một cách sáng tạo để ghi nhớ kiến thức!</p>
+                <div class="poster-row">
+                  <div class="poster-preview" id="posterPreview7">
+                    <div style="width:100%;height:100%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;font-size:2rem;">&#128444;</div>
+                  </div>
+                  <div class="poster-info">
+                    <div class="poster-desc">In ra hoặc dùng trực tiếp trên máy tính — điền vào các ô kiến thức quan trọng của Bài 7.</div>
+                    <a href="../../assets/poster7.png" download="Poster_Bai7_KhangChienPhap.png" class="btn-download">
+                      &#8595; Tải poster về
+                    </a>
+                  </div>
+                </div>
+                <span class="activity-badge" style="margin-top:12px;">Cá nhân / Cả lớp</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- AI -->
+
+
+<script src="../../js/lesson.js"></script>
+<script src="../../js/load_profile.js"></script>
+<script>
+function showTab(e, id) {
+  document.querySelectorAll('.lesson-content').forEach(function(el) {
+    el.classList.remove('visible');
+    el.style.display = 'none';
+  });
+  document.querySelectorAll('.lesson-tools button').forEach(function(b) {
+    b.classList.remove('active');
+  });
+  var t = document.getElementById(id);
+  if (t) {
+    t.style.display = (id === 'flashcard') ? 'grid' : 'block';
+    void t.offsetWidth;
+    t.classList.add('visible');
+  }
+  if (e && e.currentTarget) e.currentTarget.classList.add('active');
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  var firstBtn = document.querySelector('.lesson-tools button');
+  if (firstBtn) firstBtn.click();
+
+  var pp = document.getElementById('posterPreview7');
+  if (pp) {
+    var img = new Image();
+    img.onload = function() {
+      pp.innerHTML = '';
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+      pp.appendChild(img);
+    };
+    img.src = '../../assets/poster7.png';
+  }
+});
+
+var VR_DATA = {
+  sochihuy:  { src: 'https://vr360.yoolife.vn/so-chi-huy-chien-dich-ien-bien-phu-zmuseumc246u26822s3397',
+               label: 'Sở chỉ huy chiến dịch Điện Biên Phủ',
+               note:  'Kéo chuột để nhìn xung quanh · Nhấn vào các điểm nóng để xem thêm.' },
+  panorama:  { src: 'https://vr360.yoolife.vn/buc-tranh-panorama-chien-dich-ien-bien-phu-zbdsc239u26822s3330',
+               label: 'Bức tranh Panorama chiến dịch Điện Biên Phủ',
+               note:  'Kéo chuột để khám phá bức tranh panorama khổng lồ.' },
+  doi1:      { src: 'https://vr360.yoolife.vn/oi-d-ien-bien-phu-zbdsc224u26822s3045',
+               label: 'Đồi D — Điện Biên Phủ',
+               note:  'Kéo chuột để nhìn xung quanh cứ điểm đồi D lịch sử.' },
+  doi2:      { src: 'https://vr360.yoolife.vn/oi-a-ien-bien-phu-zmuseumc234u26822s3165',
+               label: 'Đồi A — Điện Biên Phủ',
+               note:  'Kéo chuột để tham quan đồi A — trung tâm phòng ngự của Pháp.' },
+  baotang1:  { src: 'https://vr360.yoolife.vn/d-dien-bien-bao-tang-chien-thang-dien-bien-phu-zbdsc1942u275784',
+               label: 'Bảo tàng Chiến thắng Điện Biên Phủ (1)',
+               note:  'Kéo chuột để khám phá không gian bảo tàng với các hiện vật quý.' },
+  baotang2:  { src: 'https://vr360.yoolife.vn/bao-tang-chien-thang-ien-bien-phu-ver-zmuseumc231u26822s3139',
+               label: 'Bảo tàng Chiến thắng Điện Biên Phủ (2)',
+               note:  'Tham quan bảo tàng chính với trải nghiệm thực tế ảo đầy đủ.' },
+  hamchihuy: { src: 'https://vr360.yoolife.vn/ham-chi-huy-ien-bien-phu-zbdsc233u26822s3189',
+               label: 'Hầm chỉ huy De Castries — nơi đầu hàng 7/5/1954',
+               note:  'Kéo chuột để khám phá hầm chỉ huy nguyên bản của tướng De Castries.' }
+};
+
+function loadVR(type) {
+  var d = VR_DATA[type];
+  document.getElementById('vrPicker').style.display = 'none';
+  document.getElementById('vrPlayer').style.display = 'block';
+  document.getElementById('vrIframe').src = d.src;
+  document.getElementById('vrPlayerLabel').textContent = d.label;
+  document.getElementById('vrNote').textContent = d.note;
+}
+
+function closeVR() {
+  document.getElementById('vrPlayer').style.display = 'none';
+  document.getElementById('vrPicker').style.display = 'block';
+  document.getElementById('vrIframe').src = '';
+}
+</script>
+<script>
+// --- HỆ THỐNG THEO DÕI TỰ ĐỘNG (BẢN CHUẨN) ---
+let currentSessionId = null;
+let startTime = Date.now();
+let isCompleted = false; // Biến chặn để không gửi 100% nhiều lần
+
+// 1. Tự động lấy ID bài học từ tên file (Ví dụ: lesson6.html -> lấy số 6)
+const lessonMatch = window.location.pathname.match(/lesson(\d+)/);
+const LESSON_NUM = lessonMatch ? lessonMatch[1] : '0';
+
+// 2. Thông báo bắt đầu học và lấy Session ID từ server
+fetch('/DUAN_LICHSU/php/track.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ 
+        action: 'session_start', 
+        lesson_id: LESSON_NUM 
+    })
+})
+.then(res => res.json())
+.then(data => {
+    if (data.ok && data.session_id) {
+        currentSessionId = data.session_id;
+        console.log("Đã bắt đầu phiên học:", currentSessionId);
+    }
+})
+.catch(err => console.error("Lỗi khởi tạo:", err));
+
+// 3. Theo dõi cuộn trang để tính % hoàn thành (pct_done)
+window.addEventListener('scroll', () => {
+    if (isCompleted) return; // Nếu đã xong 100% rồi thì không gửi lại nữa
+
+    let winScroll = window.scrollY;
+    let height = document.documentElement.scrollHeight - window.innerHeight;
+    let scrolled = Math.round((winScroll / height) * 100);
+
+    // Khi học sinh cuộn đến 90% trang
+    if (scrolled >= 90) {
+        isCompleted = true;
+        fetch('/DUAN_LICHSU/php/track.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                action: 'update_progress', 
+                lesson_id: LESSON_NUM, 
+                progress: 100 
+            })
+        })
+        .then(() => console.log("Đã hoàn thành bài học 100%"));
+    }
+}, { passive: true });
+
+// 4. Gửi thời gian học khi thoát trang (session_end)
+window.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden' && currentSessionId) {
+        let duration = Math.round((Date.now() - startTime) / 1000);
+        
+        // Dùng sendBeacon để đảm bảo dữ liệu đi ngay cả khi đóng tab
+        const endData = JSON.stringify({
+            action: 'session_end',
+            session_id: currentSessionId,
+            duration_s: duration
+        });
+        
+        navigator.sendBeacon('/DUAN_LICHSU/php/track.php', endData);
+    }
+});
+</script>
+<script>
+  var AI_LESSON_ID    = 7;
+  var AI_LESSON_NAME  = "Bài 7 — Kháng chiến chống Pháp";
+  var AI_STUDENT_NAME = document.getElementById('nameEl') ? document.getElementById('nameEl').textContent : "Chi";
+</script>
+<script src="../../js/ai-chat.js"></script>
+</body>
+</body>
+</html>

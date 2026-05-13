@@ -1,0 +1,255 @@
+/* ════════════════════════════════════════
+   SỬ VIỆT — tintuc.css
+   Đồng bộ với trangchu / gioithieu / thuvien / goidichvu
+   ════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap');
+
+:root {
+  --red:        #800000;
+  --red-deep:   #5a0000;
+  --gold:       #BF9B30;
+  --gold-light: #F9F1B7;
+  --gold-dim:   rgba(191,155,48,0.25);
+  --bg:         #fdfcf0;
+  --tx:         #2d0a0a;
+  --tx-muted:   #6b3a3a;
+  --ff:         'Be Vietnam Pro', sans-serif;
+  --serif:      'Playfair Display', serif;
+  --serif2:     'Crimson Pro', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--ff); background: var(--bg); color: var(--tx); overflow-x: hidden; line-height: 1.65; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+
+/* ════════════════════════════════════════
+   NAVBAR
+   ════════════════════════════════════════ */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 76px;
+  background: var(--red-deep);
+  border-bottom: 2px solid rgba(191,155,48,0.45);
+  transition: all 0.4s;
+}
+.navbar.scrolled { height: 64px; background: var(--red); box-shadow: 0 4px 28px rgba(0,0,0,0.3); }
+.nav-inner { max-width: 1280px; margin: 0 auto; height: 100%; display: flex; align-items: center; padding: 0 2rem; }
+.nav-logo  { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.logo-text { font-family: var(--serif); font-size: 1.7rem; font-weight: 900; color: var(--gold-light); }
+.logo-text em { color: var(--gold); font-style: italic; }
+.nav-links { display: flex; gap: 2rem; margin: 0 auto; padding: 0 2rem; }
+.nav-link  { font-weight: 600; font-size: 0.9rem; color: rgba(249,241,183,0.78); transition: 0.2s; position: relative; }
+.nav-link::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:var(--gold); transition:0.3s; }
+.nav-link:hover, .nav-link.active { color: var(--gold-light); }
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+.nav-actions { display: flex; gap: 0.75rem; align-items: center; flex-shrink: 0; }
+.btn-login { background:var(--gold); color:var(--red-deep)!important; padding:0.55rem 1.5rem; border-radius:8px; font-weight:800; font-size:0.9rem; box-shadow:0 4px 14px rgba(0,0,0,0.2); transition:0.3s; }
+.btn-login:hover { background:var(--gold-light); transform:translateY(-1px); }
+.hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+.hamburger span { display:block; width:24px; height:2px; background:var(--gold-light); border-radius:2px; }
+
+/* ════════════════════════════════════════
+   PAGE HERO
+   ════════════════════════════════════════ */
+.page-hero {
+  padding: 160px 0 100px;
+  background: var(--red-deep);
+  position: relative; overflow: hidden; text-align: center;
+}
+.page-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, rgba(191,155,48,0.03) 0, rgba(191,155,48,0.03) 1px, transparent 0, transparent 50%);
+  background-size: 28px 28px;
+}
+.page-hero-star {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  width: 500px; height: 500px; opacity: 0.05; pointer-events: none;
+}
+.page-hero-tag {
+  display: inline-block; background: rgba(191,155,48,0.2); color: var(--gold);
+  border: 1px solid rgba(191,155,48,0.4); padding: 6px 20px; border-radius: 100px;
+  font-size: 0.75rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 1.5rem; animation: fadeUp 0.8s ease both;
+}
+.page-hero h1 {
+  font-family: var(--serif); font-size: 4.5rem; font-weight: 900;
+  color: var(--gold-light); line-height: 1.1; margin-bottom: 1.2rem;
+  animation: fadeUp 0.8s 0.1s ease both;
+}
+.page-hero h1 em { color: var(--gold); font-style: italic; }
+.page-hero p {
+  font-family: var(--serif2); font-size: 1.2rem; color: rgba(249,241,183,0.75);
+  max-width: 580px; margin: 0 auto; line-height: 1.8;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+.page-hero-wave { position: absolute; bottom: -2px; left: 0; right: 0; height: 60px; pointer-events: none; }
+
+/* ════════════════════════════════════════
+   SECTION
+   ════════════════════════════════════════ */
+.section { padding: 100px 0; }
+
+/* ════════════════════════════════════════
+   NEWS HIGHLIGHT
+   ════════════════════════════════════════ */
+.news-highlight {
+  display: flex;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(128,0,0,0.10);
+  margin-bottom: 60px;
+  align-items: stretch;
+  border: 1.5px solid rgba(191,155,48,0.2);
+  min-height: 360px;
+}
+.highlight-content {
+  padding: 3.5rem; flex: 1;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.highlight-content h2 {
+  font-family: var(--serif); font-size: 2rem; color: var(--red);
+  margin: 0.8rem 0 1rem; line-height: 1.25;
+}
+.highlight-content p {
+  font-family: var(--serif2); font-size: 1.05rem; color: var(--tx-muted);
+  line-height: 1.75; margin-bottom: 1.5rem;
+}
+.highlight-image { flex: 1; overflow: hidden; min-height: 320px; }
+.highlight-image img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.news-highlight:hover .highlight-image img { transform: scale(1.04); }
+
+.event-info {
+  display: flex; gap: 1.5rem; margin-bottom: 1.5rem;
+  font-size: 0.88rem; font-weight: 700; color: var(--tx-muted);
+}
+.event-info i { color: var(--gold); margin-right: 5px; }
+
+/* ════════════════════════════════════════
+   LIB TAG & CARD — kế thừa từ thuvien
+   ════════════════════════════════════════ */
+.lib-tag {
+  display: inline-block;
+  font-size: 0.7rem; font-weight: 800; color: var(--red);
+  background: rgba(191,155,48,0.15); padding: 4px 12px;
+  border-radius: 4px; align-self: flex-start; margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.btn-card {
+  padding: 12px 20px; cursor: pointer;
+  background: var(--red); color: white;
+  border: 1px solid var(--gold); border-radius: 10px;
+  font-weight: 700; font-size: 0.9rem; transition: 0.3s;
+  margin-top: auto;
+}
+.btn-card:hover { background: var(--gold); color: var(--red-deep); }
+
+/* ════════════════════════════════════════
+   NEWS GRID — 3 cột
+   ════════════════════════════════════════ */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.lib-card {
+  background: white; border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(128,0,0,0.06); transition: 0.4s;
+  border: 1.5px solid rgba(191,155,48,0.14);
+  display: flex; flex-direction: column;
+}
+.lib-card:hover { transform: translateY(-8px); box-shadow: 0 18px 48px rgba(128,0,0,0.13); border-color: var(--gold); }
+
+.lib-visual {
+  width: 100%; height: 180px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; flex-shrink: 0;
+}
+/* SVG fill toàn bộ chiều cao */
+.lib-visual svg { width: 100%; height: 100%; display: block; }
+.lib-visual img { width: 100%; height: 100%; object-fit: cover; }
+
+.lib-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+.lib-content h3 { font-family: var(--serif); font-size: 1.1rem; color: var(--red); margin-bottom: 0.6rem; line-height: 1.35; }
+.lib-content p  { font-family: var(--serif2); font-size: 0.91rem; color: var(--tx-muted); line-height: 1.7; flex-grow: 1; }
+
+.news-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--red); font-weight: 700; font-size: 0.83rem;
+  margin-top: 1rem; transition: 0.2s;
+}
+.news-link:hover { color: var(--gold); gap: 10px; }
+
+/* ════════════════════════════════════════
+   FOOTER
+   ════════════════════════════════════════ */
+.footer { background: var(--red-deep); color: var(--gold-light); }
+.foot-cta { background: var(--red); padding: 50px 0; }
+.foot-cta-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+.foot-cta-hl  { font-family: var(--serif); font-size: 1.8rem; color: var(--gold-light); }
+.foot-cta-sub { color: rgba(249,241,183,0.7); margin-top: 4px; }
+.foot-cta .btn-register { background: var(--gold); color: var(--red-deep) !important; font-weight: 800; }
+.foot-main { padding: 70px 0 40px; }
+.foot-grid { display: grid; grid-template-columns: 1.6fr repeat(3,1fr); gap: 4rem; }
+.foot-brand-logo { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 0.75rem; }
+.foot-logo-text  { font-family: var(--serif); font-size: 1.65rem; font-weight: 900; color: var(--gold-light); }
+.foot-logo-text em { color: var(--gold); font-style: italic; }
+.foot-brand p { color: rgba(249,241,183,0.6); font-family: var(--serif2); font-size: 0.98rem; margin: 14px 0 20px; line-height: 1.7; }
+.foot-social { display: flex; gap: 10px; }
+.foot-social a { width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--gold-light); transition: 0.2s; }
+.foot-social a:hover { background: var(--gold); color: var(--red-deep); }
+.foot-col h4 { color: var(--gold); font-family: var(--serif); font-size: 1.1rem; margin-bottom: 1.5rem; }
+.foot-col a, .foot-col span { display: block; color: rgba(249,241,183,0.6); font-size: 0.87rem; margin-bottom: 10px; transition: 0.2s; }
+.foot-col a:hover { color: var(--gold-light); padding-left: 4px; }
+.tag-new { background: var(--gold); color: var(--red-deep); font-size: 0.64rem; padding: 1px 6px; border-radius: 4px; font-weight: 800; margin-left: 4px; vertical-align: middle; }
+.nl-row { display: flex; gap: 8px; margin-top: 8px; }
+.nl-row input { flex:1; padding:9px 14px; border-radius:8px; border:1px solid rgba(191,155,48,.26); background:rgba(255,255,255,.07); color:var(--gold-light); font-size:.83rem; outline:none; }
+.nl-row input::placeholder { color:rgba(249,241,183,.3); }
+.nl-row button { background:var(--gold); color:var(--red-deep); width:40px; border-radius:8px; border:none; cursor:pointer; font-weight:800; transition:.2s; }
+.nl-row button:hover { background:var(--gold-light); }
+.foot-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding: 24px 0; }
+.foot-bottom-inner { display: flex; justify-content: space-between; align-items: center; font-size: 0.81rem; color: rgba(249,241,183,0.4); flex-wrap: wrap; gap: 8px; }
+.tag-edtech { background: var(--gold); color: var(--red-deep); padding: 1px 8px; border-radius: 4px; font-weight: 800; font-size: 0.71rem; margin-left: 4px; }
+
+/* ════════════════════════════════════════
+   ANIMATIONS & REVEAL
+   ════════════════════════════════════════ */
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+/* Chỉ áp dụng reveal cho các card bên dưới, KHÔNG cho news-highlight */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+
+/* news-highlight luôn hiển thị, không cần reveal */
+.news-highlight { opacity: 1 !important; transform: none !important; }
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .news-grid { grid-template-columns: repeat(2, 1fr); }
+  .news-highlight { flex-direction: column; }
+  .highlight-image { min-height: 260px; }
+  .page-hero h1 { font-size: 3rem; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 76px; left: 0; right: 0;
+    background: var(--red-deep); padding: 1rem 2rem;
+    border-bottom: 2px solid rgba(191,155,48,0.3); gap: 1rem;
+  }
+  .news-grid { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr; }
+  .foot-cta-inner, .foot-bottom-inner { flex-direction: column; text-align: center; }
+  .page-hero h1 { font-size: 2.4rem; }
+}

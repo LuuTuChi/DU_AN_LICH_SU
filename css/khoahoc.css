@@ -1,0 +1,261 @@
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#f7f4e8;--maroon:#800000;--maroon-dark:#5c0000;
+  --gold:#D4AF37;--gold-light:#e8cc6a;--gold-pale:#f5e9b0;
+  --ivory:#fffcf3;--white:#ffffff;--text-dark:#1a1a1a;
+  --text-mid:#444;--text-muted:#888;--border:#e0d9c5;
+  --green:#2e7d32;--green-bg:#f1f8e9;--green-border:#81c784;
+  --blue:#1565c0;--blue-bg:#e3f2fd;--blue-border:#90caf9;
+  --shadow-sm:0 2px 8px rgba(128,0,0,0.08);
+  --shadow-md:0 6px 24px rgba(128,0,0,0.12);
+  --shadow-lg:0 12px 40px rgba(128,0,0,0.18);
+  --radius-sm:10px;--radius-md:16px;--radius-lg:22px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+.container{display:flex;min-height:100vh}
+.sidebar-icons{width:72px;background:linear-gradient(180deg,#f5edd5,#ede3c5);display:flex;flex-direction:column;align-items:center;padding-top:28px;gap:8px;border-right:1px solid var(--border);position:sticky;top:0;height:100vh;z-index:10}
+.icon-btn{width:46px;height:46px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-sm);cursor:pointer;transition:all 0.25s ease;color:#666}
+.icon-btn:hover,.icon-btn.active{background:var(--maroon);color:white;box-shadow:var(--shadow-sm)}
+.sidebar-icons .material-symbols-outlined{font-size:24px}
+.logout{margin-top:auto;padding-bottom:20px}
+.sidebar-menu{width:240px;background:linear-gradient(180deg,var(--maroon),var(--maroon-dark));color:white;padding:28px 20px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;overflow-y:auto}
+.profile{text-align:center;margin-bottom:24px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,0.15)}
+.avatar{width:84px;height:84px;background:linear-gradient(135deg,#fff 60%,var(--gold-pale));border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-weight:700;color:var(--maroon);font-size:12.5px;border:3px solid var(--gold);box-shadow:0 0 0 5px rgba(212,175,55,0.18)}
+.name{background:rgba(255,255,255,0.12);color:white;padding:8px 12px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;border:1px solid rgba(255,255,255,0.18)}
+.menu{list-style:none;flex:1}
+.menu li{margin-bottom:4px;border-radius:var(--radius-sm);transition:all 0.22s ease}
+.menu li a{display:flex;align-items:center;padding:11px 14px;text-decoration:none;color:rgba(255,255,255,0.8);font-size:13.5px;font-weight:500;border-radius:var(--radius-sm);transition:all 0.22s ease}
+.menu li:hover a{background:rgba(212,175,55,0.18);color:var(--gold-light);padding-left:20px}
+.menu li.active{background:linear-gradient(90deg,var(--gold),#c9a227);box-shadow:0 4px 14px rgba(212,175,55,0.3)}
+.menu li.active a{color:#1a0000;font-weight:700}
+.center{flex:1;padding:36px 40px;overflow-y:auto}
+.page-title{font-family:'Playfair Display',serif;font-size:27px;font-weight:800;color:var(--maroon);letter-spacing:1.5px;margin-bottom:28px;display:flex;align-items:center;gap:14px}
+.page-title::after{content:'';flex:1;height:2px;max-width:180px;background:linear-gradient(90deg,var(--gold),transparent);border-radius:2px}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;margin-top:32px}
+.section-badge{width:8px;height:8px;background:var(--gold);border-radius:50%;box-shadow:0 0 0 3px rgba(212,175,55,0.28);flex-shrink:0}
+.section-header h3{font-family:'Playfair Display',serif;font-size:16.5px;font-weight:700;color:var(--maroon);letter-spacing:1px;text-transform:uppercase}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:6px 0 28px}
+
+
+/* COURSE CARD */
+.course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-bottom:8px}
+.course-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);transition:all 0.3s ease}
+.course-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--gold)}
+.course-thumb{height:140px;display:flex;align-items:center;justify-content:center;font-size:52px;position:relative}
+.course-thumb.ls{background:linear-gradient(135deg,#fff5e6,#ffe0b2)}
+.course-thumb.vn{background:linear-gradient(135deg,#fce4ec,#f8bbd0)}
+.course-info-strip{position:absolute;bottom:10px;left:12px;right:12px;display:flex;justify-content:space-between}
+.course-tag{padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;background:rgba(255,255,255,0.9);color:var(--maroon)}
+.course-body{padding:18px 20px}
+.course-body h4{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--maroon);margin-bottom:6px}
+.course-body p{font-size:13px;color:var(--text-muted);margin-bottom:14px;line-height:1.5}
+.course-progress-label{display:flex;justify-content:space-between;font-size:12.5px;font-weight:600;color:var(--text-mid);margin-bottom:7px}
+.course-bar{height:8px;background:var(--border);border-radius:99px;overflow:hidden;margin-bottom:14px}
+.course-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),#c9a227);border-radius:99px}
+.course-meta{display:flex;gap:14px;margin-bottom:14px}
+.course-meta span{font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px}
+.course-meta .material-symbols-outlined{font-size:15px;color:var(--maroon);font-variation-settings:'FILL' 1}
+.btn-course{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:99px;background:linear-gradient(135deg,var(--maroon),var(--maroon-dark));color:white;font-size:13px;font-weight:700;text-decoration:none;border:none;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.22s;box-shadow:0 3px 12px rgba(128,0,0,0.25)}
+.btn-course:hover{opacity:0.88;transform:translateY(-1px)}
+
+/* ══════════════════════════════════════════
+   COURSE CARDS
+══════════════════════════════════════════ */
+.course-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:22px; margin-bottom:8px; }
+.course-card { background:var(--white); border:1.5px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-sm); transition:all 0.3s ease; }
+.course-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--gold); }
+
+.course-thumb { height:150px; display:flex; align-items:center; justify-content:center; font-size:56px; position:relative; }
+.course-thumb.t-ls  { background:linear-gradient(135deg,#fff5e6,#ffe0b2); }
+.course-thumb.t-dia { background:linear-gradient(135deg,#fce4ec,#f8bbd0); }
+.course-thumb.t-van { background:linear-gradient(135deg,#f3e5f5,#e1bee7); }
+.course-thumb.t-su2 { background:linear-gradient(135deg,#e8f5e9,#c8e6c9); }
+
+.course-tag      { position:absolute; bottom:10px; left:12px; padding:3px 12px; border-radius:99px; font-size:11px; font-weight:800; background:rgba(255,255,255,0.92); color:var(--maroon); letter-spacing:0.3px; border:1px solid rgba(128,0,0,0.12); }
+.course-tag-soon { position:absolute; top:10px; right:10px; padding:3px 10px; border-radius:99px; font-size:10px; font-weight:800; background:var(--gold-pale); color:#6d4c00; border:1px solid var(--gold); }
+/* Badge "Đã mua" */
+.course-tag-owned { position:absolute; top:10px; right:10px; padding:3px 12px; border-radius:99px; font-size:11px; font-weight:800; background:#e8f5e9; color:#2e7d32; border:1px solid #81c784; }
+
+.course-body { padding:18px 20px; }
+.course-body h4 { font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:var(--maroon); margin-bottom:6px; line-height:1.35; }
+.course-body p  { font-size:13px; color:var(--text-muted); margin-bottom:14px; line-height:1.55; }
+
+.course-progress-label { display:flex; justify-content:space-between; font-size:12.5px; font-weight:700; color:var(--text-mid); margin-bottom:7px; }
+.course-bar      { height:9px; background:var(--border); border-radius:99px; overflow:hidden; margin-bottom:14px; }
+.course-bar-fill { height:100%; background:linear-gradient(90deg,#17af1a,#22cc26); border-radius:99px; transition:width 0.6s ease; }
+
+.course-meta { display:flex; gap:14px; margin-bottom:16px; flex-wrap:wrap; }
+.course-meta span { font-size:12px; color:var(--text-muted); display:flex; align-items:center; gap:4px; }
+.course-meta .material-symbols-outlined { font-size:15px; color:var(--maroon); font-variation-settings:'FILL' 1; }
+
+.course-tags-row { display:flex; gap:7px; flex-wrap:wrap; margin-bottom:14px; }
+.ctag { padding:3px 10px; border-radius:99px; font-size:11px; font-weight:700; background:var(--cream); border:1px solid var(--border); color:var(--text-mid); }
+
+/* Nút tiếp tục học */
+.btn-course { display:inline-flex; align-items:center; gap:6px; padding:10px 22px; border-radius:99px; background:linear-gradient(135deg,var(--maroon),var(--maroon-dark,#5c0000)); color:white; font-size:13px; font-weight:700; text-decoration:none; border:none; cursor:pointer; font-family:'Nunito',sans-serif; transition:all 0.22s; box-shadow:0 3px 12px rgba(128,0,0,0.25); }
+.btn-course:hover { opacity:0.88; transform:translateY(-1px); }
+
+/* Nút mua khóa học */
+.btn-buy { background:linear-gradient(135deg,#D4AF37,#c9a227); color:#1a0000; box-shadow:0 3px 12px rgba(212,175,55,0.35); display:inline-flex; align-items:center; gap:6px; padding:10px 22px; border-radius:99px; font-size:13px; font-weight:800; text-decoration:none; border:none; cursor:pointer; font-family:'Nunito',sans-serif; transition:all 0.22s; }
+.btn-buy:hover { opacity:0.88; transform:translateY(-1px); }
+
+/* Nút sắp ra mắt */
+.btn-soon { background:#f0f0f0; color:#aaa; border:1.5px solid #ddd; display:inline-flex; align-items:center; gap:6px; padding:10px 22px; border-radius:99px; font-size:13px; font-weight:700; cursor:not-allowed; font-family:'Nunito',sans-serif; }
+
+/* ── Danh sách bài học trong card ── */
+.lesson-list { list-style:none; margin-bottom:16px; }
+.lesson-list li { display:flex; align-items:center; gap:10px; padding:7px 0; border-bottom:1px solid var(--border); font-size:13px; color:var(--text-mid); }
+.lesson-list li:last-child { border:none; }
+.ll-icon   { width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; flex-shrink:0; }
+.ll-done   { background:#2e7d32; color:white; }
+.ll-active { background:#1565c0; color:white; }
+.ll-todo   { background:var(--border); color:var(--text-muted); }
+.ll-label  { flex:1; }
+.ll-pct    { font-size:11px; font-weight:700; color:var(--text-muted); }
+
+/* ── Giá & quyền lợi ── */
+.price-box { background:linear-gradient(135deg,#fff8e1,#fffbf0); border:1.5px solid var(--gold); border-radius:12px; padding:14px 16px; margin-bottom:16px; }
+.price-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+.price-amount { font-family:'Playfair Display',serif; font-size:22px; font-weight:800; color:var(--maroon); }
+.price-label  { font-size:12px; color:var(--text-muted); font-weight:600; }
+.price-perks  { margin-top:10px; padding-top:10px; border-top:1px solid #e8cc6a; display:flex; flex-direction:column; gap:5px; }
+.price-perk   { display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600; color:#5c0000; }
+
+/* ── Chờ duyệt banner ── */
+.pending-banner { background:#fff8e1; border:1.5px solid #e8cc6a; border-radius:12px; padding:12px 16px; margin-bottom:16px; display:flex; align-items:center; gap:10px; font-size:13px; font-weight:600; color:#6d4c00; }
+
+/* ══════════════════════════════════════════
+   MODAL MUA KHÓA HỌC
+══════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+    MODAL MUA KHÓA HỌC - TỐI ƯU GỌN
+══════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+    MODAL MUA KHÓA HỌC - TỐI ƯU GỌN
+══════════════════════════════════════════ */
+#buyModal {
+    display:none; position:fixed; inset:0;
+    background:rgba(0,0,0,0.75); z-index:9999;
+    align-items:center; justify-content:center;
+}
+#buyModal.open { display:flex; }
+
+.buy-modal-box {
+    /* --- Giao diện & Màu sắc --- */
+    background: #ffffff !important; /* Đảm bảo nền luôn trắng sạch sẽ */
+    color: #333;
+    border-radius: 24px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+    position: relative;
+    
+    /* --- Kích thước & Căn chỉnh --- */
+    width: 90%;
+    max-width: 400px !important;
+    padding: 20px 25px !important;
+    padding-bottom: 30px !important; /* Thêm khoảng trống dưới cùng cho nút bấm */
+    
+    /* --- Cơ chế chống tràn (Quan trọng để hiện nút) --- */
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh; /* Không vượt quá 90% chiều cao màn hình */
+    overflow-y: auto; /* Tự động hiện thanh cuộn nếu ảnh bill quá dài */
+    
+    /* --- Hiệu ứng --- */
+    animation: buyPop 0.3s ease-out;
+}
+#previewImg {
+    max-height: 200px; /* Giới hạn chiều cao ảnh preview */
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+@keyframes buyPop {
+    from { opacity:0; transform:translateY(20px); }
+    to { opacity:1; transform:translateY(0); }
+}
+
+.buy-modal-header { text-align:center; margin-bottom:15px; }
+.buy-modal-icon { font-size:32px !important; margin-bottom:4px; display:block; }
+.buy-modal-title { font-family:'Playfair Display',serif; font-size:19px !important; color:var(--maroon); margin-bottom:2px; font-weight:800; }
+.buy-modal-course { font-size:12px !important; color:#666; font-weight:600; }
+
+/* Thu nhỏ phần quyền lợi */
+.buy-perks { 
+    background:#fff9f0; border:1px solid #ffeeba; 
+    border-radius:12px; padding:10px 15px !important; 
+    margin-bottom:12px !important; 
+}
+.buy-perk-item { font-size:12px !important; margin-bottom:3px; display: flex; align-items: center; gap: 8px; }
+
+/* Thông tin ngân hàng & QR */
+.buy-bank-box { 
+    background:#f8f9fa; border:1px solid #dee2e6; 
+    border-radius:12px; padding:12px !important; 
+    margin-bottom:12px !important; 
+}
+
+#qrCodeImg {
+    width: 150px !important; /* KÍCH THƯỚC QR CHUẨN */
+    height: 150px !important;
+    margin-bottom: 5px;
+    border: 1px solid #eee;
+    padding: 5px;
+    background: white;
+}
+
+.buy-bank-row { 
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 5px 0 !important; 
+    border-bottom:1px solid #eee;
+    font-size: 12.5px !important;
+}
+.buy-bank-val { font-weight: 800; color: #1a0000; }
+
+.buy-note { font-size:11px !important; text-align:center; color:#777; margin-bottom:15px; line-height:1.5; }
+.buy-note b { color: var(--maroon); }
+
+/* Nút bấm */
+.buy-modal-actions { display:flex; gap:10px; }
+.btn-buy-confirm { 
+    flex:1.5; padding:12px !important; 
+    background: linear-gradient(135deg, var(--maroon), var(--maroon-dark)); color:white; 
+    border:none; border-radius:12px; 
+    font-size:13.5px; font-weight:700; cursor:pointer; transition: 0.2s;
+}
+.btn-buy-confirm:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-buy-cancel { 
+    flex:1; padding:12px !important; 
+    background:#f0f0f0; color:#666; 
+    border:none; border-radius:12px; 
+    font-size:13.5px; cursor:pointer;
+}
+/* Mặc định menu VIP bị mờ */
+/* Sidebar Menu VIP */
+li.vip-item a {
+    opacity: 0.5;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+li.vip-item.unlocked a {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    color: #D4AF37 !important;
+    font-weight: 700;
+}
+
+/* AI */
+.ai-button{position:fixed;bottom:28px;right:28px;width:62px;height:62px;background:linear-gradient(135deg,var(--maroon),var(--maroon-dark));color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;box-shadow:0 6px 24px rgba(128,0,0,0.35);transition:all 0.3s ease;z-index:1000}
+.ai-button:hover{transform:scale(1.1) rotate(5deg)}
+.ai-chat{position:fixed;bottom:106px;right:28px;width:318px;background:var(--white);border-radius:var(--radius-lg);box-shadow:0 16px 48px rgba(0,0,0,0.18);display:none;overflow:hidden;z-index:999;border:1px solid var(--border)}
+.ai-header{background:linear-gradient(135deg,var(--maroon),var(--maroon-dark));color:white;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px}
+.ai-header span{cursor:pointer;opacity:0.7}
+.ai-body{padding:16px;height:200px;overflow-y:auto;font-size:13.5px;line-height:1.6;background:#fafaf8}
+.ai-body p{background:white;padding:10px 14px;border-radius:12px;border:1px solid var(--border);display:inline-block}
+.ai-input{display:flex;border-top:1px solid var(--border);background:white}
+.ai-input input{flex:1;border:none;padding:12px 14px;outline:none;font-family:'Nunito',sans-serif;font-size:13.5px}
+.ai-input button{background:linear-gradient(135deg,var(--maroon),var(--maroon-dark));color:white;border:none;padding:12px 16px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700}
+
+
+

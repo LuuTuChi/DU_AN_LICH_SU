@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Sổ Tay Ghi Chú</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+<link rel="stylesheet" href="../../css/sotay.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- SIDEBAR ICONS — đúng chuẩn giống dashboard -->
+  <div class="sidebar-icons">
+    <div class="icon-btn active" onclick="location.href='student_dashboard.html'">
+        <span class="material-symbols-outlined">home</span>
+    </div>
+
+    <div class="icon-btn" onclick="location.href='student_profile.html'">
+        <span class="material-symbols-outlined">groups</span>
+    </div>
+
+    <div class="icon-btn" onclick="location.href='student_settings.html'">
+        <span class="material-symbols-outlined">settings</span>
+    </div>
+
+    <div class="logout">
+         <a href="../login.html" class="icon-btn">
+           <span class="material-symbols-outlined">logout</span>
+         </a>
+       </div>
+</div>
+
+  <!-- SIDEBAR MENU — link đúng, không có ../student/ -->
+  <div class="sidebar-menu">
+    <div class="profile">
+      <div class="avatar" id="avatarEl">ẢNH</div>
+      <div class="name" id="nameEl">HỌ VÀ TÊN</div>
+    </div>
+    <ul class="menu">
+    <li><a href="student_dashboard.html">Lộ trình của tôi</a></li>
+    <li><a href="thuvienbaigiang.html">Thư viện bài giảng</a></li>
+    <li><a href="khoahoc.html">Khóa học của bạn</a></li>
+    <li><a href="luyenthi.html">Phòng luyện thi</a></li>
+    <li><a href="bangxephang.html">Bảng xếp hạng</a></li>
+    <!-- THÊM 2 DÒNG VIP DƯỚI ĐÂY -->
+    <li class="vip-item"><a href="live_review.html" id="menuLive">Lịch Live-Review</a></li>
+    <li class="vip-item"><a href="hoi_chuyen_gia.html" id="menuHoi">Hỏi đáp chuyên gia</a></li>
+    <li class="active"><a href="sotay.html">Sổ tay ghi chú</a></li>
+</ul>
+  </div>
+
+  <!-- CENTER — chức năng từ sotay.js -->
+  <div class="center">
+    <h2 class="page-title">SỔ TAY GHI CHÚ</h2>
+
+    <div class="note-toolbar">
+      <div class="nt-search">
+        <span class="material-symbols-outlined">search</span>
+        <input type="text" id="noteSearch" placeholder="Tìm ghi chú..." oninput="filterNotes()">
+      </div>
+      <button class="btn-add" onclick="openAdd()">+ Ghi chú mới</button>
+    </div>
+
+    <div class="tag-filter" id="tagFilter"></div>
+    <div class="notes-grid" id="notesGrid"></div>
+    <div class="empty-notes" id="emptyNotes" style="display:none;">
+      <div class="en-icon">📝</div>
+      <p style="font-size:15px;font-weight:600;">Chưa có ghi chú. Thêm ghi chú đầu tiên!</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL thêm/sửa ghi chú -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeBg(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">Ghi chú mới</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group" style="flex:2;">
+          <label class="form-label">Tiêu đề</label>
+          <input class="form-input" id="fTitle" type="text" placeholder="Tiêu đề ghi chú...">
+        </div>
+        <div class="form-group" style="flex:1;">
+          <label class="form-label">Nhãn</label>
+          <select class="form-input" id="fTag">
+            <option value="ls12">Lịch Sử 12</option>
+            <option value="bt">Bài tập</option>
+            <option value="qt">Quan trọng</option>
+            <option value="kn">Kiến thức</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nội dung</label>
+        <textarea class="form-input" id="fContent" placeholder="Viết ghi chú..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Màu nền</label>
+        <div class="color-picker">
+          <div class="cp-opt selected" style="background:#fffde7;" data-color="nc-yellow" onclick="pickColor(this)"></div>
+          <div class="cp-opt" style="background:#f1f8e9;" data-color="nc-green"  onclick="pickColor(this)"></div>
+          <div class="cp-opt" style="background:#e3f2fd;" data-color="nc-blue"   onclick="pickColor(this)"></div>
+          <div class="cp-opt" style="background:#fce4ec;" data-color="nc-pink"   onclick="pickColor(this)"></div>
+          <div class="cp-opt" style="background:#f3e5f5;" data-color="nc-purple" onclick="pickColor(this)"></div>
+          <div class="cp-opt" style="background:#fffcf3;" data-color="nc-cream"  onclick="pickColor(this)"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal()">Hủy</button>
+      <button class="btn-save" onclick="saveNote()">💾 Lưu ghi chú</button>
+    </div>
+  </div>
+</div>
+
+
+<script src="../../js/load_profile.js"></script>
+<script src="../../js/student.js"></script>
+<script src="../../js/sotay.js"></script>
+<script>
+function toggleChat() {
+  var c = document.getElementById('aiChat');
+  c.style.display = c.style.display === 'block' ? 'none' : 'block';
+}
+</script>
+<script>
+// KIỂM TRA TRẠNG THÁI VIP ĐỂ MỞ KHÓA MENU SIDEBAR
+fetch('../../php/progress.php')
+  .then(r => r.json())
+  .then(d => {
+    var isVip = (d.overview && d.overview.is_vip) ? parseInt(d.overview.is_vip) : 0;
+    var vipItems = document.querySelectorAll('li.vip-item');
+
+    if (isVip === 1) {
+      vipItems.forEach(function(li) { 
+        li.classList.add('unlocked'); 
+        var link = li.querySelector('a');
+        if (link) {
+          link.innerHTML = link.innerHTML.replace('🔒', '');
+        }
+      });
+    }
+  })
+  .catch(e => console.error("Lỗi kiểm tra VIP Sổ tay:", e));
+</script>
+</body>
+</html>

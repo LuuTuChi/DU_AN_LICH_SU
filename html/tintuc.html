@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tin Tức & Cộng Đồng – Sử Việt</title>
+  <link rel="stylesheet" href="../css/tintuc.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+</head>
+<body>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+        <defs><linearGradient id="gLogo" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#BF9B30"/>
+          <stop offset="50%" stop-color="#F9F1B7"/>
+          <stop offset="100%" stop-color="#BF9B30"/>
+        </linearGradient></defs>
+        <path d="M42,35 L33,38 L33,72 L42,68 Z" fill="url(#gLogo)"/>
+        <path d="M45,35 L36,38 L36,75 L45,71 Z" fill="url(#gLogo)" opacity=".8"/>
+        <path d="M48,35 C55,55 58,65 60,78 C65,60 75,40 88,22 L84,19 C72,37 62,57 58,72 C56,62 52,45 48,35Z" fill="url(#gLogo)"/>
+        <polygon points="88,16 90,21 96,21 91,25 93,31 88,27 83,31 85,25 80,21 86,21" fill="url(#gLogo)"/>
+      </svg>
+      <span class="logo-text">Sử<em>Việt</em></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Trang chủ</a></li>
+      <li><a href="gioithieu.html" class="nav-link">Về Sử Việt</a></li>
+      <li><a href="thuvien.html" class="nav-link">Thư viện</a></li>
+      <li><a href="goidichvu.html" class="nav-link">Gói dịch vụ</a></li>
+      <li><a href="tintuc.html" class="nav-link active">Tin tức</a></li>
+      <li><a href="hotro.html" class="nav-link">Hỗ trợ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="btn-login">Đăng nhập</a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ══════════ PAGE HERO ══════════ -->
+<header class="page-hero">
+  <svg class="page-hero-star" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+    <polygon fill="#BF9B30" points="250,25 298,170 450,170 328,260 375,405 250,315 125,405 172,260 50,170 202,170"/>
+  </svg>
+  <div class="wrap" style="position:relative;z-index:2;text-align:center;">
+    <div class="page-hero-tag">TIN TỨC & CỘNG ĐỒNG</div>
+    <h1>Tin Tức & <em>Cộng Đồng</em></h1>
+    <p>Cập nhật những hoạt động, sự kiện và câu chuyện truyền cảm hứng từ Sử Việt</p>
+  </div>
+  <svg class="page-hero-wave" viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,30 Q360,60 720,30 Q1080,0 1440,30 L1440,60 L0,60 Z" fill="#fdfcf0"/>
+  </svg>
+</header>
+
+<!-- ══════════ NỘI DUNG TIN TỨC ══════════ -->
+<section class="section">
+  <div class="wrap">
+
+    <div class="news-highlight">
+  <div class="highlight-content">
+    <span class="lib-tag">SÂN CHƠI HÀNG TUẦN</span>
+    <h2>Đấu Trường Sử Việt Online</h2>
+    <p>Thử thách kiến thức cùng cộng đồng Sử Việt! Tham gia đấu trường Battle Mode để ôn tập bài học một cách thú vị và leo bảng xếp hạng sĩ tử.</p>
+    <div class="event-info">
+      <span><i class="fas fa-gamepad"></i> Chơi ngay 24/7</span>
+      <span><i class="fas fa-users"></i> Dành cho mọi Sĩ tử</span>
+    </div>
+    <button class="btn-card" style="max-width:200px;" onclick="location.href='login.html'">Vào đấu trường ngay</button>
+  </div>
+  <div class="highlight-image">
+    <img src="../assets/dautruongsuviet.jpg" alt="Đấu trường Sử Việt"
+         onerror="this.src='https://img.freepik.com/free-photo/tank-military-vehicle_23-2151663481.jpg'"/>
+  </div>
+</div>
+
+    <!-- Grid 3 tin -->
+    <div class="news-grid">
+
+      <!-- Card 1: AR Feature -->
+      <div class="lib-card">
+        <div class="lib-visual lib-visual--ar">
+          <svg viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <rect width="280" height="180" fill="#1a0000"/>
+            <!-- Bản đồ đường nét -->
+            <path d="M40,90 Q80,60 120,80 Q160,100 200,70 Q230,50 260,65" stroke="#BF9B30" stroke-width="2" fill="none" opacity="0.6"/>
+            <path d="M20,110 Q60,130 100,115 Q140,100 180,120 Q220,140 260,125" stroke="#BF9B30" stroke-width="1.5" fill="none" opacity="0.4"/>
+            <!-- Xe tăng đơn giản -->
+            <rect x="105" y="88" width="70" height="28" rx="4" fill="#800000" opacity="0.9"/>
+            <rect x="115" y="80" width="50" height="14" rx="3" fill="#a00000" opacity="0.9"/>
+            <rect x="155" y="76" width="28" height="8" rx="2" fill="#c0392b"/>
+            <circle cx="118" cy="118" r="10" fill="#5a0000" stroke="#BF9B30" stroke-width="2"/>
+            <circle cx="162" cy="118" r="10" fill="#5a0000" stroke="#BF9B30" stroke-width="2"/>
+            <circle cx="118" cy="118" r="5" fill="#BF9B30"/>
+            <circle cx="162" cy="118" r="5" fill="#BF9B30"/>
+            <!-- AR khung -->
+            <rect x="20" y="20" width="30" height="3" fill="#BF9B30" opacity="0.7"/>
+            <rect x="20" y="20" width="3" height="30" fill="#BF9B30" opacity="0.7"/>
+            <rect x="230" y="20" width="30" height="3" fill="#BF9B30" opacity="0.7"/>
+            <rect x="257" y="20" width="3" height="30" fill="#BF9B30" opacity="0.7"/>
+            <rect x="20" y="157" width="30" height="3" fill="#BF9B30" opacity="0.7"/>
+            <rect x="20" y="130" width="3" height="30" fill="#BF9B30" opacity="0.7"/>
+            <rect x="230" y="157" width="30" height="3" fill="#BF9B30" opacity="0.7"/>
+            <rect x="257" y="130" width="3" height="30" fill="#BF9B30" opacity="0.7"/>
+            <!-- Text AR -->
+            <text x="14" y="15" font-size="10" fill="#BF9B30" font-family="monospace" opacity="0.8">AR MODE</text>
+            <!-- Dots -->
+            <circle cx="140" cy="50" r="3" fill="#BF9B30" opacity="0.5"/>
+            <circle cx="200" cy="40" r="2" fill="#BF9B30" opacity="0.4"/>
+            <circle cx="80" cy="55" r="2.5" fill="#BF9B30" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="lib-content">
+          <span class="lib-tag">TÍNH NĂNG MỚI</span>
+          <h3>Ra mắt AR Chiến dịch Hồ Chí Minh</h3>
+          <p>Trải nghiệm mô hình 3D xe tăng và bản đồ chiến dịch cực kỳ sắc nét bằng công nghệ AR mới nhất.</p>
+          <a href="#" class="news-link">Xem chi tiết <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Card 2: Câu chuyện sĩ tử -->
+      <div class="lib-card">
+        <div class="lib-visual lib-visual--story">
+          <svg viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <defs>
+              <linearGradient id="gStory" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#BF9B30"/>
+                <stop offset="100%" stop-color="#8b6914"/>
+              </linearGradient>
+            </defs>
+            <rect width="280" height="180" fill="url(#gStory)"/>
+            <!-- Ngôi sao điểm 9.5 -->
+            <polygon points="140,30 150,60 182,60 158,78 167,108 140,90 113,108 122,78 98,60 130,60"
+              fill="white" opacity="0.95"/>
+            <!-- Số điểm -->
+            <text x="140" y="155" text-anchor="middle" font-size="42" font-weight="900"
+              fill="white" font-family="Georgia,serif" opacity="0.9">9.5</text>
+            <text x="140" y="172" text-anchor="middle" font-size="11" fill="white" opacity="0.75"
+              font-family="sans-serif" font-weight="700" letter-spacing="2">ĐIỂM LỊCH SỬ</text>
+            <!-- Trang trí -->
+            <circle cx="40" cy="40" r="20" fill="rgba(255,255,255,0.1)"/>
+            <circle cx="240" cy="140" r="30" fill="rgba(255,255,255,0.08)"/>
+            <circle cx="250" cy="30" r="15" fill="rgba(255,255,255,0.1)"/>
+            <circle cx="30" cy="150" r="18" fill="rgba(255,255,255,0.08)"/>
+          </svg>
+        </div>
+        <div class="lib-content">
+          <span class="lib-tag">CÂU CHUYỆN SĨ TỬ</span>
+          <h3>Bí kíp đạt 9.5 điểm Sử</h3>
+          <p>Chia sẻ của bạn Minh Anh về cách ôn tập kết hợp giữa Sơ đồ tư duy AI và Đấu trường Sử Việt.</p>
+          <a href="#" class="news-link">Đọc bài viết <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Card 3: Góc báo chí -->
+      <div class="lib-card">
+        <div class="lib-visual lib-visual--press">
+          <svg viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <rect width="280" height="180" fill="#2d0a0a"/>
+            <!-- Tờ báo -->
+            <rect x="30" y="25" width="220" height="130" rx="8" fill="white" opacity="0.08"/>
+            <rect x="30" y="25" width="220" height="130" rx="8" fill="none" stroke="#BF9B30" stroke-width="1" opacity="0.4"/>
+            <!-- Tiêu đề báo -->
+            <rect x="45" y="38" width="190" height="8" rx="2" fill="#BF9B30" opacity="0.85"/>
+            <!-- Dòng chữ -->
+            <rect x="45" y="55" width="130" height="5" rx="2" fill="white" opacity="0.5"/>
+            <rect x="45" y="65" width="100" height="5" rx="2" fill="white" opacity="0.35"/>
+            <rect x="45" y="75" width="120" height="5" rx="2" fill="white" opacity="0.35"/>
+            <!-- Ảnh thumbnail -->
+            <rect x="175" y="52" width="60" height="42" rx="4" fill="#800000" opacity="0.7"/>
+            <polygon points="205,68 215,73 205,78" fill="#BF9B30" opacity="0.9"/>
+            <!-- Dòng phụ -->
+            <rect x="45" y="105" width="190" height="4" rx="2" fill="white" opacity="0.2"/>
+            <rect x="45" y="115" width="150" height="4" rx="2" fill="white" opacity="0.2"/>
+            <rect x="45" y="125" width="170" height="4" rx="2" fill="white" opacity="0.2"/>
+            <!-- Logo VTV -->
+            <rect x="45" y="138" width="40" height="12" rx="3" fill="#800000" opacity="0.8"/>
+            <text x="65" y="148" text-anchor="middle" font-size="8" fill="#BF9B30" font-weight="900" font-family="sans-serif">VTV</text>
+            <!-- Micro icon -->
+            <circle cx="235" cy="50" r="14" fill="#800000" opacity="0.6"/>
+            <rect x="231" y="43" width="8" height="12" rx="4" fill="#BF9B30" opacity="0.9"/>
+            <path d="M228,52 Q228,60 235,60 Q242,60 242,52" stroke="#BF9B30" stroke-width="1.5" fill="none" opacity="0.9"/>
+            <line x1="235" y1="60" x2="235" y2="64" stroke="#BF9B30" stroke-width="1.5" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="lib-content">
+          <span class="lib-tag">GÓC BÁO CHÍ</span>
+          <h3>VTV nói gì về Sử Việt Learning?</h3>
+          <p>Phóng sự ngắn về dự án EdTech tiên phong đưa lịch sử đến gần hơn với thế hệ Gen Z.</p>
+          <a href="#" class="news-link">Xem video <i class="fas fa-play-circle"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer">
+  <div class="foot-main">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <div class="foot-brand-logo">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+            <defs><linearGradient id="gFL" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#BF9B30"/>
+              <stop offset="50%" stop-color="#F9F1B7"/>
+              <stop offset="100%" stop-color="#BF9B30"/>
+            </linearGradient></defs>
+            <path d="M42,35 L33,38 L33,72 L42,68 Z" fill="url(#gFL)"/>
+            <path d="M45,35 L36,38 L36,75 L45,71 Z" fill="url(#gFL)" opacity=".8"/>
+            <path d="M48,35 C55,55 58,65 60,78 C65,60 75,40 88,22 L84,19 C72,37 62,57 58,72 C56,62 52,45 48,35Z" fill="url(#gFL)"/>
+            <polygon points="88,16 90,21 96,21 91,25 93,31 88,27 83,31 85,25 80,21 86,21" fill="url(#gFL)"/>
+          </svg>
+          <span class="foot-logo-text">Sử<em>Việt</em></span>
+        </div>
+        <p>Biến từng trang sử khô khan thành<br/>những thước phim <em>sống động</em>.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.53V6.78a4.85 4.85 0 01-1.02-.09z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>📚 Sản phẩm</h4>
+        <a href="thuvien.html">Thư viện bài học</a>
+        <a href="#">Battle Mode <span class="tag-new">MỚI</span></a>
+        <a href="#">Không gian VR/AR</a>
+        <a href="#">AI Tutor</a>
+        <a href="goidichvu.html">Gói Premium</a>
+      </div>
+      <div class="foot-col">
+        <h4>🏛 Về chúng tôi</h4>
+        <a href="gioithieu.html">Câu chuyện thương hiệu</a>
+        <a href="gioithieu.html#team">Đội ngũ phát triển</a>
+        <a href="gioithieu.html#roadmap">Lộ trình phát triển</a>
+        <a href="tintuc.html">Tin tức</a>
+      </div>
+      <div class="foot-col">
+        <h4>✉️ Liên hệ</h4>
+        <a href="/cdn-cgi/l/email-protection#75060005051a0701350600031c10015b031b">📧 <span class="__cf_email__" data-cfemail="93e0e6e3e3fce1e7d3e0e6e5faf6e7bde5fd">[email&#160;protected]</span></a>
+        <a href="tel:0123456789">📞 0123 456 789</a>
+        <span>📍 Hà Nội, Việt Nam</span>
+        <div style="margin-top:1rem">
+          <p style="color:rgba(249,241,183,.7);font-size:.83rem;margin-bottom:8px;">Nhận thông báo bài học mới</p>
+          <div class="nl-row">
+            <input type="email" placeholder="Email của bạn…"/>
+            <button type="button">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div class="wrap foot-bottom-inner">
+      <p>© 2025 <strong>Sử Việt</strong>. Bảo lưu mọi quyền.</p>
+      <p>Chính sách bảo mật · Điều khoản dịch vụ</p>
+      <p>Phát triển bởi <strong>NHÓM 2</strong> <span class="tag-edtech">EdTech for Future 🚀</span></p>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const nb = document.getElementById('navbar');
+  window.addEventListener('scroll', () => nb.classList.toggle('scrolled', scrollY > 50));
+
+  document.getElementById('hamburger').addEventListener('click', function () {
+    this.classList.toggle('open');
+    document.querySelector('.nav-links').classList.toggle('open');
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+  revealEls.forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>

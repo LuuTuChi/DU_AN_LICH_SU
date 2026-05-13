@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Hỏi đáp chuyên gia — Sử Việt</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <style>
+        /* Tùy chỉnh riêng cho trang Hỏi đáp */
+        .q-form-card { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 20px; 
+            border: 1px solid #eee; 
+            margin-top: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+        }
+        .q-input { 
+            width: 100%; 
+            height: 120px; 
+            padding: 15px; 
+            border-radius: 12px; 
+            border: 1.5px solid #f1f1f1; 
+            font-family: 'Nunito', sans-serif; 
+            font-size: 15px; 
+            margin-bottom: 15px; 
+            resize: none; 
+            outline: none;
+            transition: 0.3s;
+        }
+        .q-input:focus { border-color: #BF9B30; background: #fdfaf5; }
+        
+        .q-item { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 15px; 
+            border: 1px solid #eee; 
+            margin-bottom: 20px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+        }
+        .status-badge { 
+            font-size: 10px; 
+            padding: 4px 10px; 
+            border-radius: 20px; 
+            font-weight: 800; 
+            text-transform: uppercase;
+        }
+        .pending { background: #f5f5f5; color: #888; }
+        .replied { background: #e6f4ea; color: #1e7e34; }
+        
+        .answer-box {
+            margin-top: 15px;
+            padding: 15px; 
+            background: #fdfaf5; 
+            border-radius: 12px; 
+            border-left: 4px solid #BF9B30;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .sidebar-menu ul.menu li.active {
+    background: linear-gradient(90deg, #D4AF37, #c9a227) !important;
+}
+
+/* 2. Ép màu chữ Đen cho thẻ a bên trong mục active */
+.sidebar-menu ul.menu li.active a {
+    color: #1a1a1a !important; /* Chữ đen đậm để nổi bật trên nền vàng */
+    font-weight: 800 !important;
+    opacity: 1 !important; /* Bỏ độ mờ 0.5 của vip-item */
+    pointer-events: auto !important;
+}
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="sidebar-icons">
+        <div class="icon-btn" onclick="location.href='student_dashboard.html'">
+            <span class="material-symbols-outlined">home</span>
+        </div>
+        <div class="icon-btn" onclick="location.href='student_profile.html'">
+            <span class="material-symbols-outlined">groups</span>
+        </div>
+        <div class="icon-btn" onclick="location.href='student_settings.html'">
+            <span class="material-symbols-outlined">settings</span>
+        </div>
+        <div class="logout">
+            <a href="../login.html" class="icon-btn">
+                <span class="material-symbols-outlined">logout</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="sidebar-menu">
+        <div class="profile">
+            <div class="avatar" id="avatarEl">ẢNH</div>
+            <div class="name" id="nameEl">HỌ VÀ TÊN</div>
+        </div>
+        <ul class="menu">
+            <li><a href="student_dashboard.html">Lộ trình của tôi</a></li>
+            <li><a href="thuvienbaigiang.html">Thư viện bài giảng</a></li>
+            <li><a href="khoahoc.html">Khóa học của bạn</a></li>
+            <li><a href="luyenthi.html">Phòng luyện thi</a></li>
+            <li><a href="bangxephang.html">Bảng xếp hạng</a></li>
+            <li class="vip-item unlocked"><a href="live_review.php">Lịch Live-Review</a></li>
+            <li class="vip-item unlocked active"><a href="hoi_chuyen_gia.html">Hỏi đáp chuyên gia</a></li>
+            <li><a href="sotay.html">Sổ tay ghi chú</a></li>
+        </ul>
+    </div>
+
+    <div class="center">
+        <h2 class="page-title">HỎI ĐÁP CHUYÊN GIA</h2>
+        
+        <div class="q-form-card">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                <span class="material-symbols-outlined" style="color: #800000;">contact_support</span>
+                <h4 style="color: #800000; font-family: 'Playfair Display', serif; margin: 0; font-size: 18px;">Gửi thắc mắc cho Mentor</h4>
+            </div>
+            <p style="font-size: 13px; color: #777; margin-bottom: 20px;">Các vấn đề chuyên sâu sẽ được chuyên gia giải đáp trong vòng 24h hoặc thảo luận trực tiếp tại buổi Live-Review.</p>
+            
+            <textarea id="qContent" class="q-input" placeholder="Ví dụ: Thầy ơi, tại sao Nguyễn Ái Quốc lại chọn con đường sang phương Tây thay vì phương Đông ạ?"></textarea>
+            
+            <div style="display: flex; justify-content: flex-end;">
+                <button onclick="sendQuestion()" class="btn-vip" style="padding: 12px 30px; border: none; border-radius: 99px; cursor: pointer; font-family: 'Nunito', sans-serif; font-weight: 800; background: linear-gradient(135deg, #800000, #5c0000); color: #D4AF37;">
+                    Gửi câu hỏi ngay
+                </button>
+            </div>
+        </div>
+
+        <div class="q-history" style="margin-top: 40px;">
+            <div class="section-header">
+                <div class="section-badge"></div>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 20px;">Lịch sử thảo luận</h3>
+            </div>
+            
+            <div id="qList" style="margin-top: 20px;">
+                <p style="color:#999; font-style: italic;">Đang tải danh sách câu hỏi...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../js/load_profile.js"></script>
+<script>
+    function sendQuestion() {
+        const content = document.getElementById('qContent').value;
+        if(!content.trim()) return alert("Chi ơi, bạn chưa nhập câu hỏi mà!");
+
+        fetch('../../php/save_question.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: content })
+        })
+        .then(r => r.json())
+        .then(data => {
+            if(data.ok) {
+                alert("Gửi thành công! Hãy kiên nhẫn chờ Mentor phản hồi nhé.");
+                location.reload();
+            }
+        });
+    }
+
+    // Tải danh sách câu hỏi
+    fetch('../../php/get_questions.php')
+        .then(r => r.json())
+        .then(data => {
+            const list = document.getElementById('qList');
+            if(!data || data.length === 0) {
+                list.innerHTML = "<p style='color:#bbb; font-style: italic; text-align: center; padding: 40px;'>Bạn chưa có câu hỏi nào gửi cho chuyên gia.</p>";
+                return;
+            }
+            list.innerHTML = '';
+            data.forEach(q => {
+                const statusText = q.status === 'pending' ? 'Đang chờ' : 'Đã trả lời';
+                const statusClass = q.status === 'pending' ? 'pending' : 'replied';
+                
+                list.innerHTML += `
+                    <div class="q-item">
+                        <div style="display:flex; justify-content:space-between; align-items: center;">
+                            <div style="display: flex; align-items: center; gap: 8px; color: #800000; font-weight: 800; font-size: 13px;">
+                                <span class="material-symbols-outlined" style="font-size: 18px;">help_center</span>
+                                CÂU HỎI CỦA BẠN
+                            </div>
+                            <span class="status-badge ${statusClass}">${statusText}</span>
+                        </div>
+                        <p style="margin: 15px 0; color: #333; font-weight: 500; line-height: 1.5;">${q.content}</p>
+                        
+                        ${q.answer ? `
+                        <div class="answer-box">
+                            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px; color: #BF9B30; font-weight: 800; font-size: 12px; text-transform: uppercase;">
+                                <span class="material-symbols-outlined" style="font-size: 16px;">verified_user</span>
+                                Mentor phản hồi
+                            </div>
+                            <div style="color: #555;">${q.answer}</div>
+                        </div>` : ''}
+                    </div>
+                `;
+            });
+        });
+</script>
+</body>
+</html>

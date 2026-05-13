@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Quiz Bài 6 — Cách Mạng Tháng Tám 1945</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+<link rel="stylesheet" href="../../css/dashboard.css">
+<style>
+/* ── QUIZ LAYOUT ── */
+.quiz-wrap { max-width: 780px; margin: 0 auto; }
+
+/* ── HEADER CARD ── */
+.quiz-header-card {
+  background: linear-gradient(135deg, var(--maroon), var(--maroon-dark));
+  border-radius: var(--radius-lg); padding: 28px 32px; margin-bottom: 24px;
+  color: white; position: relative; overflow: hidden;
+}
+.quiz-header-card::after {
+  content: ''; position: absolute; right: -30px; top: -30px;
+  width: 180px; height: 180px; border-radius: 50%;
+  background: rgba(212,175,55,0.12); pointer-events: none;
+}
+.quiz-eyebrow { font-size: 10px; font-weight: 800; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--gold-light); margin-bottom: 6px; }
+.quiz-header-card h2 { font-family: 'Playfair Display',serif; font-size: 22px;
+  font-weight: 800; margin-bottom: 14px; }
+.quiz-meta-row { display: flex; gap: 18px; flex-wrap: wrap; }
+.quiz-meta-chip { display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 99px; padding: 6px 14px; font-size: 12.5px; font-weight: 700; }
+.quiz-meta-chip .material-symbols-outlined { font-size: 15px; }
+
+/* ── PROGRESS ── */
+.quiz-progress-bar { height: 6px; background: var(--border); border-radius: 99px;
+  overflow: hidden; margin-bottom: 20px; }
+.quiz-progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), #c9a227);
+  border-radius: 99px; transition: width 0.4s ease; }
+.quiz-progress-label { display: flex; justify-content: space-between;
+  font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
+
+/* ── QUESTION CARD ── */
+.q-card { background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg); padding: 28px 30px;
+  box-shadow: var(--shadow-md); margin-bottom: 16px; animation: fadeUp 0.3s ease; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+.q-number { font-size: 10px; font-weight: 800; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.q-text { font-family: 'Playfair Display',serif; font-size: 18px; font-weight: 700;
+  color: var(--text-dark); line-height: 1.5; margin-bottom: 22px; }
+
+/* ── OPTIONS ── */
+.options-list { display: flex; flex-direction: column; gap: 10px; }
+.opt-btn {
+  width: 100%; text-align: left; display: flex; align-items: center; gap: 14px;
+  padding: 13px 18px; border: 1.5px solid var(--border); border-radius: var(--radius-md);
+  background: var(--cream); font-family: 'Nunito',sans-serif; font-size: 14px;
+  font-weight: 600; color: var(--text-mid); cursor: pointer; transition: all 0.2s;
+}
+.opt-btn:hover:not(:disabled) { border-color: var(--gold); background: var(--gold-pale);
+  color: var(--maroon); transform: translateX(4px); }
+.opt-btn .opt-key { width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-weight: 800;
+  font-size: 12px; background: white; border: 1.5px solid var(--border); }
+.opt-btn.correct { background: #f1f8e9; border-color: var(--green); color: var(--green); }
+.opt-btn.correct .opt-key { background: var(--green); color: white; border-color: var(--green); }
+.opt-btn.wrong { background: #ffebee; border-color: #c0392b; color: #c0392b; }
+.opt-btn.wrong .opt-key { background: #c0392b; color: white; border-color: #c0392b; }
+.opt-btn.reveal { background: #f1f8e9; border-color: var(--green); color: var(--green); opacity: 0.7; }
+.opt-btn:disabled { cursor: default; }
+
+/* ── EXPLANATION ── */
+.q-explain { margin-top: 14px; padding: 13px 16px; background: var(--gold-pale);
+  border-radius: var(--radius-md); border: 1px solid rgba(212,175,55,0.4);
+  font-size: 13px; color: var(--maroon); line-height: 1.6; display: none; }
+.q-explain.show { display: block; }
+.q-explain strong { font-weight: 800; }
+
+/* ── NAV BUTTONS ── */
+.quiz-nav { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+.btn-next { display: inline-flex; align-items: center; gap: 7px;
+  padding: 11px 24px; border-radius: 99px; font-family: 'Nunito',sans-serif;
+  font-size: 13.5px; font-weight: 800; border: none; cursor: pointer;
+  background: linear-gradient(135deg, var(--maroon), var(--maroon-dark));
+  color: white; box-shadow: 0 4px 14px rgba(128,0,0,0.28); transition: all 0.22s;
+  display: none; }
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(128,0,0,0.36); }
+.btn-next.visible { display: inline-flex; }
+
+/* ── RESULT CARD ── */
+.result-card { background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg); padding: 40px 36px; text-align: center;
+  box-shadow: var(--shadow-lg); display: none; }
+.result-card.show { display: block; animation: fadeUp 0.4s ease; }
+.result-icon { font-size: 3.5rem; margin-bottom: 16px; }
+.result-score { font-family: 'Playfair Display',serif; font-size: 54px; font-weight: 800;
+  color: var(--maroon); line-height: 1; margin-bottom: 6px; }
+.result-score span { font-size: 28px; color: var(--text-muted); }
+.result-label { font-size: 15px; font-weight: 700; color: var(--text-mid); margin-bottom: 20px; }
+.result-badge { display: inline-block; padding: 8px 22px; border-radius: 99px;
+  font-size: 13px; font-weight: 800; margin-bottom: 28px; }
+.badge-pass { background: #e8f5e9; color: var(--green); border: 1.5px solid #81c784; }
+.badge-fail { background: #ffebee; color: #c0392b; border: 1.5px solid #e57373; }
+.result-breakdown { display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px; margin-bottom: 28px; }
+.rb-item { background: var(--cream); border-radius: var(--radius-md);
+  padding: 16px 10px; border: 1px solid var(--border); }
+.rb-num { font-family: 'Playfair Display',serif; font-size: 26px; font-weight: 800;
+  color: var(--maroon); }
+.rb-lbl { font-size: 11px; font-weight: 700; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+.result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-retake { padding: 12px 26px; border-radius: 99px; font-family: 'Nunito',sans-serif;
+  font-size: 13.5px; font-weight: 800; cursor: pointer; transition: all 0.22s; }
+.btn-retake.primary { background: linear-gradient(135deg, var(--maroon), var(--maroon-dark));
+  color: white; border: none; box-shadow: 0 4px 14px rgba(128,0,0,0.28); }
+.btn-retake.secondary { background: var(--white); color: var(--text-mid);
+  border: 1.5px solid var(--border); }
+.btn-retake:hover { transform: translateY(-2px); }
+.btn-retake.secondary:hover { border-color: var(--gold); color: var(--maroon); }
+
+/* ── SAVING INDICATOR ── */
+.save-indicator { font-size: 12px; font-weight: 700; color: var(--text-muted);
+  text-align: center; margin-top: 12px; min-height: 18px; }
+.save-indicator.ok { color: var(--green); }
+.save-indicator.err { color: #c0392b; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- SIDEBAR ICONS -->
+  <div class="sidebar-icons">
+    <div class="icon-btn active" onclick="location.href='student_dashboard.html'">
+        <span class="material-symbols-outlined">home</span>
+    </div>
+
+    <div class="icon-btn" onclick="location.href='student_profile.html'">
+        <span class="material-symbols-outlined">groups</span>
+    </div>
+
+    <div class="icon-btn" onclick="location.href='student_settings.html'">
+        <span class="material-symbols-outlined">settings</span>
+    </div>
+
+    <div class="logout">
+        <div class="icon-btn" onclick="location.href='../../php/logout.php'">
+            <span class="material-symbols-outlined">logout</span>
+        </div>
+    </div>
+</div>
+
+  <!-- SIDEBAR MENU -->
+  <div class="sidebar-menu">
+    <div class="profile">
+      <div class="avatar" id="avatarEl">ẢNH</div>
+      <div class="name" id="nameEl">HỌ VÀ TÊN</div>
+    </div>
+    <ul class="menu">
+      <li class="active"><a href="student_dashboard.html">Lộ trình của tôi</a></li>
+      <li><a href="thuvienbaigiang.html">Thư viện bài giảng</a></li>
+      <li><a href="khoahoc.html">Khóa học của bạn</a></li>
+      <li><a href="luyenthi.html">Phòng luyện thi</a></li>
+      <li><a href="bangxephang.html">Bảng xếp hạng</a></li>
+      <li><a href="sotay.html">Sổ tay ghi chú</a></li>
+    </ul>
+  </div>
+
+  <!-- CENTER -->
+  <div class="center">
+    <div class="quiz-wrap">
+
+      <!-- Header -->
+      <div class="quiz-header-card">
+        <div class="quiz-eyebrow">Kiểm tra kiến thức</div>
+        <h2>Bài 6 — Cách Mạng Tháng Tám Năm 1945</h2>
+        <div class="quiz-meta-row">
+          <span class="quiz-meta-chip"><span class="material-symbols-outlined">quiz</span> 10 câu hỏi</span>
+          <span class="quiz-meta-chip"><span class="material-symbols-outlined">schedule</span> ~5 phút</span>
+          <span class="quiz-meta-chip"><span class="material-symbols-outlined">military_tech</span> Đạt: 5/10 trở lên</span>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div id="progressWrap">
+        <div class="quiz-progress-label">
+          <span id="progressText">Câu 1 / 10</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="progressFill" style="width:0%;"></div>
+        </div>
+      </div>
+
+      <!-- Question Area -->
+      <div id="questionArea"></div>
+      <div class="quiz-nav"><button class="btn-next" id="btnNext">Câu tiếp theo <span class="material-symbols-outlined">arrow_forward</span></button></div>
+
+      <!-- Result Card -->
+      <div class="result-card" id="resultCard">
+        <div class="result-icon" id="resultIcon">🏆</div>
+        <div class="result-score"><span id="scoreNum">0</span><span> / 10</span></div>
+        <div class="result-label" id="resultLabel"></div>
+        <div class="result-badge" id="resultBadge"></div>
+        <div class="result-breakdown">
+          <div class="rb-item"><div class="rb-num" id="rbCorrect">0</div><div class="rb-lbl">Đúng</div></div>
+          <div class="rb-item"><div class="rb-num" id="rbWrong">0</div><div class="rb-lbl">Sai</div></div>
+          <div class="rb-item"><div class="rb-num" id="rbPct">0%</div><div class="rb-lbl">Tỷ lệ đúng</div></div>
+        </div>
+        <div class="result-actions">
+  <button class="btn-retake primary" onclick="retakeQuiz()">Làm lại</button>
+  <a href="lesson6.html" class="btn-retake secondary">Ôn lại bài</a>
+  <a href="student_dashboard.html" class="btn-retake secondary">Về trang chủ</a>
+</div>
+        <div class="save-indicator" id="saveIndicator"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../../js/load_profile.js"></script>
+<script src="../../js/student.js"></script>
+<script>
+var LESSON_ID = 6;
+var TOTAL_Q   = 10;
+
+var QUESTIONS = [
+  {
+    text: 'Sự kiện nào đánh dấu thời cơ "ngàn năm có một" cho Cách mạng tháng Tám?',
+    opts: ['Nhật đảo chính Pháp (9/3/1945)', 'Nhật Bản đầu hàng Đồng minh không điều kiện (15/8/1945)', 'Pháp rút quân khỏi Đông Dương', 'Liên Xô tuyên chiến với Nhật'],
+    ans:  1,
+    explain: 'Thời cơ khách quan là <strong>Nhật đầu hàng Đồng minh ngày 15/8/1945</strong>, không phải ngày Nhật đảo chính Pháp (9/3). Đây là điểm hay bị nhầm trong đề thi.'
+  },
+  {
+    text: 'Nhân tố quyết định nhất dẫn đến thắng lợi của Cách mạng tháng Tám là gì?',
+    opts: ['Chiến thắng của Đồng minh tiêu diệt phát xít Nhật', 'Sự ủng hộ quốc tế', 'Sự lãnh đạo đúng đắn của Đảng và Hồ Chí Minh', 'Lực lượng vũ trang hùng mạnh'],
+    ans:  2,
+    explain: '<strong>Nhân tố chủ quan quyết định nhất</strong> là sự lãnh đạo của Đảng và Hồ Chí Minh. Nhân tố khách quan (Đồng minh thắng) chỉ là điều kiện, không phải quyết định.'
+  },
+  {
+    text: 'Ngày giành chính quyền tại Hà Nội trong Cách mạng tháng Tám là ngày nào?',
+    opts: ['16/8/1945', '19/8/1945', '23/8/1945', '25/8/1945'],
+    ans:  1,
+    explain: 'Hà Nội giành chính quyền ngày <strong>19/8/1945</strong>. Huế: 23/8, Sài Gòn: 25/8. Cần nhớ thứ tự: Hà Nội trước, Huế sau, Sài Gòn cuối.'
+  },
+  {
+    text: 'Hội nghị nào đã quyết định Tổng khởi nghĩa và thành lập Ủy ban Khởi nghĩa toàn quốc?',
+    opts: ['Đại hội Quốc dân Tân Trào', 'Hội nghị toàn quốc của Đảng', 'Hội nghị Trung ương lần thứ 8', 'Hội nghị Diên Hồng'],
+    ans:  1,
+    explain: '<strong>Hội nghị toàn quốc của Đảng</strong> (13-15/8/1945) quyết định Tổng khởi nghĩa và thành lập Ủy ban Khởi nghĩa. Hội nghị này diễn ra TRƯỚC Đại hội Quốc dân Tân Trào — đây là điểm hay nhầm.'
+  },
+  {
+    text: 'Đại hội Quốc dân Tân Trào (16/8/1945) đã bầu ai làm Chủ tịch Ủy ban Dân tộc giải phóng Việt Nam?',
+    opts: ['Võ Nguyên Giáp', 'Trường Chinh', 'Hồ Chí Minh', 'Tôn Đức Thắng'],
+    ans:  2,
+    explain: 'Đại hội Quốc dân Tân Trào đã cử <strong>Hồ Chí Minh</strong> làm Chủ tịch Ủy ban Dân tộc giải phóng — chính phủ lâm thời của nước Việt Nam.'
+  },
+  {
+    text: 'Lực lượng đóng vai trò nòng cốt trong Cách mạng tháng Tám là gì?',
+    opts: ['Quân đội cách mạng', 'Khối liên minh công - nông', 'Tầng lớp trí thức', 'Mặt trận Việt Minh'],
+    ans:  1,
+    explain: '<strong>Khối liên minh công - nông</strong> là lực lượng nòng cốt. Mặt trận Việt Minh là tổ chức tập hợp, còn công - nông là lực lượng chính tham gia khởi nghĩa.'
+  },
+  {
+    text: '4 tỉnh nào giành chính quyền sớm nhất cả nước trong Cách mạng tháng Tám?',
+    opts: ['Hà Nội, Huế, Sài Gòn, Cần Thơ', 'Bắc Giang, Hải Dương, Hà Tĩnh, Quảng Nam', 'Thái Nguyên, Bắc Ninh, Nam Định, Thanh Hóa', 'Lạng Sơn, Cao Bằng, Tuyên Quang, Yên Bái'],
+    ans:  1,
+    explain: 'Bốn tỉnh đầu tiên giành chính quyền là <strong>Bắc Giang, Hải Dương, Hà Tĩnh, Quảng Nam</strong> — trước cả khi có lệnh Tổng khởi nghĩa chính thức.'
+  },
+  {
+    text: 'Tính chất điển hình của Cách mạng tháng Tám 1945 là gì?',
+    opts: ['Cách mạng dân chủ tư sản', 'Cách mạng xã hội chủ nghĩa', 'Cách mạng giải phóng dân tộc', 'Cách mạng văn hóa'],
+    ans:  2,
+    explain: 'Tính chất điển hình là <strong>cách mạng giải phóng dân tộc</strong>. Mặc dù có tính dân chủ nhưng nhiệm vụ giải phóng dân tộc vẫn là hàng đầu và quyết định.'
+  },
+  {
+    text: 'Văn kiện "Tuyên ngôn Độc lập" ngày 2/9/1945 có ý nghĩa gì?',
+    opts: ['Kết thúc chiến tranh với Pháp', 'Khai sinh nước Việt Nam Dân chủ Cộng hòa', 'Tuyên bố thành lập Đảng Cộng sản', 'Công nhận độc lập từ phía Mỹ'],
+    ans:  1,
+    explain: 'Tuyên ngôn Độc lập ngày 2/9/1945 <strong>khai sinh nước Việt Nam Dân chủ Cộng hòa</strong> — nhà nước dân chủ nhân dân đầu tiên ở Đông Nam Á.'
+  },
+  {
+    text: 'Hình thức giành chính quyền chủ yếu trong Cách mạng tháng Tám là gì?',
+    opts: ['Đàm phán hòa bình', 'Khởi nghĩa vũ trang', 'Tổng bãi công', 'Bầu cử dân chủ'],
+    ans:  1,
+    explain: 'Hình thức chủ yếu là <strong>khởi nghĩa vũ trang</strong>, kết hợp đấu tranh chính trị với vũ trang. Đấu tranh chính trị đóng vai trò quyết định thắng lợi ở các đô thị lớn.'
+  }
+];
+
+var current  = 0;
+var score    = 0;
+var answered = false;
+var shuffled = [];
+
+function shuffle(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+function startQuiz() {
+  current  = 0;
+  score    = 0;
+  answered = false;
+  shuffled = shuffle(QUESTIONS);
+  document.getElementById('resultCard').classList.remove('show');
+  document.getElementById('progressWrap').style.display = 'block';
+  document.getElementById('questionArea').style.display = 'block';
+  document.getElementById('btnNext').className = 'btn-next';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  answered = false;
+  var q    = shuffled[current];
+  var pct  = Math.round((current / TOTAL_Q) * 100);
+  document.getElementById('progressText').textContent = 'Câu ' + (current + 1) + ' / ' + TOTAL_Q;
+  document.getElementById('progressPct').textContent  = pct + '%';
+  document.getElementById('progressFill').style.width = pct + '%';
+
+  var keys = ['A', 'B', 'C', 'D'];
+  var html = '<div class="q-card">'
+    + '<div class="q-number">Câu ' + (current + 1) + ' / ' + TOTAL_Q + '</div>'
+    + '<div class="q-text">' + q.text + '</div>'
+    + '<div class="options-list">';
+  q.opts.forEach(function(opt, i) {
+    html += '<button class="opt-btn" id="opt' + i + '" onclick="selectAnswer(' + i + ')">'
+      + '<span class="opt-key">' + keys[i] + '</span>' + opt + '</button>';
+  });
+  html += '</div>'
+    + '<div class="q-explain" id="qExplain">' + q.explain + '</div>'
+    + '</div>';
+  document.getElementById('questionArea').innerHTML = html;
+  document.getElementById('btnNext').className = 'btn-next';
+}
+
+function selectAnswer(idx) {
+  if (answered) return;
+  answered = true;
+  var q = shuffled[current];
+  var keys = ['A', 'B', 'C', 'D'];
+
+  for (var i = 0; i < q.opts.length; i++) {
+    var btn = document.getElementById('opt' + i);
+    btn.disabled = true;
+    if (i === q.ans) {
+      btn.className = 'opt-btn correct';
+      btn.querySelector('.opt-key').textContent = '✓';
+    } else if (i === idx && i !== q.ans) {
+      btn.className = 'opt-btn wrong';
+      btn.querySelector('.opt-key').textContent = '✗';
+    } else {
+      btn.className = 'opt-btn';
+    }
+  }
+
+  if (idx === q.ans) score++;
+  document.getElementById('qExplain').className = 'q-explain show';
+
+  var btnNext = document.getElementById('btnNext');
+  if (current < TOTAL_Q - 1) {
+    btnNext.textContent = '';
+    btnNext.innerHTML   = 'Câu tiếp theo <span class="material-symbols-outlined">arrow_forward</span>';
+  } else {
+    btnNext.innerHTML = 'Xem kết quả <span class="material-symbols-outlined">emoji_events</span>';
+  }
+  btnNext.className = 'btn-next visible';
+}
+
+document.getElementById('btnNext').addEventListener('click', function() {
+  if (!answered) return;
+  current++;
+  if (current < TOTAL_Q) {
+    renderQuestion();
+  } else {
+    showResult();
+  }
+});
+
+function showResult() {
+  document.getElementById('progressWrap').style.display = 'none';
+  document.getElementById('questionArea').style.display = 'none';
+  document.getElementById('btnNext').className = 'btn-next';
+
+  var pct  = Math.round(score / TOTAL_Q * 100);
+  var pass = score >= 5;
+
+  document.getElementById('resultIcon').textContent   = pass ? '🏆' : '📚';
+  document.getElementById('scoreNum').textContent     = score;
+  document.getElementById('rbCorrect').textContent    = score;
+  document.getElementById('rbWrong').textContent      = TOTAL_Q - score;
+  document.getElementById('rbPct').textContent        = pct + '%';
+  document.getElementById('resultLabel').textContent  = pass
+    ? 'Xuất sắc! Bạn đã nắm vững kiến thức Bài 6.'
+    : 'Cần ôn thêm. Xem lại bài học và thử lại nhé!';
+
+  var badge = document.getElementById('resultBadge');
+  badge.textContent  = pass ? '✓ Đạt yêu cầu — ' + score + '/10 điểm' : '✗ Chưa đạt — ' + score + '/10 điểm';
+  badge.className    = 'result-badge ' + (pass ? 'badge-pass' : 'badge-fail');
+
+  document.getElementById('resultCard').classList.add('show');
+  saveScore(score);
+}
+
+function saveScore(s) {
+  var ind = document.getElementById('saveIndicator');
+  ind.className = 'save-indicator';
+  ind.textContent = 'Đang lưu điểm...';
+
+  fetch('../../php/quiz_score.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ lesson_id: LESSON_ID, score: s, total_q: TOTAL_Q })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+    if (d.ok) {
+      ind.className   = 'save-indicator ok';
+      ind.textContent = '✓ Đã lưu điểm vào hệ thống';
+    } else {
+      ind.className   = 'save-indicator err';
+      ind.textContent = '⚠ Không lưu được: ' + (d.error || 'lỗi không xác định');
+    }
+  })
+  .catch(function() {
+    ind.className   = 'save-indicator err';
+    ind.textContent = '⚠ Lỗi kết nối — điểm chưa được lưu';
+  });
+}
+
+function retakeQuiz() {
+  startQuiz();
+}
+
+startQuiz();
+</script>
+</body>
+</html>

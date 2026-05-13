@@ -1,0 +1,492 @@
+/* ============================================================
+   SU VIET — register.css
+   Dong bo hoan toan voi login.css
+   Giu nguyen 100% trong dong + hieu ung xe tang
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Be+Vietnam+Pro:wght@400;600;700;800;900&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+  --red:        #800000;
+  --red-deep:   #4d0000;
+  --red-dark:   #300000;
+  --gold:       #C9A84C;
+  --gold-b:     #FFD060;
+  --gold-light: #F9F1B7;
+  --gold-dim:   rgba(201,168,76,0.22);
+  --bg-card:    #fdfcf0;
+  --tx-card:    #2d0a0a;
+  --tx-muted:   #6b3a3a;
+  --ff:         'Be Vietnam Pro', sans-serif;
+  --serif:      'Playfair Display', serif;
+  --serif2:     'Crimson Pro', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  height: 100vh;
+  font-family: var(--ff);
+  background: radial-gradient(circle at 30% 50%, var(--red) 0%, var(--red-dark) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  perspective: 2000px;
+}
+
+/* grain texture */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* pattern ke cheo vang */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.016;
+  background-image: repeating-linear-gradient(
+    45deg, #C9A84C 0, #C9A84C 1px, transparent 0, transparent 50%
+  );
+  background-size: 28px 28px;
+}
+
+.main-container {
+  display: flex;
+  width: 95%;
+  max-width: 1300px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+/* Style nút quay về trang khách */
+.back-to-guest {
+    position: fixed;
+    bottom: 25px; /* Cách đáy 25px */
+    left: 25px;   /* Cách trái 25px */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.08); /* Nền mờ nhẹ */
+    backdrop-filter: blur(8px);           /* Hiệu ứng kính */
+    border: 1px solid rgba(191, 155, 48, 0.3); /* Viền màu vàng Gold mờ */
+    border-radius: 50px;
+    color: #F9F1B7; /* Màu vàng nhạt */
+    text-decoration: none;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.back-to-guest svg {
+    transition: transform 0.3s ease;
+}
+
+.back-to-guest:hover {
+    background: rgba(191, 155, 48, 0.2); /* Sáng lên màu vàng khi hover */
+    border-color: #BF9B30;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.back-to-guest:hover svg {
+    transform: translateX(-5px); /* Mũi tên dịch sang trái khi hover */
+}
+
+/* Ẩn bớt chữ trên điện thoại cho gọn */
+@media (max-width: 480px) {
+    .back-to-guest span { display: none; }
+    .back-to-guest { padding: 10px; border-radius: 50%; }
+}
+/* ============================================================
+   FORM CARD
+   ============================================================ */
+.left-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  z-index: 20;
+}
+
+.form-card {
+  background: var(--bg-card);
+  width: 100%;
+  max-width: 480px;
+  padding: 38px 42px 36px;
+
+  border: 1.5px solid rgba(201,168,76,0.35);
+  border-top: 4px solid var(--gold);
+  border-radius: 4px;
+
+  box-shadow:
+    20px 20px 70px rgba(0,0,0,0.65),
+    0   0   50px rgba(128,0,0,0.18);
+
+  color: var(--tx-card);
+  position: relative;
+  overflow: hidden;
+
+  /* Giu animation xe tang huc do */
+  transition: all 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-origin: bottom;
+}
+
+/* Lop nay duoc JS them vao khi xe tang huc */
+.form-fall-back {
+  transform: rotateX(-85deg) translateY(150px) translateZ(-200px);
+  opacity: 0.1;
+  filter: blur(5px);
+  pointer-events: none;
+}
+
+/* shimmer gradient nhe phia tren */
+.form-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 100px;
+  background: linear-gradient(to bottom, rgba(201,168,76,0.04), transparent);
+  pointer-events: none;
+}
+
+/* Logo */
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin: 0 auto 16px;
+  background: var(--red-deep);
+  padding: 9px 18px 9px 11px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(201,168,76,0.3);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  width: fit-content;
+}
+
+.logo-wrap svg {
+  border-radius: 6px;
+  padding: 3px;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--gold-light);
+  letter-spacing: -0.5px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+.logo-text em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+/* Tieu de */
+h2 {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--red);
+  text-align: center;
+  margin-bottom: 6px;
+  letter-spacing: 0;
+}
+
+/* Duong ke phan cach */
+.title-divider {
+  width: 50px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 8px auto 14px;
+}
+
+.form-sub {
+  font-family: var(--serif2);
+  font-size: 0.95rem;
+  color: var(--tx-muted);
+  text-align: center;
+  margin-bottom: 20px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Input row 2 cot */
+.input-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 0;
+}
+.input-row .field { flex: 1; }
+
+/* Fields */
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--tx-muted);
+}
+
+input {
+  padding: 11px 14px;
+  border: 1.5px solid rgba(128,0,0,0.14);
+  border-radius: 9px;
+  outline: none;
+  font-family: var(--ff);
+  font-size: 0.88rem;
+  color: var(--tx-card);
+  background: #faf8f0;
+  transition: all 0.25s;
+  width: 100%;
+}
+input::placeholder { color: rgba(107,58,58,0.3); }
+input:focus {
+  border-color: var(--gold);
+  background: white;
+  box-shadow: 0 0 0 3px var(--gold-dim);
+}
+
+/* Nut dang ky — dong bo hieu ung 3D voi login */
+.btn-register {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%);
+  color: #ffffff;
+  border: 1.5px solid rgba(201,168,76,0.35);
+  border-radius: 10px;
+  font-family: var(--ff);
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 6px;
+  font-size: 0.92rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+
+  /* 3D shadow */
+  box-shadow: 0 6px 0 var(--red-dark), 0 8px 20px rgba(0,0,0,0.4);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn-register:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--red-dark), 0 12px 28px rgba(201,168,76,0.22);
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+.btn-register:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--red-dark);
+}
+
+/* Vet sang quet */
+.btn-register::after {
+  content: '';
+  position: absolute; top: -50%; left: -60%;
+  width: 20%; height: 200%;
+  background: rgba(255,255,255,0.15);
+  transform: rotate(30deg);
+  transition: 0.5s;
+}
+.btn-register:hover::after { left: 120%; }
+
+/* Link dang nhap */
+.login-redirect {
+  text-align: center;
+  margin-top: 18px;
+  font-family: var(--serif2);
+  font-size: 0.9rem;
+  color: var(--tx-muted);
+}
+.link-pretty {
+  color: var(--red);
+  font-family: var(--ff);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1.5px solid rgba(201,168,76,0.35);
+  padding-bottom: 1px;
+  margin-left: 4px;
+  transition: 0.2s;
+}
+.link-pretty:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+/* ============================================================
+   TRONG DONG — GIU NGUYEN 100%
+   ============================================================ */
+.right-side {
+  flex: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.drum-container {
+  position: relative;
+  width: 580px;
+  height: 580px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(80px);
+}
+
+.drum-glow {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(45px);
+  z-index: 1;
+  animation: pulseGlow 4s infinite ease-in-out;
+}
+
+.bronze-drum {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('../assets/trong-dong.png') no-repeat center;
+  background-size: contain;
+  opacity: 0.7;
+  filter: sepia(1) saturate(2.5) brightness(1.2) drop-shadow(0 0 20px rgba(191,155,48,0.5));
+  z-index: 2;
+  animation: slowRotate 100s linear infinite;
+}
+
+.epic-title {
+  position: absolute;
+  left: -150px;
+  z-index: 10;
+  text-align: left;
+}
+
+.sub-text {
+  font-size: 1.3rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  display: block;
+  margin-bottom: 5px;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+}
+
+.main-text {
+  font-size: 4.8rem;
+  font-weight: 900;
+  font-family: 'Times New Roman', serif;
+  background: linear-gradient(to bottom, #FFFDD0 10%, #FFD700 50%, #BF9B30 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(5px 5px 15px rgba(0,0,0,0.9));
+}
+
+.line-deco {
+  width: 200px;
+  height: 5px;
+  background: linear-gradient(to right, #FFD700, transparent);
+  margin-top: 15px;
+}
+
+/* ============================================================
+   HIEU UNG XE TANG — GIU NGUYEN 100%
+   ============================================================ */
+.tank-unit {
+  position: absolute;
+  left: -600px;
+  bottom: 80px;
+  width: 420px;
+  z-index: 100;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.7));
+  display: none;
+}
+
+.tank-active {
+  display: block !important;
+  animation: driveAndStop 1.1s forwards cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+@keyframes driveAndStop {
+  0%   { left: -600px; }
+  100% { left: 50px; }
+}
+
+/* ============================================================
+   MAN HINH THANH CONG
+   ============================================================ */
+.success-screen {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  justify-content: center; align-items: center;
+  z-index: 9999;
+}
+.success-box {
+  background: var(--bg-card);
+  padding: 56px 80px;
+  border: 3px solid var(--gold);
+  border-top: 4px solid var(--gold);
+  border-radius: 4px;
+  text-align: center;
+  color: var(--red);
+  box-shadow: 0 0 70px rgba(201,168,76,0.4);
+}
+.success-box h3 {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+.success-box p {
+  font-family: var(--serif2);
+  color: var(--tx-muted);
+  font-size: 1rem;
+}
+.icon-star {
+  font-size: 3.2rem;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* ============================================================
+   ANIMATIONS — GIU NGUYEN
+   ============================================================ */
+@keyframes slowRotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes pulseGlow {
+  0%,100% { opacity: 0.3; transform: scale(1); }
+  50%     { opacity: 0.7; transform: scale(1.1); }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1100px) {
+  .right-side { display: none; }
+  .main-container { justify-content: center; }
+}
+@media (max-width: 560px) {
+  .form-card { padding: 28px 22px; max-width: 100%; }
+  .input-row { flex-direction: column; gap: 0; }
+  h2 { font-size: 1.15rem; }
+}

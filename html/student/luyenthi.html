@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Phòng luyện thi</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+   <link rel="stylesheet" href="../../css/nhap.css">
+   <link rel="stylesheet" href="../../css/dashboard.css">
+   <style>
+     .sidebar-icons{width:72px;background:linear-gradient(180deg,#f5edd5,#ede3c5);display:flex;flex-direction:column;align-items:center;padding-top:28px;gap:8px;border-right:1px solid var(--border);position:sticky;top:0;height:100vh;z-index:10}
+     .icon-btn{width:46px;height:46px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-sm);cursor:pointer;transition:all .25s ease;color:#666;background:transparent;border:none;text-decoration:none}
+     .icon-btn:hover{background:var(--maroon)!important;color:white!important;transform:scale(1.08);box-shadow:var(--shadow-sm)}
+     .icon-btn.active{background:var(--maroon)!important;color:white!important;box-shadow:var(--shadow-sm)}
+     .sidebar-icons .material-symbols-outlined{font-size:24px}
+     .logout{margin-top:auto;padding-bottom:20px}
+     .logout .icon-btn:hover{background:#c0392b!important}
+
+     /* ── LAYOUT 2 CỘT ─────────────────────── */
+     .workspace-with-nav{display:flex;gap:16px;align-items:flex-start}
+     .question-nav-panel{width:196px;flex-shrink:0;background:#fff;border:1px solid var(--border,#e8dfc8);border-radius:12px;padding:14px 12px 16px;position:sticky;top:16px;max-height:calc(100vh - 240px);overflow-y:auto}
+     .qnav-title{font-size:11px;font-weight:700;text-transform:uppercase;color:#8b1a2e;letter-spacing:.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #f0e8d8}
+     .qnav-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:10px}
+     .qnav-btn{width:100%;aspect-ratio:1;border:1.5px solid #d9ceb8;border-radius:6px;background:#faf7f0;font-size:11px;font-weight:600;color:#666;cursor:pointer;transition:all .14s;padding:0;line-height:1}
+     .qnav-btn:hover{border-color:#8b1a2e;color:#8b1a2e}
+     .qnav-btn.qnav-done{background:#8b1a2e;border-color:#8b1a2e;color:#fff}
+     .qnav-btn.qnav-current{background:#f5c842;border-color:#c49e00;color:#333;box-shadow:0 0 0 2px rgba(245,200,66,.45)}
+     .qnav-legend{display:flex;flex-wrap:wrap;gap:4px 8px;font-size:11px;color:#666;align-items:center;margin-top:6px}
+     .qnav-leg-dot{display:inline-block;width:11px;height:11px;border-radius:3px;border:1.5px solid #d9ceb8}
+     .qnav-leg-dot.qnav-done{background:#8b1a2e;border-color:#8b1a2e}
+     .qnav-leg-dot.qnav-current{background:#f5c842;border-color:#c49e00}
+
+     /* ── ĐỀ KIỂM TRA / LUYỆN TẬP 40 CÂU ──── */
+     .test-all-questions{display:flex;flex-direction:column;gap:20px;padding-bottom:24px}
+     .test-question-block{border:1.5px solid #e8dfc8;border-radius:10px;padding:16px 18px;background:#fff;scroll-margin-top:80px;transition:border-color .2s}
+     .test-q-label{font-size:15px;line-height:1.65;color:#1a1a1a;margin:0 0 12px}
+     .test-options{display:flex;flex-direction:column;gap:8px}
+     .test-opt{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border:1.5px solid #e0d8c8;border-radius:8px;background:#faf7f0;cursor:pointer;font-size:14px;line-height:1.5;transition:all .14s;color:#333;user-select:none}
+     .test-opt input[type="radio"]{flex-shrink:0;margin-top:3px;accent-color:#8b1a2e}
+     .test-opt:hover:not(.reviewed){border-color:#8b1a2e;background:#fdf5f0}
+     .test-opt.selected{border-color:#8b1a2e;background:#fdf0ec;font-weight:600}
+     .test-opt-key{font-weight:700;min-width:18px;color:#8b1a2e;flex-shrink:0}
+     .test-opt.reviewed{cursor:default}
+     .test-opt.opt-correct{border-color:#2e7d32;background:#e8f5e9!important;color:#1b5e20}
+     .test-opt.opt-wrong{border-color:#c62828;background:#ffebee!important;color:#b71c1c}
+     .opt-tag{margin-left:auto;font-size:12px;font-weight:700;flex-shrink:0;padding-left:8px}
+     .correct-tag{color:#2e7d32}
+     .wrong-tag{color:#c62828}
+     .test-explain{margin:10px 0 0;padding:8px 12px;background:#fffbe6;border-left:3px solid #f5c842;border-radius:0 6px 6px 0;font-size:13px;color:#555;line-height:1.6}
+     .q-correct{border-color:#a5d6a7!important}
+     .q-wrong{border-color:#ef9a9a!important}
+     .unanswered{border-color:#ccc!important;opacity:.75}
+
+     /* ── CARD TRỘN — nổi bật hơn ────────────── */
+     .study-card.card-mixed{
+       background: linear-gradient(135deg, #fff9f0 0%, #fff3e0 100%);
+       border: 2px solid #e8a020;
+       position: relative;
+       overflow: hidden;
+     }
+     .study-card.card-mixed::before{
+       position: absolute;
+       right: 14px; top: 14px;
+       font-size: 28px;
+       opacity: .25;
+     }
+     .card-mixed .tag{background:#e67e22;color:#fff}
+     .card-mixed .chip{background:#fff3cd;color:#8a5000;border:1px solid #f0c040}
+
+     /* ── DIVIDER NHÓM ─────────────────────── */
+     .group-divider{
+       display: flex;
+       align-items: center;
+       gap: 12px;
+       margin: 8px 0 4px;
+       font-size: 12px;
+       font-weight: 700;
+       text-transform: uppercase;
+       letter-spacing: .5px;
+       color: #8b1a2e;
+     }
+     .group-divider::after{
+       content: '';
+       flex: 1;
+       height: 1px;
+       background: #e8dfc8;
+     }
+     /* Sidebar Menu VIP */
+li.vip-item a {
+    opacity: 0.5;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+li.vip-item.unlocked a {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    color: #D4AF37 !important;
+    font-weight: 700;
+}
+
+     @keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+   </style>
+</head>
+<body>
+<div class="container" id="mainView">
+
+  <div class="sidebar-icons">
+    <div class="icon-btn active"><span class="material-symbols-outlined">home</span></div>
+    <div class="icon-btn"><span class="material-symbols-outlined">groups</span></div>
+    <div class="icon-btn"><span class="material-symbols-outlined">settings</span></div>
+    <div class="logout">
+      <a href="../login.html" class="icon-btn"><span class="material-symbols-outlined">logout</span></a>
+    </div>
+  </div>
+
+  <div class="sidebar-menu">
+    <div class="profile">
+      <div class="avatar" id="avatarEl">ẢNH</div>
+      <div class="name" id="nameEl">HỌ VÀ TÊN</div>
+    </div>
+    <ul class="menu">
+    <li><a href="student_dashboard.html">Lộ trình của tôi</a></li>
+    <li><a href="thuvienbaigiang.html">Thư viện bài giảng</a></li>
+    <li><a href="khoahoc.html">Khóa học của bạn</a></li>
+    <li class="active"><a href="luyenthi.html">Phòng luyện thi</a></li>
+    <li><a href="bangxephang.html">Bảng xếp hạng</a></li>
+    <!-- THÊM 2 DÒNG DƯỚI ĐÂY -->
+    <li class="vip-item"><a href="live_review.php">Lịch Live-Review</a></li>
+    <li class="vip-item"><a href="hoi_chuyen_gia.html" id="menuHoi">Hỏi đáp chuyên gia</a></li>
+    <li><a href="sotay.html">Sổ tay ghi chú</a></li>
+</ul>
+  </div>
+
+  <main class="center">
+    <h1 class="page-title">PHÒNG LUYỆN THI</h1>
+    <section class="hero-card">
+      <div>
+        <p class="eyebrow">Nội dung mới</p>
+        <h2>Ôn bài theo 3 hình thức rõ ràng và đúng yêu cầu mới</h2>
+      </div>
+      <div class="hero-metrics">
+        <div class="metric">
+          <span class="metric-label">Loại nội dung</span>
+          <strong id="metricTitle">Bài luyện tập</strong>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Hình thức</span>
+          <strong id="metricFormat">10 câu nhanh hoặc 40 câu đầy đủ</strong>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Mức độ</span>
+          <strong id="metricLevel">Luyện ngay sau bài học</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-header">
+        <div class="section-badge"></div>
+        <h3>Chọn kiểu luyện</h3>
+      </div>
+      <div class="mode-grid" aria-label="Lựa chọn nội dung luyện">
+        <button class="mode-card active section-btn" type="button" data-section="practice">
+          <span class="material-symbols-outlined mode-icon">edit_note</span>
+          <span class="mode-name">Bài luyện tập</span>
+          <span class="mode-desc">10 câu nhanh hoặc 40 câu đầy đủ có giải thích.</span>
+        </button>
+        <button class="mode-card section-btn" type="button" data-section="test">
+          <span class="material-symbols-outlined mode-icon">fact_check</span>
+          <span class="mode-name">Đề kiểm tra</span>
+          <span class="mode-desc">Đề tổng kết bài hoặc trộn 3 bài, 50 phút.</span>
+        </button>
+        <button class="mode-card section-btn" type="button" data-section="games">
+          <span class="material-symbols-outlined mode-icon">sports_esports</span>
+          <span class="mode-name">Trò chơi</span>
+          <span class="mode-desc">Đối kháng Battle Mode.</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="content-panels">
+
+      <!-- ══════ LUYỆN TẬP ══════ -->
+      <article class="content-panel" id="practice">
+        <div class="panel-top">
+          <div>
+            <p class="panel-kicker">Bài luyện tập</p>
+            <h2>Luyện tập từng bài và tổng hợp 3 bài</h2>
+          </div>
+          <span class="ribbon">Sau bài học</span>
+        </div>
+
+        <!-- Nhóm: Luyện 10 câu nhanh -->
+        <div class="group-divider">Luyện tập nhanh — 10 câu</div>
+        <div class="content-grid">
+          <article class="study-card">
+            <div class="study-head"><span class="tag">Bài 6</span><span class="chip">10 câu</span></div>
+            <h3>Cách mạng tháng 8 năm 1945</h3>
+            <p>Luyện tập nhanh 10 câu hỏi xoay quanh diễn biến, thời cơ và ý nghĩa Cách mạng tháng Tám.</p>
+            <div class="card-actions">
+              <button class="btn-primary action-btn" type="button" data-activity="practice-lesson6">Luyện nhanh</button>
+            </div>
+          </article>
+          <article class="study-card">
+            <div class="study-head"><span class="tag">Bài 7</span><span class="chip">10 câu</span></div>
+            <h3>Kháng chiến chống thực dân Pháp</h3>
+            <p>Ôn lại chiến dịch Việt Bắc, Đại hội II của Đảng và ý nghĩa thắng lợi kháng chiến.</p>
+            <div class="card-actions">
+              <button class="btn-primary action-btn" type="button" data-activity="practice-lesson7">Luyện nhanh</button>
+            </div>
+          </article>
+          <article class="study-card">
+            <div class="study-head"><span class="tag">Bài 8</span><span class="chip">10 câu</span></div>
+            <h3>Kháng chiến chống Mỹ cứu nước</h3>
+            <p>Luyện 10 câu về phong trào đấu tranh, các chiến thắng lớn và ý nghĩa lịch sử.</p>
+            <div class="card-actions">
+              <button class="btn-primary action-btn" type="button" data-activity="practice-lesson8">Luyện nhanh</button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Nhóm: Luyện 40 câu đầy đủ -->
+        <div class="group-divider" style="margin-top:20px">Luyện tập đầy đủ — 40 câu có giải thích</div>
+        <div class="content-grid">
+          <article class="study-card">
+            <div class="study-head"><span class="tag">Bài 6</span><span class="chip">40 câu</span></div>
+            <h3>Luyện đầy đủ — Cách mạng tháng Tám</h3>
+            <p>Toàn bộ 40 câu hỏi bài 6, có giải thích sau mỗi câu để hiểu sâu hơn.</p>
+            <div class="card-actions">
+              <button class="btn-primary action-btn" type="button" data-activity="practice40-lesson6">Luyện 40 câu</button>
+            </div>
+          </article>
+          <article class="study-card">
+            <div class="study-head"><span class="tag">Bài 7</span><span class="chip">40 câu</span></div>
+            <h3>Luyện đầy đủ — Kháng chiến chống Pháp</h3>
+            <p>Toàn bộ 40 câu hỏi bài 7, có giải thích chi tiết giúp nắm chắc kiến thức.</p>
+            <div class="card-actions">
+              <button class="btn-primary action-btn" type="button" data-activity="practice40-lesson7">Luyện 40 câu</button>
+            </div>
+          </article>
+          <article class="study-card">
+            <div class="study-head"><span class="tag">Bài 8</span><span class="chip">40 câu</span></div>
+            <h3>Luyện đầy đủ — Kháng chiến chống Mỹ</h3>
+            <p>Toàn bộ 40 câu hỏi bài 8, có giải thích để ôn tập và kiểm tra mức độ nắm bài.</p>
+            <div class="card-actions">
+              <button class="btn-primary action-btn" type="button" data-activity="practice40-lesson8">Luyện 40 câu</button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Nhóm: Luyện tập trộn 3 bài -->
+        <div class="group-divider" style="margin-top:20px">Luyện tập tổng hợp - Trộn 3 bài</div>
+        <div class="content-grid">
+          <article class="study-card card-mixed" style="grid-column: 1 / -1; max-width: 480px;">
+            <div class="study-head"><span class="tag">Bài 6 + 7 + 8</span><span class="chip">40 câu · xáo ngẫu nhiên</span></div>
+            <h3>Luyện tập tổng hợp - Trộn 3 bài</h3>
+            <p>40 câu ngẫu nhiên từ cả 3 bài 6, 7, 8 - xáo trộn mỗi lần làm để luyện nhớ toàn bộ chương trình. Có giải thích chi tiết sau khi nộp.</p>
+            <div class="card-actions">
+              <button class="btn-primary action-btn" type="button" data-activity="practice40-mixed">Luyện tổng hợp</button>
+            </div>
+          </article>
+        </div>
+      </article>
+
+      <!-- ══════ ĐỀ KIỂM TRA ══════ -->
+      <article class="content-panel" id="test" hidden>
+        <div class="panel-top">
+          <div>
+            <p class="panel-kicker">Đề kiểm tra</p>
+            <h2>Kiểm tra từng bài và tổng hợp 3 bài — 50 phút</h2>
+          </div>
+          <span class="ribbon">Tổng kết bài</span>
+        </div>
+
+        <!-- Nhóm: Đề kiểm tra từng bài -->
+        <div class="group-divider">Đề kiểm tra từng bài — 40 câu · 50 phút</div>
+        <div class="content-grid">
+          <article class="study-card">
+            <div class="study-head"><span class="tag">Bài 6</span><span class="chip">40 câu</span></div>
+            <h3>Đề kiểm tra tổng kết bài 6</h3>
+            <p>40 câu trắc nghiệm về thời cơ, diễn biến, thắng lợi và ý nghĩa lịch sử Cách mạng tháng Tám.</p>
+            <div class="card-actions">
+              <button class="btn-primary action-btn" type="button" data-activity="test-lesson6">Vào đề ngay</button>
+            </div>
+          </article>
+          <article class="study-card">
+            <div class="study-head"><span class="tag">Bài 7</span><span class="chip">40 câu</span></div>
+            <h3>Đề kiểm tra tổng kết bài 7</h3>
+            <p>40 câu trắc nghiệm về cuộc kháng chiến chống Pháp từ 1945 đến thắng lợi Điện Biên Phủ 1954.</p>
+            <div class="card-actions">
+              <button class="btn-primary action-btn" type="button" data-activity="test-lesson7">Vào đề ngay</button>
+            </div>
+          </article>
+          <article class="study-card">
+            <div class="study-head"><span class="tag">Bài 8</span><span class="chip">40 câu</span></div>
+            <h3>Đề kiểm tra tổng kết bài 8</h3>
+            <p>40 câu trắc nghiệm về kháng chiến chống Mỹ cứu nước từ 1954 đến thống nhất đất nước 1975.</p>
+            <div class="card-actions">
+              <button class="btn-primary action-btn" type="button" data-activity="test-lesson8">Vào đề ngay</button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Nhóm: Đề trộn 3 bài -->
+        <div class="group-divider" style="margin-top:20px">Đề kiểm tra tổng hợp - Trộn 3 bài</div>
+        <div class="content-grid">
+          <article class="study-card card-mixed" style="grid-column: 1 / -1; max-width: 480px;">
+            <div class="study-head"><span class="tag">Bài 6 + 7 + 8</span><span class="chip">40 câu · xáo ngẫu nhiên · 50 phút</span></div>
+            <h3>Đề kiểm tra tổng hợp - Trộn 3 bài</h3>
+            <p>40 câu ngẫu nhiên từ cả 3 bài 6, 7, 8 - xáo trộn mỗi lần thi, có tính giờ 50 phút và chống gian lận. Xem đáp án & giải thích sau khi nộp.</p>
+            <div class="card-actions">
+              <button class="btn-primary action-btn" type="button" data-activity="test-mixed">Thi tổng hợp</button>
+            </div>
+          </article>
+        </div>
+      </article>
+<!-- ══════ GAME ══════ -->
+     <article class="content-panel" id="games" hidden>
+    <div class="panel-top">
+        <div>
+            <p class="panel-kicker">Đấu trường Sĩ tử</p>
+            <h2>Sĩ tử tranh hùng — Chế độ đối kháng</h2>
+        </div>
+        <span class="ribbon">Đấu trí 1vs1</span>
+    </div>
+
+    <div class="group-divider">Đấu trường trực tuyến — Trộn bài 6, 7, 8</div>
+    
+    <div class="content-grid">
+        <article class="study-card card-mixed" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto;">
+            <div class="study-head">
+                <span class="tag" style="background: #800000;">BATTLE MODE</span>
+                <span class="chip">10 câu · Trộn kiến thức</span>
+            </div>
+            
+            <div class="battle-lobby-sync" style="padding: 20px 0; text-align: center;"> <div class="player-vs" style="display: flex; align-items: center; justify-content: space-around; margin-bottom: 20px;">
+        <div class="p-box">
+            <div class="p-avatar" style="width: 60px; height: 60px; border-radius: 50%; background: #fdfaf5; border: 2px solid #BF9B30; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 8px;">😊</div>
+            <div class="p-name" style="font-weight: 700; font-size: 13px; color: #333;">Bạn (Chi)</div>
+        </div>
+        <div class="vs-circle" style="width: 40px; height: 40px; background: #800000; color: #D4AF37; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-family: 'Playfair Display'; font-size: 16px;">VS</div>
+        <div class="p-box">
+            <div class="p-avatar" id="oppAvatar" style="width: 60px; height: 60px; border-radius: 50%; background: #fdfaf5; border: 2px solid #666; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 8px;">?</div>
+            <div class="p-name" id="oppName" style="font-weight: 700; font-size: 13px; color: #666;">Đang tìm...</div>
+        </div>
+    </div>
+
+    <h3 style="margin-bottom: 8px;">Đại hội Sĩ tử Tranh hùng</h3>
+    
+    <p style="font-size: 14px; line-height: 1.6; color: #555; max-width: 450px; margin: 0 auto;">
+        Thử thách kiến thức Lịch sử lớp 12 (Giai đoạn 1945 - 1975). Trả lời nhanh và chính xác để đánh bại đối thủ và thăng hạng trên Bảng xếp hạng.
+    </p>
+    
+    <div class="card-actions" style="margin-top: 20px;">
+        <button class="btn-primary btn-battle-start" type="button" onclick="startBattle()" style="width: 100%; justify-content: center; gap: 10px; background: linear-gradient(135deg, #800000, #5c0000);">
+            <span class="material-symbols-outlined">crossed_swords</span>
+            TÌM TRẬN NGAY
+        </button>
+    </div>
+</div>
+        </article>
+    </div>
+</article>
+
+<style>
+    .battle-card-main {
+        background: white; border-radius: 24px; padding: 40px;
+        box-shadow: 0 10px 40px rgba(128,0,0,0.08); border: 1px solid #f0e8d8;
+        max-width: 600px; margin: 20px auto;
+    }
+    .player-vs { display: flex; align-items: center; justify-content: space-around; }
+    .p-box { text-align: center; }
+    .p-avatar { 
+        width: 80px; height: 80px; border-radius: 50%; background: #fdfaf5;
+        display: flex; align-items: center; justify-content: center; font-size: 32px;
+        margin-bottom: 10px; transition: 0.3s;
+    }
+    .vs-circle {
+        width: 50px; height: 50px; background: #800000; color: #D4AF37;
+        border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        font-weight: 900; font-family: 'Playfair Display'; font-size: 18px;
+        box-shadow: 0 0 15px rgba(128,0,0,0.3);
+    }
+    .p-name { font-weight: 800; font-size: 14px; color: #333; }
+    .btn-battle-start {
+        width: 100%; margin-top: 30px; padding: 16px; border: none; border-radius: 12px;
+        background: linear-gradient(135deg, #800000, #5c0000); color: #D4AF37;
+        font-family: 'Nunito'; font-weight: 800; font-size: 16px; cursor: pointer;
+        display: flex; align-items: center; justify-content: center; gap: 10px;
+        transition: 0.3s;
+    }
+    .btn-battle-start:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(128,0,0,0.2); }
+    
+    /* Hiệu ứng tìm trận */
+    .finding-anim { animation: pulse-gold 1s infinite; }
+    @keyframes pulse-gold { 50% { border-color: #D4AF37; transform: scale(1.1); } }
+</style>
+    </section>
+  </main>
+</div><!-- #mainView -->
+
+<!-- ══════ EXPERIENCE SHELL ══════ -->
+<section class="experience-shell" id="experienceShell">
+  <div class="experience-inner">
+    <div class="experience-header">
+      <button class="back-btn" id="backBtn" type="button">
+        <span class="material-symbols-outlined">arrow_back</span>
+        Quay lại
+      </button>
+      <div class="experience-heading">
+        <p class="experience-kicker" id="workspaceLabel">LỊCH SỬ 12 · BÀI ÔN TẬP</p>
+        <h2 id="workspaceHeading">Kiểm tra</h2>
+      </div>
+      <div id="testTimer" hidden
+           style="margin-left:auto;padding:6px 18px;border-radius:8px;
+                  background:#8b1a2e;color:#fff;font-weight:700;font-size:18px;
+                  letter-spacing:1px;white-space:nowrap;min-width:96px;text-align:center;flex-shrink:0;">
+        ⏱ 50:00
+      </div>
+    </div>
+    <div class="experience-divider"></div>
+    <div class="experience-summary">
+      <div class="summary-box"><strong id="answeredCount">0</strong><span>Đã trả lời</span></div>
+      <div class="summary-box"><strong id="totalCount">0</strong><span>Tổng câu</span></div>
+      <div class="summary-progress">
+        <div class="summary-track"><div class="summary-fill" id="summaryFill"></div></div>
+      </div>
+    </div>
+    <div class="workspace-with-nav">
+      <aside id="questionNav" hidden class="question-nav-panel"></aside>
+      <div class="workspace-card" style="flex:1;min-width:0;">
+        <div class="activity-board" id="activityBoard">
+          <div class="activity-top">
+            <div class="activity-meta">
+              <span class="activity-number" id="activityNumber">1</span>
+              <span class="activity-badge" id="activityBadge">Bài luyện tập</span>
+              <span class="activity-progress" id="activityProgress">Câu 1 / 5</span>
+            </div>
+            <div class="activity-score" id="activityScore">Điểm: 0</div>
+          </div>
+          <div class="question-card" id="questionCard">
+            <p class="question-label" id="questionLabel">Câu hỏi</p>
+            <h3 class="question-title" id="questionTitle"></h3>
+            <div class="question-body" id="questionBody"></div>
+          </div>
+          <div class="activity-actions" id="activityActions">
+            <button class="btn-secondary" id="prevBtn" type="button">Câu trước</button>
+            <button class="btn-primary"   id="nextBtn" type="button">Câu tiếp</button>
+            <button class="btn-primary"   id="submitBtn" type="button">Nộp bài</button>
+            <button class="btn-secondary" id="restartBtn" type="button">Làm lại</button>
+          </div>
+          <div class="result-panel" id="resultPanel" hidden>
+            <span class="demo-kicker">Kết quả</span>
+            <h3 id="resultTitle">Bạn đã hoàn thành</h3>
+            <p id="resultText"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="../../js/load_profile.js"></script>
+<script src="../../js/student.js"></script>
+<script src="../../js/nhap.js"></script>
+<script>
+// KIỂM TRA VIP ĐỂ PHÂN QUYỀN TRUY CẬP (ĐÃ ĐIỀU CHỈNH: THƯỜNG VẪN ĐƯỢC LUYỆN TẬP)
+fetch('../../php/progress.php')
+  .then(r => r.json())
+  .then(d => {
+    var isVip = (d.overview && d.overview.is_vip) ? parseInt(d.overview.is_vip) : 0;
+    var vipItems = document.querySelectorAll('li.vip-item');
+
+    // 1. Mở khóa Menu Sidebar nếu là VIP
+    if (isVip === 1) {
+        vipItems.forEach(function(li) { 
+            li.classList.add('unlocked');
+            var link = li.querySelector('a');
+            if (link) {
+                link.style.opacity = '1';
+                link.style.pointerEvents = 'auto';
+                link.innerHTML = link.innerHTML.replace('🔒', '');
+            }
+        });
+    }
+
+    // 2. Phân quyền: Chỉ khóa "Đề kiểm tra", còn "Luyện tập" thì mở hết
+    document.querySelectorAll('.action-btn').forEach(btn => {
+        var activity = btn.dataset.activity;
+        
+        // Hoạt động có chữ "test" (Đề kiểm tra) sẽ bị khóa nếu chưa là VIP
+        if (activity && activity.includes('test') && isVip !== 1) {
+            btn.innerHTML = '🔒 VIP mới được thi';
+            btn.style.background = '#999';
+            btn.style.cursor = 'not-allowed';
+            
+            btn.onclick = function(e) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                if(confirm("Đề kiểm tra tổng kết chỉ dành cho Sĩ tử VIP. Bạn có muốn nâng cấp để mở khóa không?")) {
+                    window.location.href = 'khoahoc.html';
+                }
+            };
+        }
+    });
+  })
+  .catch(e => console.error("Lỗi phân quyền luyenthi:", e));
+</script>
+<script>
+function startBattle() {
+    const oppName = document.getElementById('oppName');
+    const oppAvatar = document.getElementById('oppAvatar');
+    const btn = document.querySelector('.btn-battle-start');
+    
+    btn.disabled = true;
+    btn.innerHTML = `<span class="material-symbols-outlined spinning">sync</span> ĐANG QUÉT CHIẾN TRƯỜNG...`;
+    oppAvatar.classList.add('finding-anim');
+
+    setTimeout(() => {
+        const opponents = [
+            {name: "Sĩ tử Bảo Nam", ava: "👦"},
+            {name: "Lan Anh (Hạng 2)", ava: "👧"},
+            {name: "Quang Minh", ava: "🧑‍🎓"}
+        ];
+        const randomOpp = opponents[Math.floor(Math.random() * opponents.length)];
+        
+        oppName.textContent = randomOpp.name;
+        oppAvatar.textContent = randomOpp.ava;
+        btn.textContent = "TRẬN ĐẤU BẮT ĐẦU!";
+        btn.style.background = "#27ae60";
+
+        setTimeout(() => {
+            // THAY ĐỔI Ở ĐÂY: Thay vì window.location.href, ta hiện Overlay
+            const url = "game_battle.php?opp=" + encodeURIComponent(randomOpp.name) + "&ava=" + encodeURIComponent(randomOpp.ava);
+            const overlay = document.getElementById('gameOverlay');
+            const frame = document.getElementById('gameFrame');
+            
+            frame.src = url;
+            overlay.style.display = 'flex';
+            
+            // Reset lại nút tìm trận cho lần sau
+            btn.disabled = false;
+            btn.innerHTML = `<span class="material-symbols-outlined">crossed_swords</span> TÌM TRẬN NGAY`;
+            btn.style.background = ""; 
+        }, 1000);
+    }, 2000);
+}
+
+// Hàm đóng game
+function closeGame() {
+    if(confirm("Bạn có chắc muốn thoát trận đấu đang diễn ra?")) {
+        document.getElementById('gameOverlay').style.display = 'none';
+        document.getElementById('gameFrame').src = ""; // Giải phóng bộ nhớ
+    }
+}
+</script>
+
+<style>
+/* Thêm một chút hiệu ứng xoay cho icon lúc đang quét */
+.spinning {
+    animation: spin 1s linear infinite;
+    font-size: 18px;
+    vertical-align: middle;
+}
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+</style>
+<div id="gameOverlay" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.85); backdrop-filter:blur(10px); align-items:center; justify-content:center; padding:20px;">
+    <div style="position:relative; width:100%; max-width:1000px; height:90vh; background:#12080a; border:2px solid #c9a227; border-radius:20px; overflow:hidden; box-shadow:0 0 50px rgba(201,162,39,0.3);">
+        <button onclick="closeGame()" style="position:absolute; top:15px; right:20px; z-index:100; background:none; border:none; color:#c9a227; font-size:30px; cursor:pointer;">&times;</button>
+        <iframe id="gameFrame" src="" style="width:100%; height:100%; border:none;"></iframe>
+    </div>
+</div>
+</body>
+</html>

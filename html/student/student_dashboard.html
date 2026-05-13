@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<title>Student Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+<link rel="stylesheet" href="../../css/dashboard.css">
+<link rel="stylesheet" href="../../css/ai-style.css">
+<style>
+/* ══════════════════════════════════════════
+   VIP STYLES
+══════════════════════════════════════════ */
+
+/* Nút Đăng ký VIP trong sidebar */
+.vip-register-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 16px 4px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #800000, #5c0000);
+  color: #D4AF37;
+  border: none;
+  border-radius: 99px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 12px rgba(128,0,0,0.28);
+  width: calc(100% - 32px);
+}
+.vip-register-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(128,0,0,0.38);
+}
+.vip-crown { font-size: 16px; }
+
+/* Badge VIP trên avatar */
+.vip-badge-avatar {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  background: linear-gradient(135deg, #D4AF37, #c9a227);
+  color: #5c0000;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 99px;
+  border: 1.5px solid white;
+  letter-spacing: 0.5px;
+  display: none;
+}
+.vip-badge-avatar.show { display: block; }
+.profile { position: relative; }
+
+/* Menu item VIP khoá / mở */
+/* Mặc định menu VIP bị mờ */
+li.vip-item a {
+  opacity: 0.5;
+  pointer-events: none; /* Không cho bấm */
+  transition: all 0.3s ease;
+}
+
+/* Khi có class unlocked (đã là VIP) */
+li.vip-item.unlocked a {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  color: #D4AF37 !important; /* Màu vàng Gold cho sang trọng */
+  font-weight: 700;
+}
+
+/* Nút Live-Review */
+.btn-locked {
+  background: #f0f0f0 !important;
+  color: #aaa !important;
+  border: 1.5px solid #ddd !important;
+  padding: 10px 22px !important;
+  border-radius: 99px !important;
+  cursor: pointer !important;
+  font-family: 'Nunito', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+.btn-vip {
+  background: linear-gradient(135deg, #800000, #5c0000) !important;
+  color: #D4AF37 !important;
+  font-weight: 800 !important;
+  border: none !important;
+  padding: 10px 22px !important;
+  border-radius: 99px !important;
+  cursor: pointer !important;
+  font-family: 'Nunito', sans-serif !important;
+  font-size: 14px !important;
+  transition: all 0.2s !important;
+}
+.btn-vip:hover { opacity: 0.88 !important; transform: translateY(-1px) !important; }
+
+
+/* Overlay modal */
+#vipModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+#vipModal.open { display: flex; }
+
+/* Modal box */
+.vip-modal-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 30px 28px;
+  max-width: 440px;
+  width: 92%;
+  box-shadow: 0 20px 60px rgba(128,0,0,0.22);
+  position: relative;
+  animation: vipPop 0.35s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes vipPop {
+  from { opacity:0; transform: scale(0.88) translateY(24px); }
+  to   { opacity:1; transform: scale(1) translateY(0); }
+}
+.vip-modal-header { text-align: center; margin-bottom: 20px; }
+.vip-modal-crown  { font-size: 42px; display: block; margin-bottom: 6px; }
+.vip-modal-title  { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 800; color: #800000; margin-bottom: 4px; }
+.vip-modal-sub    { font-size: 13px; color: #777; }
+
+/* Quyền lợi */
+.vip-perks { background: linear-gradient(135deg,#fff8e1,#fff3cd); border: 1.5px solid #e8cc6a; border-radius: 12px; padding: 14px 16px; margin-bottom: 18px; }
+.vip-perk-item { display: flex; align-items: center; gap: 9px; font-size: 13.5px; font-weight: 600; color: #5c0000; padding: 4px 0; }
+.vip-perk-item .icon { font-size: 16px; }
+
+/* Thông tin ngân hàng */
+.vip-bank-box { background: #f9f5ff; border: 1.5px solid #c4b5e8; border-radius: 12px; padding: 14px 16px; margin-bottom: 18px; font-size: 13px; }
+.vip-bank-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid #ede8f7; }
+.vip-bank-row:last-child { border-bottom: none; }
+.vip-bank-label { color: #666; font-weight: 600; }
+.vip-bank-val   { color: #3d1152; font-weight: 800; letter-spacing: 0.3px; }
+.vip-bank-copy  { background: none; border: 1px solid #c4b5e8; border-radius: 6px; padding: 2px 8px; font-size: 11px; font-weight: 700; color: #6a3fa0; cursor: pointer; transition: all 0.15s; }
+.vip-bank-copy:hover { background: #6a3fa0; color: white; }
+
+.vip-note { font-size: 12px; color: #888; text-align: center; margin-bottom: 16px; line-height: 1.6; }
+.vip-note b { color: #800000; }
+
+/* Nút trong modal */
+.vip-modal-actions { display: flex; gap: 10px; }
+.btn-vip-confirm { flex: 1; padding: 12px; background: linear-gradient(135deg,#800000,#5c0000); color: #D4AF37; border: none; border-radius: 99px; font-family: 'Nunito',sans-serif; font-size: 14px; font-weight: 800; cursor: pointer; transition: all 0.2s; }
+.btn-vip-confirm:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-vip-cancel  { padding: 12px 20px; background: white; color: #888; border: 1.5px solid #ddd; border-radius: 99px; font-family: 'Nunito',sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+.btn-vip-cancel:hover { border-color: #800000; color: #800000; }
+
+@keyframes blink-red {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+.ad-blink {
+    color: #ff0000;
+    animation: blink-red 1s infinite;
+    font-weight: bold;
+    margin-right: 5px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- SIDEBAR ICONS -->
+  <div class="sidebar-icons">
+    <div class="icon-btn active" onclick="location.href='student_dashboard.html'">
+      <span class="material-symbols-outlined">home</span>
+    </div>
+    <div class="icon-btn" onclick="location.href='student_profile.html'">
+      <span class="material-symbols-outlined">groups</span>
+    </div>
+    <div class="icon-btn" onclick="location.href='student_settings.html'">
+      <span class="material-symbols-outlined">settings</span>
+    </div>
+    <div class="logout">
+      <a href="../login.html" class="icon-btn">
+        <span class="material-symbols-outlined">logout</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- SIDEBAR MENU -->
+  <div class="sidebar-menu">
+    <div class="profile">
+      <div class="avatar" id="avatarEl">ẢNH</div>
+      <div class="name" id="nameEl">HỌ VÀ TÊN</div>
+    </div>
+    <ul class="menu">
+      <li class="active"><a href="student_dashboard.html">Lộ trình của tôi</a></li>
+      <li><a href="thuvienbaigiang.html">Thư viện bài giảng</a></li>
+      <li><a href="khoahoc.html">Khóa học của bạn</a></li>
+      <li><a href="luyenthi.html">Phòng luyện thi</a></li>
+      <li><a href="bangxephang.html">Bảng xếp hạng</a></li>
+      <li class="vip-item"><a href="live_review.php" id="menuLive">Lịch Live-Review</a></li>
+      <li class="vip-item"><a href="hoi_chuyen_gia.html" id="menuHoi">Hỏi đáp chuyên gia</a></li>
+      <li><a href="sotay.html">Sổ tay ghi chú</a></li>
+    </ul>
+  </div>
+
+  <!-- CENTER -->
+  <div class="center">
+    <h2 class="page-title">LỘ TRÌNH CỦA TÔI</h2>
+
+    <!-- Loading state -->
+    <div id="loadingState" style="text-align:center;padding:60px 20px;color:var(--text-muted);">
+      <div style="font-size:2rem;margin-bottom:12px;">⏳</div>
+      <div style="font-weight:600;">Đang tải dữ liệu...</div>
+    </div>
+
+    <!-- Toàn bộ nội dung — hiện sau khi fetch xong -->
+    <div id="dashContent" style="display:none;">
+
+      <!-- TIẾN ĐỘ -->
+      <div class="section-header"><div class="section-badge"></div><h3>Tiến độ học tập</h3></div>
+      <div class="progress-box">
+        <div class="progress-top-row">
+          <div class="progress-info">
+            <div class="progress-label">Hoàn thành</div>
+            <div class="progress-count">
+              <span id="doneCount">0</span>
+              <span id="totalCount"> / 3 bài</span>
+            </div>
+          </div>
+          <div class="progress-track">
+            <div class="progress-track-label">
+              <span>Tiến độ tổng thể</span>
+              <b id="pctLabel">0%</b>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="progressFill" style="width:0%;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="progress-bottom-row">
+          <div class="progress-meta-item">
+            <span class="material-symbols-outlined">schedule</span>
+            Thời gian tuần này: <b id="studyLabel" style="color:var(--maroon);margin-left:4px;">0m</b>
+          </div>
+          <div class="progress-meta-item">
+            <span class="material-symbols-outlined">style</span>
+            Flashcard đã ôn: <b id="flashLabel" style="color:var(--maroon);margin-left:4px;">0 thẻ</b>
+          </div>
+          <div class="progress-meta-item">
+            <span class="material-symbols-outlined">emoji_events</span>
+            Điểm TB: <b id="avgLabel" style="color:var(--maroon);margin-left:4px;">—</b>
+          </div>
+        </div>
+      </div>
+
+      <!-- STREAK -->
+      <div style="margin-top:16px;">
+        <div class="streak-banner">
+          <div class="streak-fire">🔥</div>
+          <div class="streak-info">
+            <div class="streak-title">Chuỗi học liên tục</div>
+            <div class="streak-count" id="streakCount">0 ngày</div>
+            <div class="streak-dots" id="streakDots"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIP LIVE SECTION -->
+      <div id="vipLiveSection" style="margin-top:20px;">
+        <div class="section-header">
+          <div class="section-badge" style="background:var(--maroon)"></div>
+          <h3>Đặc quyền VIP: Live-Review</h3>
+        </div>
+        <div class="live-card">
+          <div class="live-status-tag">🔴 TRỰC TIẾP TUẦN NÀY</div>
+          <div class="live-content">
+            <div class="live-info">
+              <h4 id="liveTitle">Tranh luận: Thời cơ Cách mạng tháng Tám</h4>
+              <p id="liveTime">
+                <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">calendar_today</span>
+                20:00 - Thứ 7 tuần này
+              </p>
+              <p style="font-size:12px;color:var(--text-muted);margin-top:5px;">Cùng Giáo viên phân tích các tình huống lịch sử chuyên sâu.</p>
+            </div>
+            <div class="live-action">
+              <button id="btnJoinLive" class="btn btn-locked">Mua khóa học để tham gia</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- HỌC THEO BÀI -->
+      <div class="section-header"><div class="section-badge"></div><h3>Học theo bài</h3></div>
+      <div class="lesson-grid" id="lessonGrid"></div>
+
+      <div class="divider"></div>
+
+      <!-- LUYỆN TẬP -->
+      <div class="section-header"><div class="section-badge"></div><h3>Luyện tập</h3></div>
+      <div class="lesson-grid" id="quizGrid"></div>
+
+      <div class="divider"></div>
+
+      <!-- THỐNG KÊ -->
+      <div class="section-header"><div class="section-badge"></div><h3>Thống kê học tập</h3></div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon-wrap"><span class="material-symbols-outlined">menu_book</span></div>
+          <p>Bài đã học</p><h4 id="statDone">0</h4><div class="stat-sub">/ 3 bài</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap"><span class="material-symbols-outlined">quiz</span></div>
+          <p>Bài kiểm tra</p><h4 id="statQuiz">0</h4><div class="stat-sub">đã hoàn thành</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap"><span class="material-symbols-outlined">star</span></div>
+          <p>Điểm trung bình</p><h4 id="statAvg">—</h4><div class="stat-sub">/ 10</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap"><span class="material-symbols-outlined">schedule</span></div>
+          <p>Thời gian học</p><h4 id="statTime">0m</h4><div class="stat-sub">tuần này</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap"><span class="material-symbols-outlined">style</span></div>
+          <p>Flashcard ôn</p><h4 id="statFlash">0</h4><div class="stat-sub">thẻ đã ôn</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- BIỂU ĐỒ -->
+      <div class="section-header"><div class="section-badge"></div><h3>Biểu đồ tiến độ</h3></div>
+      <div class="chart-card">
+        <div class="chart-title">
+          <span class="material-symbols-outlined">bar_chart</span>
+          Thời gian học theo tuần (giờ)
+        </div>
+        <div class="bar-chart" id="barChart"></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- FLASHCARD + THÀNH TÍCH -->
+      <div class="section-header"><div class="section-badge"></div><h3>Flashcard &amp; Thành tích</h3></div>
+      <div class="two-col-grid">
+        <div class="info-card">
+          <div class="info-card-title">
+            <span class="material-symbols-outlined">style</span>Flashcard đã học
+          </div>
+          <div class="flash-stat-list" id="flashStatList"></div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">
+            <span class="material-symbols-outlined">military_tech</span>Huy hiệu thành tích
+          </div>
+          <div class="badge-grid" id="badgeGrid"></div>
+        </div>
+      </div>
+
+      <div style="height:24px;"></div>
+    </div><!-- #dashContent -->
+  </div><!-- .center -->
+</div><!-- .container -->
+
+<!-- MODAL VIP -->
+<div id="vipModal">
+  <div class="vip-modal-box">
+    <button onclick="closeVipModal()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#bbb;line-height:1;">✕</button>
+    <div class="vip-modal-header">
+      <span class="vip-modal-crown">👑</span>
+      <div class="vip-modal-title">Đăng ký Sĩ tử VIP</div>
+      <div class="vip-modal-sub">Mở khóa toàn bộ tính năng nâng cao</div>
+    </div>
+    <div class="vip-perks">
+      <div class="vip-perk-item"><span class="icon">🔴</span> Tham gia Live-Review hàng tuần với Giáo viên</div>
+      <div class="vip-perk-item"><span class="icon">🎓</span> Hỏi đáp trực tiếp chuyên gia Lịch sử</div>
+      <div class="vip-perk-item"><span class="icon">📌</span> Tài liệu độc quyền &amp; đề luyện nâng cao</div>
+      <div class="vip-perk-item"><span class="icon">⚡</span> Ưu tiên hỗ trợ &amp; thông báo sự kiện mới</div>
+    </div>
+    <div class="vip-bank-box">
+      <div class="vip-bank-row">
+        <span class="vip-bank-label">Ngân hàng</span>
+        <span class="vip-bank-val">Vietcombank</span>
+      </div>
+      <div class="vip-bank-row">
+        <span class="vip-bank-label">Số tài khoản</span>
+        <span class="vip-bank-val" id="bankSTK">1234 5678 9012</span>
+        <button class="vip-bank-copy" onclick="copyBankText('bankSTK', this)">Sao chép</button>
+      </div>
+      <div class="vip-bank-row">
+        <span class="vip-bank-label">Chủ tài khoản</span>
+        <span class="vip-bank-val">NGUYEN THI CHI</span>
+      </div>
+      <div class="vip-bank-row">
+        <span class="vip-bank-label">Số tiền</span>
+        <span class="vip-bank-val" style="color:#800000;">199.000 đ</span>
+      </div>
+      <div class="vip-bank-row">
+        <span class="vip-bank-label">Nội dung CK</span>
+        <span class="vip-bank-val" id="bankNote">VIP <span id="bankNoteUID"></span></span>
+        <button class="vip-bank-copy" onclick="copyBankText('bankNote', this)">Sao chép</button>
+      </div>
+    </div>
+    <p class="vip-note">
+      Sau khi chuyển khoản, <b>Admin sẽ duyệt trong vòng 24h</b>.<br>
+      Tài khoản VIP tự động kích hoạt khi bạn tải lại trang.
+    </p>
+    <div class="vip-modal-actions">
+      <button class="btn-vip-confirm" onclick="confirmVipTransfer()">✓ Tôi đã chuyển khoản</button>
+      <button class="btn-vip-cancel"  onclick="closeVipModal()">Để sau</button>
+    </div>
+  </div>
+</div>
+
+<script src="../../js/ai-chat.js"></script>
+<script src="../../js/load_profile.js"></script>
+<script src="../../js/student.js"></script>
+<script>
+// ══════════════════════════════════════════
+//  CONFIG BÀI HỌC
+// ══════════════════════════════════════════
+var LESSONS = [
+  { id: 6, title: 'Cách Mạng Tháng Tám Năm 1945',    desc: 'Diễn biến và ý nghĩa lịch sử',  url: 'lesson6.html', maxCards: 20 },
+  { id: 7, title: 'Kháng Chiến Chống Thực Dân Pháp', desc: 'Giai đoạn 1945–1954',            url: 'lesson7.html', maxCards: 20 },
+  { id: 8, title: 'Kháng Chiến Chống Mỹ, Cứu Nước',  desc: 'Giai đoạn 1954–1975',            url: 'lesson8.html', maxCards: 20 },
+];
+var QUIZ_URLS = { 6: 'quiz6.html', 7: 'quiz7.html', 8: 'quiz8.html' };
+
+// ══════════════════════════════════════════
+//  FETCH PROGRESS & RENDER
+// ══════════════════════════════════════════
+fetch('../../php/progress.php')
+  .then(function(r) {
+    if (!r.ok) throw new Error('API error ' + r.status);
+    return r.json();
+  })
+  .then(function(d) {
+    document.getElementById('loadingState').style.display = 'none';
+    document.getElementById('dashContent').style.display  = 'block';
+    renderAll(d);
+  })
+  .catch(function(e) {
+    document.getElementById('loadingState').innerHTML =
+      '<div style="color:#c0392b;font-weight:600;">⚠️ Không tải được dữ liệu. Vui lòng thử lại.</div>';
+    console.error(e);
+  });
+
+// ══════════════════════════════════════════
+//  CHECK VIP — ĐẦY ĐỦ
+//  Gọi ở cuối renderAll(d)
+// ══════════════════════════════════════════
+function checkVipStatus(d) {
+    var isVip = (d.overview && d.overview.is_vip) ? parseInt(d.overview.is_vip) : 0;
+    var vipItems = document.querySelectorAll('li.vip-item');
+
+    if (isVip === 1) {
+        // Mở khóa thanh Menu bên trái
+        vipItems.forEach(function(li) { 
+            li.classList.add('unlocked'); 
+            var link = li.querySelector('a');
+            if (link) {
+                // Xóa biểu tượng ổ khóa 🔒
+                link.innerHTML = link.innerHTML.replace(/🔒/g, '').replace(/<span.*?>🔒<\/span>/g, '');
+            }
+        });
+    } else {
+        vipItems.forEach(function(li) { li.classList.remove('unlocked'); });
+    }
+}
+
+// ══════════════════════════════════════════
+//  MODAL VIP
+// ══════════════════════════════════════════
+// Đóng khi bấm ra ngoài
+document.getElementById('vipModal').addEventListener('click', function(e) {
+  if (e.target === this) closeVipModal();
+});
+
+// Sao chép vào clipboard
+function copyBankText(elId, btn) {
+  var text = document.getElementById(elId).textContent.trim();
+  navigator.clipboard.writeText(text).then(function() {
+    var orig = btn.textContent;
+    btn.textContent = '✓ Đã chép';
+    btn.style.background = '#6a3fa0';
+    btn.style.color = 'white';
+    setTimeout(function() {
+      btn.textContent = orig;
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 1800);
+  });
+}
+
+// Xác nhận đã CK → gửi yêu cầu lên server
+
+// ══════════════════════════════════════════
+//  RENDER ALL
+// ══════════════════════════════════════════
+function renderAll(d) {
+  var ov = d.overview;
+
+  // Tiến độ
+  document.getElementById('doneCount').textContent    = ov.completed_lessons;
+  document.getElementById('pctLabel').textContent     = ov.overall_pct + '%';
+  document.getElementById('progressFill').style.width = ov.overall_pct + '%';
+  document.getElementById('studyLabel').textContent   = ov.study_label;
+  document.getElementById('flashLabel').textContent   = ov.flash_this_week + ' thẻ';
+  document.getElementById('avgLabel').textContent     = ov.avg_score !== null ? ov.avg_score + '/10' : '—';
+
+  // Streak
+  var s = d.streak;
+  document.getElementById('streakCount').textContent = s.days > 0 ? s.days + ' ngày liên tiếp!' : 'Hôm nay bắt đầu nhé!';
+  var dotsEl = document.getElementById('streakDots');
+  dotsEl.innerHTML = '';
+  (s.dots || []).forEach(function(dot) {
+    var el = document.createElement('div');
+    el.className = 'streak-dot ' + dot.status;
+    el.textContent = dot.label;
+    dotsEl.appendChild(el);
+  });
+
+  // Bài học
+  var lessonGrid = document.getElementById('lessonGrid');
+  lessonGrid.innerHTML = '';
+  LESSONS.forEach(function(lesson) {
+    var info = d.lessons[lesson.id] || {};
+    var done = !!info.completed;
+    var pct  = info.pct_done || 0;
+    var cardClass, numBg, statusHtml, btnHtml;
+    if (done) {
+      cardClass  = 'done';
+      numBg      = 'background:var(--green)';
+      statusHtml = '<div class="lesson-status status-done">✓ Đã hoàn thành</div>';
+      btnHtml    = '<a href="' + lesson.url + '" class="btn btn-secondary">Xem lại</a>';
+    } else if (pct > 0) {
+      cardClass  = 'active';
+      numBg      = 'background:var(--blue)';
+      statusHtml = '<div class="lesson-status status-active">▶ Đang học — ' + pct + '%</div>';
+      btnHtml    = '<a href="' + lesson.url + '" class="btn">Tiếp tục →</a>';
+    } else {
+      cardClass  = '';
+      numBg      = '';
+      statusHtml = '<div class="lesson-status" style="color:var(--text-muted);">Chưa bắt đầu</div>';
+      btnHtml    = '<a href="' + lesson.url + '" class="btn">Bắt đầu →</a>';
+    }
+    lessonGrid.innerHTML += '<div class="lesson-card ' + cardClass + '">'
+      + '<div class="lesson-number" style="' + numBg + '">Bài ' + lesson.id + '</div>'
+      + '<h4>' + lesson.title + '</h4>'
+      + '<p>' + lesson.desc + '</p>'
+      + statusHtml + btnHtml + '</div>';
+  });
+
+  // Quiz
+  var quizGrid = document.getElementById('quizGrid');
+  quizGrid.innerHTML = '';
+  LESSONS.forEach(function(lesson) {
+    var q   = d.quizzes[lesson.id];
+    var url = QUIZ_URLS[lesson.id];
+    var numBg, scoreHtml, btnHtml;
+    if (q) {
+      numBg      = 'background:var(--green)';
+      scoreHtml  = '<div class="quiz-score-label">Điểm của bạn</div>'
+                 + '<div class="quiz-score-row"><span class="quiz-score">' + q.score + '</span>'
+                 + '<span class="quiz-score-total">/ ' + q.total_q + '</span></div>';
+      btnHtml    = '<a href="' + url + '" class="btn">Làm lại →</a>';
+    } else {
+      numBg      = 'background:var(--blue)';
+      scoreHtml  = '<div class="quiz-score-label">Chưa làm</div>'
+                 + '<div class="quiz-score-row"><span class="quiz-score" style="color:var(--text-muted);">—</span></div>';
+      btnHtml    = '<a href="' + url + '" class="btn">Làm bài →</a>';
+    }
+    quizGrid.innerHTML += '<div class="quiz-card">'
+      + '<div class="lesson-number" style="' + numBg + '">Bài ' + lesson.id + '</div>'
+      + '<h4>' + lesson.title + '</h4>'
+      + scoreHtml
+      + '<div class="quiz-questions-count">10 câu hỏi</div>'
+      + btnHtml + '</div>';
+  });
+
+  // Stats
+  var quizCount = Object.keys(d.quizzes || {}).length;
+  document.getElementById('statDone').textContent  = ov.completed_lessons;
+  document.getElementById('statQuiz').textContent  = quizCount;
+  document.getElementById('statAvg').textContent   = ov.avg_score !== null ? ov.avg_score : '—';
+  document.getElementById('statTime').textContent  = ov.study_label;
+  document.getElementById('statFlash').textContent = ov.flash_this_week;
+
+  // Biểu đồ
+  var maxH = 0;
+  (d.chart || []).forEach(function(w) { if (w.hours > maxH) maxH = w.hours; });
+  var barChart = document.getElementById('barChart');
+  barChart.innerHTML = '';
+  (d.chart || []).forEach(function(w) {
+    var px = maxH > 0 ? Math.round((w.hours / maxH) * 80) : 4;
+    px = Math.max(px, 4);
+    barChart.innerHTML += '<div class="bar-col">'
+      + '<div class="bar-val">' + (w.hours > 0 ? w.hours + 'h' : '0') + '</div>'
+      + '<div class="bar-fill ' + (w.current ? 'current' : '') + '" style="height:' + px + 'px;"></div>'
+      + '<div class="bar-label">' + w.label + '</div>'
+      + '</div>';
+  });
+
+  // Flashcard by lesson
+  var fList = document.getElementById('flashStatList');
+  fList.innerHTML = '';
+  LESSONS.forEach(function(lesson) {
+    var done = d.flashcard_by_lesson[lesson.id] || 0;
+    var max  = lesson.maxCards;
+    var pct  = Math.min(Math.round(done / max * 100), 100);
+    fList.innerHTML += '<div class="flash-stat-item">'
+      + '<div class="flash-lesson-label">Bài ' + lesson.id + '</div>'
+      + '<div class="flash-bar-wrap"><div class="flash-bar-fill" style="width:' + pct + '%;"></div></div>'
+      + '<div class="flash-count">' + Math.min(done, max) + ' / ' + max + '</div>'
+      + '</div>';
+  });
+
+  // Huy hiệu
+  var badges = [
+    { icon: '🏅', label: 'Học bài đầu tiên', earned: ov.completed_lessons >= 1 },
+    { icon: '✏️', label: 'Quiz đầu tiên',    earned: quizCount >= 1 },
+    { icon: '🔥', label: '3 ngày liên tiếp', earned: d.streak.days >= 3 },
+    { icon: '🃏', label: 'Ôn 20 flashcard',  earned: ov.flash_this_week >= 20 },
+    { icon: '🏆', label: 'Quiz điểm 10',     earned: Object.values(d.quizzes||{}).some(function(q){ return q.score === 10; }) },
+    { icon: '📚', label: 'Học cả 3 bài',     earned: ov.completed_lessons >= 3 },
+  ];
+  var bGrid = document.getElementById('badgeGrid');
+  bGrid.innerHTML = '';
+  badges.forEach(function(b) {
+    bGrid.innerHTML += '<div class="badge-item ' + (b.earned ? 'earned' : '') + '">'
+      + '<div class="badge-icon">' + b.icon + '</div>'
+      + '<div>' + b.label + '</div></div>';
+  });
+const liveCard = document.getElementById('vipLiveSection');
+    if (d.next_live) {
+        const live = d.next_live;
+        const startTime = new Date(live.scheduled_at).getTime();
+        const now = new Date().getTime();
+        const openBefore = 5 * 60 * 1000; // 5 phút
+        const endTime = startTime + (2 * 60 * 60 * 1000); // Kết thúc sau 2 tiếng
+
+        // 1. Đổ dữ liệu vào UI
+        document.getElementById('liveTitle').textContent = live.title;
+        
+        // Định dạng thời gian hiển thị: HH:mm - DD/MM
+        const dt = new Date(live.scheduled_at);
+        const timeStr = dt.getHours().toString().padStart(2,'0') + ":" + 
+                        dt.getMinutes().toString().padStart(2,'0') + " - " + 
+                        dt.getDate() + "/" + (dt.getMonth()+1);
+        
+        document.getElementById('liveTime').innerHTML = `
+            <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">calendar_today</span>
+            ${timeStr}
+        `;
+        
+        // 2. Xử lý nút bấm dựa trên VIP và Thời gian
+        const btnJoin = document.getElementById('btnJoinLive');
+        const isVip = parseInt(d.overview.is_vip || 0);
+
+        if (isVip === 1) {
+            if (now >= (startTime - openBefore) && now <= endTime) {
+                // ĐANG DIỄN RA
+                btnJoin.innerHTML = '<span class="ad-blink">🔴</span> Vào lớp ngay →';
+                btnJoin.className = 'btn btn-vip'; // Chuyển sang màu đỏ/vàng VIP
+                btnJoin.onclick = function() { 
+                    // Mở Jitsi Meet
+                    window.open(`https://meet.jit.si/${live.room_id}`, '_blank'); 
+                };
+            } else if (now < startTime) {
+                // SẮP DIỄN RA
+                btnJoin.textContent = 'Chưa đến giờ học';
+                btnJoin.className = 'btn btn-locked';
+                btnJoin.disabled = true;
+            } else {
+                // ĐÃ KẾT THÚC
+                btnJoin.textContent = 'Buổi học đã kết thúc';
+                btnJoin.className = 'btn btn-locked';
+                btnJoin.disabled = true;
+            }
+        } else {
+            // KHÔNG PHẢI VIP
+            btnJoin.onclick = function() { 
+                alert("Đặc quyền Live-Review chỉ dành cho Sĩ tử VIP. Chi hãy nâng cấp khóa học nhé!");
+                window.location.href = 'khoahoc.html';
+            };
+        }
+    } else {
+        // Nếu không có lịch live nào
+        document.getElementById('liveTitle').textContent = "Chưa có lịch Live mới";
+        document.getElementById('btnJoinLive').style.display = "none";
+    }
+  // ── GỌI CHECK VIP — DÒNG NÀY LÀ MẤU CHỐT ──
+  checkVipStatus(d);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Quiz Bài 8 — Kháng Chiến Chống Mỹ, Cứu Nước (1954–1975)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+<link rel="stylesheet" href="../../css/dashboard.css">
+<style>
+.quiz-wrap{max-width:780px;margin:0 auto}
+.quiz-header-card{background:linear-gradient(135deg,var(--maroon),var(--maroon-dark));border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:24px;color:white;position:relative;overflow:hidden}
+.quiz-header-card::after{content:'';position:absolute;right:-30px;top:-30px;width:180px;height:180px;border-radius:50%;background:rgba(212,175,55,0.12);pointer-events:none}
+.quiz-eyebrow{font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-light);margin-bottom:6px}
+.quiz-header-card h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;margin-bottom:14px}
+.quiz-meta-row{display:flex;gap:18px;flex-wrap:wrap}
+.quiz-meta-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:6px 14px;font-size:12.5px;font-weight:700}
+.quiz-meta-chip .material-symbols-outlined{font-size:15px}
+.quiz-progress-bar{height:6px;background:var(--border);border-radius:99px;overflow:hidden;margin-bottom:20px}
+.quiz-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),#c9a227);border-radius:99px;transition:width 0.4s ease}
+.quiz-progress-label{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px}
+.q-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:28px 30px;box-shadow:var(--shadow-md);margin-bottom:16px;animation:fadeUp 0.3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.q-number{font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.q-text{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text-dark);line-height:1.5;margin-bottom:22px}
+.options-list{display:flex;flex-direction:column;gap:10px}
+.opt-btn{width:100%;text-align:left;display:flex;align-items:center;gap:14px;padding:13px 18px;border:1.5px solid var(--border);border-radius:var(--radius-md);background:var(--cream);font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;color:var(--text-mid);cursor:pointer;transition:all 0.2s}
+.opt-btn:hover:not(:disabled){border-color:var(--gold);background:var(--gold-pale);color:var(--maroon);transform:translateX(4px)}
+.opt-btn .opt-key{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;background:white;border:1.5px solid var(--border)}
+.opt-btn.correct{background:#f1f8e9;border-color:var(--green);color:var(--green)}
+.opt-btn.correct .opt-key{background:var(--green);color:white;border-color:var(--green)}
+.opt-btn.wrong{background:#ffebee;border-color:#c0392b;color:#c0392b}
+.opt-btn.wrong .opt-key{background:#c0392b;color:white;border-color:#c0392b}
+.opt-btn:disabled{cursor:default}
+.q-explain{margin-top:14px;padding:13px 16px;background:var(--gold-pale);border-radius:var(--radius-md);border:1px solid rgba(212,175,55,0.4);font-size:13px;color:var(--maroon);line-height:1.6;display:none}
+.q-explain.show{display:block}
+.q-explain strong{font-weight:800}
+.quiz-nav{display:flex;justify-content:flex-end;gap:10px;margin-top:8px}
+.btn-next{display:none;align-items:center;gap:7px;padding:11px 24px;border-radius:99px;font-family:'Nunito',sans-serif;font-size:13.5px;font-weight:800;border:none;cursor:pointer;background:linear-gradient(135deg,var(--maroon),var(--maroon-dark));color:white;box-shadow:0 4px 14px rgba(128,0,0,0.28);transition:all 0.22s}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(128,0,0,0.36)}
+.btn-next.visible{display:inline-flex}
+.result-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:40px 36px;text-align:center;box-shadow:var(--shadow-lg);display:none}
+.result-card.show{display:block;animation:fadeUp 0.4s ease}
+.result-icon{font-size:3.5rem;margin-bottom:16px}
+.result-score{font-family:'Playfair Display',serif;font-size:54px;font-weight:800;color:var(--maroon);line-height:1;margin-bottom:6px}
+.result-label{font-size:15px;font-weight:700;color:var(--text-mid);margin-bottom:20px}
+.result-badge{display:inline-block;padding:8px 22px;border-radius:99px;font-size:13px;font-weight:800;margin-bottom:28px}
+.badge-pass{background:#e8f5e9;color:var(--green);border:1.5px solid #81c784}
+.badge-fail{background:#ffebee;color:#c0392b;border:1.5px solid #e57373}
+.result-breakdown{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:28px}
+.rb-item{background:var(--cream);border-radius:var(--radius-md);padding:16px 10px;border:1px solid var(--border)}
+.rb-num{font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:var(--maroon)}
+.rb-lbl{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-retake{padding:12px 26px;border-radius:99px;font-family:'Nunito',sans-serif;font-size:13.5px;font-weight:800;cursor:pointer;transition:all 0.22s;text-decoration:none;display:inline-flex;align-items:center}
+.btn-retake.primary{background:linear-gradient(135deg,var(--maroon),var(--maroon-dark));color:white;border:none;box-shadow:0 4px 14px rgba(128,0,0,0.28)}
+.btn-retake.secondary{background:var(--white);color:var(--text-mid);border:1.5px solid var(--border)}
+.btn-retake:hover{transform:translateY(-2px)}
+.btn-retake.secondary:hover{border-color:var(--gold);color:var(--maroon)}
+.save-indicator{font-size:12px;font-weight:700;color:var(--text-muted);text-align:center;margin-top:12px;min-height:18px}
+.save-indicator.ok{color:var(--green)}
+.save-indicator.err{color:#c0392b}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- SIDEBAR ICONS -->
+  <div class="sidebar-icons">
+    <div class="icon-btn active" onclick="location.href='student_dashboard.html'">
+      <span class="material-symbols-outlined">home</span>
+    </div>
+    <div class="icon-btn" onclick="location.href='student_profile.html'">
+      <span class="material-symbols-outlined">groups</span>
+    </div>
+    <div class="icon-btn" onclick="location.href='student_settings.html'">
+      <span class="material-symbols-outlined">settings</span>
+    </div>
+    <div class="logout">
+      <div class="icon-btn" onclick="location.href='../../php/logout.php'">
+        <span class="material-symbols-outlined">logout</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR MENU -->
+  <div class="sidebar-menu">
+    <div class="profile">
+      <div class="avatar" id="avatarEl">&#7842;NH</div>
+      <div class="name" id="nameEl">H&#7884; V&#192; T&#202;N</div>
+    </div>
+    <ul class="menu">
+      <li class="active"><a href="student_dashboard.html">L&#7897; tr&#236;nh c&#7911;a t&#244;i</a></li>
+      <li><a href="thuvienbaigiang.html">Th&#432; vi&#7879;n b&#224;i gi&#7843;ng</a></li>
+      <li><a href="khoahoc.html">Kh&#243;a h&#7885;c c&#7911;a b&#7841;n</a></li>
+      <li><a href="luyenthi.html">Ph&#242;ng luy&#7879;n thi</a></li>
+      <li><a href="bangxephang.html">B&#7843;ng x&#7871;p h&#7841;ng</a></li>
+      <li><a href="sotay.html">S&#7893; tay ghi ch&#250;</a></li>
+    </ul>
+  </div>
+
+  <!-- CENTER -->
+  <div class="center">
+    <div class="quiz-wrap">
+
+      <!-- Header -->
+      <div class="quiz-header-card">
+        <div class="quiz-eyebrow">Ki&#7875;m tra ki&#7871;n th&#7913;c</div>
+        <h2>B&#224;i 8 &#8212; Kh&#225;ng Chi&#7871;n Ch&#7889;ng M&#7929;, C&#7913;u N&#432;&#7899;c (1954&#8211;1975)</h2>
+        <div class="quiz-meta-row">
+          <span class="quiz-meta-chip"><span class="material-symbols-outlined">quiz</span> 10 c&#226;u h&#7887;i</span>
+          <span class="quiz-meta-chip"><span class="material-symbols-outlined">schedule</span> ~5 ph&#250;t</span>
+          <span class="quiz-meta-chip"><span class="material-symbols-outlined">military_tech</span> &#272;&#7841;t: 5/10 tr&#7903; l&#234;n</span>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div id="progressWrap">
+        <div class="quiz-progress-label">
+          <span id="progressText">C&#226;u 1 / 10</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="progressFill" style="width:0%;"></div>
+        </div>
+      </div>
+
+      <div id="questionArea"></div>
+      <div class="quiz-nav">
+        <button class="btn-next" id="btnNext">C&#226;u ti&#7871;p theo <span class="material-symbols-outlined">arrow_forward</span></button>
+      </div>
+
+      <!-- Result -->
+      <div class="result-card" id="resultCard">
+        <div class="result-icon" id="resultIcon">&#127942;</div>
+        <div class="result-score"><span id="scoreNum">0</span><span style="font-size:28px;color:var(--text-muted);"> / 10</span></div>
+        <div class="result-label" id="resultLabel"></div>
+        <div class="result-badge" id="resultBadge"></div>
+        <div class="result-breakdown">
+          <div class="rb-item"><div class="rb-num" id="rbCorrect">0</div><div class="rb-lbl">&#272;&#250;ng</div></div>
+          <div class="rb-item"><div class="rb-num" id="rbWrong">0</div><div class="rb-lbl">Sai</div></div>
+          <div class="rb-item"><div class="rb-num" id="rbPct">0%</div><div class="rb-lbl">T&#7927; l&#7879; &#273;&#250;ng</div></div>
+        </div>
+        <div class="result-actions">
+          <button class="btn-retake primary" onclick="retakeQuiz()">&#128260; L&#224;m l&#7841;i</button>
+          <a href="lesson8.html" class="btn-retake secondary">&#128218; &#212;n l&#7841;i b&#224;i</a>
+          <a href="student_dashboard.html" class="btn-retake secondary">&#127968; V&#7873; trang ch&#7911;</a>
+        </div>
+        <div class="save-indicator" id="saveIndicator"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../../js/load_profile.js"></script>
+<script src="../../js/student.js"></script>
+<script>
+var LESSON_ID = 8;
+var TOTAL_Q   = 10;
+
+var QUESTIONS = [
+  {
+    text: 'Sau Hi&#7879;p &#273;&#7883;nh Gi&#417;-ne-v&#417; (1954), &#273;&#7845;t n&#432;&#7899;c Vi&#7879;t Nam b&#7883; chia c&#7855;t t&#7841;m th&#7901;i &#7903; &#273;&#226;u?',
+    opts: [
+      'V&#297; tuy&#7871;n 16',
+      'V&#297; tuy&#7871;n 17 &#8212; s&#244;ng B&#7871;n H&#7843;i',
+      'V&#297; tuy&#7871;n 18',
+      'V&#297; tuy&#7871;n 19'
+    ],
+    ans: 1,
+    explain: '<strong>V&#297; tuy&#7871;n 17</strong> (s&#244;ng B&#7871;n H&#7843;i) l&#224; ranh gi&#7899;i t&#7841;m th&#7901;i. Mi&#7873;n B&#7855;c ti&#7871;n l&#234;n CNXH, mi&#7873;n Nam d&#432;&#7899;i ch&#7871; &#273;&#7897; M&#7929;&#8211;ng&#7909;y. Hi&#7879;p &#273;&#7883;nh quy &#273;&#7883;nh t&#7893;ng tuy&#7875;n c&#7917; th&#7889;ng nh&#7845;t n&#259;m 1956 nh&#432;ng M&#7929; v&#224; ch&#237;nh quy&#7873;n S&#224;i G&#242;n t&#7915; ch&#7889;i th&#7921;c hi&#7879;n.'
+  },
+  {
+    text: 'H&#7897;i ngh&#7883; Trung &#432;&#417;ng 15 (1/1959) quy&#7871;t &#273;&#7883;nh &#273;i&#7873;u g&#236;?',
+    opts: [
+      'K&#253; hi&#7879;p &#273;&#7883;nh h&#242;a b&#236;nh v&#7899;i M&#7929;',
+      'Cho nh&#226;n d&#226;n mi&#7873;n Nam s&#7917; d&#7909;ng b&#7841;o l&#7921;c c&#225;ch m&#7841;ng &#273;&#7875; &#273;&#7845;u tranh',
+      'B&#7855;t &#273;&#7847;u &#273;&#432;a qu&#226;n mi&#7873;n B&#7855;c v&#224;o Nam',
+      'Th&#224;nh l&#7853;p M&#7863;t tr&#7853;n Gi&#7843;i ph&#243;ng mi&#7873;n Nam'
+    ],
+    ans: 1,
+    explain: 'Ngh&#7883; quy&#7871;t 15 cho ph&#233;p nh&#226;n d&#226;n mi&#7873;n Nam <strong>s&#7917; d&#7909;ng b&#7841;o l&#7921;c c&#225;ch m&#7841;ng</strong> &#273;&#7875; &#273;&#7845;u tranh. &#272;&#226;y l&#224; n&#7873;n t&#7843;ng ph&#225;p l&#253; cho phong tr&#224;o &#272;&#7891;ng kh&#7903;i 1959&#8211;1960 bung n&#7893;. L&#432;u &#253;: M&#7863;t tr&#7853;n GPMN ra &#273;&#7901;i ng&#224;y 20/12/1960 &#8212; sau ngh&#7883; quy&#7871;t n&#224;y.'
+  },
+  {
+    text: 'Phong tr&#224;o &#272;&#7891;ng kh&#7903;i (1959&#8211;1960) c&#243; &#253; ngh&#297;a g&#236; l&#7899;n nh&#7845;t?',
+    opts: [
+      'Gi&#7843;i ph&#243;ng ho&#224;n to&#224;n mi&#7873;n Nam',
+      'Chuy&#7875;n c&#225;ch m&#7841;ng t&#7915; th&#7871; gi&#7919; g&#236;n l&#7921;c l&#432;&#7907;ng sang th&#7871; ti&#7871;n c&#244;ng',
+      'Bu&#7897;c M&#7929; r&#250;t h&#7871;t c&#7889; v&#7845;n v&#7873; n&#432;&#7899;c',
+      'K&#7871;t th&#250;c chi&#7871;n l&#432;&#7907;c "Chi&#7871;n tranh &#273;&#7863;c bi&#7879;t"'
+    ],
+    ans: 1,
+    explain: '&#272;&#7891;ng kh&#7903;i <strong>chuy&#7875;n b&#432;&#7899;c ngo&#7863;t c&#225;ch m&#7841;ng</strong> t&#7915; th&#7845;p sang ti&#7871;n c&#244;ng. B&#7871;n Tre l&#224; n&#417;i n&#7893; ra m&#7841;nh nh&#7845;t v&#7899;i "&#273;&#7897;i qu&#226;n t&#243;c d&#224;i". K&#7871;t qu&#7843;: M&#7863;t tr&#7853;n GPMN ra &#273;&#7901;i 20/12/1960 &#8212; &#273;&#226;y l&#224; t&#7893; ch&#7913;c &#273;&#7867;m &#273;&#7847;u c&#225;ch m&#7841;ng mi&#7873;n Nam.'
+  },
+  {
+    text: '"Qu&#7889;c s&#225;ch" c&#7911;a chi&#7871;n l&#432;&#7907;c "Chi&#7871;n tranh &#273;&#7863;c bi&#7879;t" (1961&#8211;1965) l&#224; g&#236;?',
+    opts: [
+      'Tr&#7921;c th&#259;ng v&#7853;n, thi&#7871;t xa v&#7853;n',
+      '&#7844;p chi&#7871;n l&#432;&#7907;c &#8212; d&#7891;n d&#226;n v&#224;o c&#225;c khu ki&#7875;m so&#225;t',
+      'Qu&#226;n &#273;&#7897;i M&#7929; tr&#7921;c ti&#7871;p tham chi&#7871;n',
+      'B&#7855;n ph&#225; mi&#7873;n B&#7855;c b&#7857;ng kh&#244;ng qu&#226;n'
+    ],
+    ans: 1,
+    explain: '<strong>&#7844;p chi&#7871;n l&#432;&#7907;c</strong> l&#224; qu&#7889;c s&#225;ch c&#7911;a "Chi&#7871;n tranh &#273;&#7863;c bi&#7879;t" &#8212; d&#7891;n nh&#226;n d&#226;n v&#224;o c&#225;c khu t&#7853;p trung &#273;&#7875; c&#244; l&#7853;p c&#225;ch m&#7841;ng. Ta &#273;&#225;nh b&#7841;i b&#7857;ng c&#225;ch ph&#225; v&#7905;, r&#7843;i r&#225;c. Chi&#7871;n th&#7855;ng &#7844;p B&#7855;c (1/1963) ch&#7913;ng minh c&#243; th&#7875; &#273;&#225;nh b&#7841;i chi&#7871;n thu&#7853;t tr&#7921;c th&#259;ng v&#7853;n, thi&#7871;t xa v&#7853;n c&#7911;a M&#7929;.'
+  },
+  {
+    text: 'T&#7893;ng ti&#7871;n c&#244;ng T&#7871;t M&#7853;u Th&#226;n 1968 c&#243; t&#225;c &#273;&#7897;ng quan tr&#7885;ng nh&#7845;t n&#224;o?',
+    opts: [
+      'Gi&#7843;i ph&#243;ng ho&#224;n to&#224;n mi&#7873;n Nam',
+      'Bu&#7897;c M&#7929; ph&#7843;i tuy&#234;n b&#7889; "phi M&#7929; h&#243;a" chi&#7871;n tranh &#8212; th&#7915;a nh&#7853;n th&#7845;t b&#7841;i',
+      'Ti&#234;u di&#7879;t to&#224;n b&#7897; qu&#226;n &#273;&#7897;i S&#224;i G&#242;n',
+      'M&#7929; r&#250;t h&#7871;t qu&#226;n v&#7873; n&#432;&#7899;c ngay l&#7853;p t&#7913;c'
+    ],
+    ans: 1,
+    explain: 'M&#7853;u Th&#226;n 1968 l&#224; &#273;&#242;n t&#226;m l&#253; chi&#7871;n quy&#7871;t &#273;&#7883;nh: <strong>M&#7929; bu&#7897;c ph&#7843;i tuy&#234;n b&#7889; "phi M&#7929; h&#243;a"</strong>, chuy&#7875;n sang "Vi&#7879;t Nam h&#243;a chi&#7871;n tranh". Tuy ta b&#7883; t&#7893;n th&#7845;t l&#7899;n nh&#432;ng &#273;&#7841;t m&#7909;c ti&#234;u chi&#7871;n l&#432;&#7907;c: c&#244;ng khai c&#225;o bu&#7897;c M&#7929; th&#7845;t b&#7841;i tr&#432;&#7899;c d&#432; lu&#7853;n qu&#7889;c t&#7871;.'
+  },
+  {
+    text: 'Tr&#7853;n "&#272;i&#7879;n Bi&#234;n Ph&#7911; tr&#234;n kh&#244;ng" (12/1972) di&#7877;n ra trong bao l&#226;u v&#224; k&#7871;t qu&#7843; l&#224; g&#236;?',
+    opts: [
+      '7 ng&#224;y &#273;&#234;m &#8212; ta b&#7855;n r&#417;i 20 m&#225;y bay B-52',
+      '12 ng&#224;y &#273;&#234;m &#8212; ta b&#7855;n r&#417;i 81 m&#225;y bay (trong &#273;&#243; 34 chi&#7871;c B-52), bu&#7897;c M&#7929; k&#253; Hi&#7879;p &#273;&#7883;nh Pa-ri',
+      '20 ng&#224;y &#273;&#234;m &#8212; M&#7929; ho&#224;n to&#224;n r&#250;t qu&#226;n',
+      '30 ng&#224;y &#273;&#234;m &#8212; c&#7843; H&#224; N&#7897;i v&#224; H&#7843;i Ph&#242;ng b&#7883; ph&#225; h&#7911;y'
+    ],
+    ans: 1,
+    explain: '<strong>12 ng&#224;y &#273;&#234;m</strong> (18&#8211;29/12/1972): ta b&#7855;n r&#417;i 81 m&#225;y bay, trong &#273;&#243; 34 chi&#7871;c B-52 &#8212; lo&#7841;i v&#361; kh&#237; &#273;&#432;&#7907;c coi l&#224; b&#7845;t kh&#7843; x&#226;m ph&#7841;m. Sau &#273;&#243; M&#7929; bu&#7897;c ph&#7843;i k&#253; <strong>Hi&#7879;p &#273;&#7883;nh Pa-ri ng&#224;y 27/1/1973</strong> v&#224; r&#250;t qu&#226;n v&#7873; n&#432;&#7899;c &#8212; ho&#224;n th&#224;nh m&#7909;c ti&#234;u "&#273;&#225;nh cho M&#7929; c&#250;t".'
+  },
+  {
+    text: 'Hi&#7879;p &#273;&#7883;nh Pa-ri (27/1/1973) c&#243; &#253; ngh&#297;a g&#236; quan tr&#7885;ng nh&#7845;t?',
+    opts: [
+      'M&#7929; cam k&#7871;t vi&#7879;n tr&#7907; v&#297;nh vi&#7877;n cho ch&#237;nh quy&#7873;n S&#224;i G&#242;n',
+      'Ho&#224;n th&#224;nh m&#7909;c ti&#234;u "&#273;&#225;nh cho M&#7929; c&#250;t", t&#7841;o ti&#7873;n &#273;&#7873; &#273;&#7875; "&#273;&#225;nh cho Ng&#7909;y nh&#224;o"',
+      'Mi&#7873;n Nam &#273;&#432;&#7907;c gi&#7843;i ph&#243;ng ngay l&#7853;p t&#7913;c',
+      'Vi&#7879;t Nam &#273;&#432;&#7907;c th&#7889;ng nh&#7845;t ho&#224;n to&#224;n'
+    ],
+    ans: 1,
+    explain: 'Hi&#7879;p &#273;&#7883;nh Pa-ri: M&#7929; r&#250;t h&#7871;t qu&#226;n &#8212; <strong>ho&#224;n th&#224;nh "&#273;&#225;nh cho M&#7929; c&#250;t"</strong>. T&#7841;o so s&#225;nh l&#7921;c l&#432;&#7907;ng ho&#224;n to&#224;n c&#243; l&#7907;i cho ta &#273;&#7875; ti&#7871;n t&#7899;i "&#273;&#225;nh cho Ng&#7909;y nh&#224;o". L&#432;u &#253;: hi&#7879;p &#273;&#7883;nh ch&#432;a gi&#7843;i ph&#243;ng mi&#7873;n Nam ngay &#8212; ch&#7881; t&#7841;o ti&#7873;n &#273;&#7873; cho T&#7893;ng ti&#7871;n c&#244;ng Xu&#226;n 1975.'
+  },
+  {
+    text: 'Chi&#7871;n d&#7883;ch n&#224;o m&#7903; &#273;&#7847;u T&#7893;ng ti&#7871;n c&#244;ng v&#224; n&#7893;i d&#7853;y Xu&#226;n 1975?',
+    opts: [
+      'Chi&#7871;n d&#7883;ch H&#7891; Ch&#237; Minh',
+      'Chi&#7871;n d&#7883;ch &#272;&#432;&#7901;ng 14 &#8211; Ph&#432;&#7899;c Long',
+      'Chi&#7871;n d&#7883;ch T&#226;y Nguy&#234;n',
+      'Chi&#7871;n d&#7883;ch Hu&#7871;'
+    ],
+    ans: 2,
+    explain: '<strong>Chi&#7871;n d&#7883;ch T&#226;y Nguy&#234;n</strong> (4/3/1975) m&#7903; &#273;&#7847;u Xu&#226;n 1975, t&#7841;o hi&#7879;u &#7913;ng "r&#250;t qu&#226;n ch&#7841;y lo&#7841;n" c&#7911;a &#273;&#7883;ch. Tr&#432;&#7899;c &#273;&#243;, chi&#7871;n d&#7883;nh Ph&#432;&#7899;c Long (1/1975) l&#224; &#273;&#242;n "trinh s&#225;t" ki&#7875;m tra ph&#7843;n &#7913;ng c&#7911;a M&#7929;. Chi&#7871;n d&#7883;ch H&#7891; Ch&#237; Minh l&#224; chi&#7871;n d&#7883;ch cu&#7889;i c&#249;ng gi&#7843;i ph&#243;ng S&#224;i G&#242;n 30/4/1975.'
+  },
+  {
+    text: 'Th&#7901;i kh&#7855;c l&#7883;ch s&#7917; tr&#432;a 30/4/1975 l&#224; g&#236;?',
+    opts: [
+      '9h00 &#8212; xe t&#259;ng ta v&#224;o &#273;&#7871;n c&#7893;ng',
+      '11h30 &#8212; xe t&#259;ng h&#250;c &#273;&#7893; c&#7893;ng Dinh &#272;&#7897;c L&#7853;p, t&#432;&#7899;ng D&#432;&#417;ng V&#259;n Minh &#273;&#7847;u h&#224;ng',
+      '14h00 &#8212; t&#7845;t c&#7843; l&#7921;c l&#432;&#7907;ng &#273;&#7883;ch bu&#244;ng v&#361;',
+      '12h00 &#8212; Hu&#7871; &#273;&#432;&#7907;c gi&#7843;i ph&#243;ng'
+    ],
+    ans: 1,
+    explain: '<strong>11h30 ng&#224;y 30/4/1975</strong>: xe t&#259;ng s&#7889; 843 v&#224; 390 h&#250;c &#273;&#7893; c&#7893;ng Dinh &#272;&#7897;c L&#7853;p. T&#432;&#7899;ng D&#432;&#417;ng V&#259;n Minh tuy&#234;n b&#7889; &#273;&#7847;u h&#224;ng kh&#244;ng &#273;i&#7873;u ki&#7879;n. K&#7871;t th&#250;c <strong>21 n&#259;m kh&#225;ng chi&#7871;n ch&#7889;ng M&#7929;</strong> (1954&#8211;1975), th&#7889;ng nh&#7845;t &#273;&#7845;t n&#432;&#7899;c. &#272;&#226;y l&#224; m&#7889;c th&#7901;i gian <em>b&#7855;t bu&#7897;c ph&#7843;i nh&#7899;</em>.'
+  },
+  {
+    text: 'Nguy&#234;n nh&#226;n quy&#7871;t &#273;&#7883;nh nh&#7845;t d&#7851;n &#273;&#7871;n th&#7855;ng l&#7907;i c&#7911;a kh&#225;ng chi&#7871;n ch&#7889;ng M&#7929;?',
+    opts: [
+      'Vi&#7879;n tr&#7907; l&#7899;n c&#7911;a Li&#234;n X&#244; v&#224; Trung Qu&#7889;c',
+      'M&#7929; b&#7883; suy y&#7871;u sau chi&#7871;n tranh Vi&#7879;t Nam',
+      'S&#7921; l&#227;nh &#273;&#7841;o s&#225;ng su&#7889;t c&#7911;a &#272;&#7843;ng, ti&#7875;u h&#7907; h&#7907;p, s&#7913;c m&#7841;nh to&#224;n d&#226;n',
+      'Ch&#7881; nh&#7901; v&#224;o s&#7913;c m&#7841;nh qu&#226;n s&#7921;'
+    ],
+    ans: 2,
+    explain: '<strong>Ba nguy&#234;n nh&#226;n ch&#7911; quan quy&#7871;t &#273;&#7883;nh</strong>: (1) S&#7921; l&#227;nh &#273;&#7841;o s&#225;ng su&#7889;t c&#7911;a &#272;&#7843;ng; (2) &#272;o&#224;n k&#7871;t to&#224;n d&#226;n; (3) Ti&#7873;u h&#7907; h&#7907;p Qu&#7889;c t&#7871; XHCN. Nguy&#234;n nh&#226;n kh&#225;ch quan (vi&#7879;n tr&#7907;, M&#7929; suy y&#7871;u) ch&#7881; l&#224; &#273;i&#7873;u ki&#7879;n thu&#7853;n l&#7907;i, kh&#244;ng ph&#7843;i quy&#7871;t &#273;&#7883;nh. &#272;&#226;y l&#224; <em>b&#7851;y ph&#226;n bi&#7879;t</em> ch&#7911; quan vs kh&#225;ch quan trong &#273;&#7873; thi.'
+  }
+];
+
+var current  = 0;
+var score    = 0;
+var answered = false;
+var shuffled = [];
+
+function shuffle(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+function startQuiz() {
+  current  = 0; score = 0; answered = false;
+  shuffled = shuffle(QUESTIONS);
+  document.getElementById('resultCard').classList.remove('show');
+  document.getElementById('progressWrap').style.display = 'block';
+  document.getElementById('questionArea').style.display = 'block';
+  document.getElementById('btnNext').className = 'btn-next';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  answered = false;
+  var q   = shuffled[current];
+  var pct = Math.round((current / TOTAL_Q) * 100);
+  document.getElementById('progressText').textContent = 'C\u00e2u ' + (current + 1) + ' / ' + TOTAL_Q;
+  document.getElementById('progressPct').textContent  = pct + '%';
+  document.getElementById('progressFill').style.width = pct + '%';
+
+  var keys = ['A','B','C','D'];
+  var html = '<div class="q-card">'
+    + '<div class="q-number">C\u00e2u ' + (current + 1) + ' / ' + TOTAL_Q + '</div>'
+    + '<div class="q-text">' + q.text + '</div>'
+    + '<div class="options-list">';
+  q.opts.forEach(function(opt, i) {
+    html += '<button class="opt-btn" id="opt' + i + '" onclick="selectAnswer(' + i + ')">'
+      + '<span class="opt-key">' + keys[i] + '</span>' + opt + '</button>';
+  });
+  html += '</div><div class="q-explain" id="qExplain">' + q.explain + '</div></div>';
+  document.getElementById('questionArea').innerHTML = html;
+  document.getElementById('btnNext').className = 'btn-next';
+}
+
+function selectAnswer(idx) {
+  if (answered) return;
+  answered = true;
+  var q = shuffled[current];
+  for (var i = 0; i < q.opts.length; i++) {
+    var btn = document.getElementById('opt' + i);
+    btn.disabled = true;
+    if (i === q.ans) {
+      btn.className = 'opt-btn correct';
+      btn.querySelector('.opt-key').textContent = '\u2713';
+    } else if (i === idx && i !== q.ans) {
+      btn.className = 'opt-btn wrong';
+      btn.querySelector('.opt-key').textContent = '\u2717';
+    }
+  }
+  if (idx === q.ans) score++;
+  document.getElementById('qExplain').className = 'q-explain show';
+  var btnNext = document.getElementById('btnNext');
+  btnNext.innerHTML = current < TOTAL_Q - 1
+    ? 'C\u00e2u ti\u1ebfp theo <span class="material-symbols-outlined">arrow_forward</span>'
+    : 'Xem k\u1ebft qu\u1ea3 <span class="material-symbols-outlined">emoji_events</span>';
+  btnNext.className = 'btn-next visible';
+}
+
+document.getElementById('btnNext').addEventListener('click', function() {
+  if (!answered) return;
+  current++;
+  if (current < TOTAL_Q) { renderQuestion(); } else { showResult(); }
+});
+
+function showResult() {
+  document.getElementById('progressWrap').style.display = 'none';
+  document.getElementById('questionArea').style.display = 'none';
+  document.getElementById('btnNext').className = 'btn-next';
+  var pct  = Math.round(score / TOTAL_Q * 100);
+  var pass = score >= 5;
+  document.getElementById('resultIcon').textContent  = pass ? '\ud83c\udfc6' : '\ud83d\udcda';
+  document.getElementById('scoreNum').textContent    = score;
+  document.getElementById('rbCorrect').textContent   = score;
+  document.getElementById('rbWrong').textContent     = TOTAL_Q - score;
+  document.getElementById('rbPct').textContent       = pct + '%';
+  document.getElementById('resultLabel').textContent = pass
+    ? 'Xu\u1ea5t s\u1eafc! B\u1ea1n \u0111\u00e3 n\u1eafm v\u1eefng ki\u1ebfn th\u1ee9c B\u00e0i 8.'
+    : 'C\u1ea7n \u00f4n th\u00eam. Xem l\u1ea1i b\u00e0i h\u1ecdc v\u00e0 th\u1eed l\u1ea1i nh\u00e9!';
+  var badge = document.getElementById('resultBadge');
+  badge.textContent = pass
+    ? '\u2713 \u0110\u1ea1t y\u00eau c\u1ea7u \u2014 ' + score + '/10 \u0111i\u1ec3m'
+    : '\u2717 Ch\u01b0a \u0111\u1ea1t \u2014 ' + score + '/10 \u0111i\u1ec3m';
+  badge.className = 'result-badge ' + (pass ? 'badge-pass' : 'badge-fail');
+  document.getElementById('resultCard').classList.add('show');
+  saveScore(score);
+}
+
+function saveScore(s) {
+  var ind = document.getElementById('saveIndicator');
+  ind.className = 'save-indicator';
+  ind.textContent = '\u0110ang l\u01b0u \u0111i\u1ec3m...';
+  fetch('../../php/quiz_score.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ lesson_id: LESSON_ID, score: s, total_q: TOTAL_Q })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+    if (d.ok) { ind.className = 'save-indicator ok'; ind.textContent = '\u2713 \u0110\u00e3 l\u01b0u \u0111i\u1ec3m v\u00e0o h\u1ec7 th\u1ed1ng'; }
+    else { ind.className = 'save-indicator err'; ind.textContent = '\u26a0 Kh\u00f4ng l\u01b0u \u0111\u01b0\u1ee3c: ' + (d.error || 'l\u1ed7i'); }
+  })
+  .catch(function() { ind.className = 'save-indicator err'; ind.textContent = '\u26a0 L\u1ed7i k\u1ebft n\u1ed1i'; });
+}
+
+function retakeQuiz() { startQuiz(); }
+startQuiz();
+</script>
+</body>
+</html>

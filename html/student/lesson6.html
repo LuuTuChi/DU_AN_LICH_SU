@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<title>Bài 6 – Cách mạng tháng Tám năm 1945</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+<link rel="stylesheet" href="../../css/lesson.css"/>
+<link rel="stylesheet" href="../../css/ai-style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- SIDEBAR ICONS -->
+  <div class="sidebar-icons">
+    <div class="icon-btn active" onclick="location.href='student_dashboard.html'">
+        <span class="material-symbols-outlined">home</span>
+    </div>
+
+    <div class="icon-btn" onclick="location.href='student_profile.html'">
+        <span class="material-symbols-outlined">groups</span>
+    </div>
+
+    <div class="icon-btn" onclick="location.href='student_settings.html'">
+        <span class="material-symbols-outlined">settings</span>
+    </div>
+
+    <div class="logout">
+        <div class="icon-btn" onclick="location.href='../../php/logout.php'">
+            <span class="material-symbols-outlined">logout</span>
+        </div>
+    </div>
+</div>
+  <!-- SIDEBAR MENU -->
+  <div class="sidebar-menu">
+    <div class="profile">
+      <div class="avatar" id="avatarEl">ẢNH</div>
+      <div class="name" id="nameEl">HỌ VÀ TÊN</div>
+    </div>
+    <ul class="menu">
+      <li class="active"><a href="../student/student_dashboard.html">Lộ trình của tôi</a></li>
+      <li><a href="../student/thuvienbaigiang.html">Thư viện bài giảng</a></li>
+      <li><a href="../student/khoahoc.html">Khóa học của bạn</a></li>
+      <li><a href="../student/luyenthi.html">Phòng luyện thi</a></li>
+      <li><a href="../student/bangxephang.html">Bảng xếp hạng</a></li>
+      <li><a href="../student/sotay.html">Sổ tay ghi chú</a></li>
+    </ul>
+  </div>
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <div class="lesson-header">
+      <a href="../student/student_dashboard.html" class="back-btn">&#8592; Quay lại</a>
+      <div>
+        <div class="lesson-meta">Lịch sử 12 · Chương II · Bài 6</div>
+        <h2>Cách Mạng Tháng Tám Năm 1945</h2>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="lesson-tools">
+      <button onclick="showTab(event,'video')">&#127916; Video bài giảng</button>
+      <button onclick="showTab(event,'ppt')">&#128209; Slide bài giảng</button>
+      <button onclick="showTab(event,'mindmap')">&#129504; Sơ đồ tư duy</button>
+      <button onclick="showTab(event,'media')">&#127902; Tư liệu &amp; Kho ảnh</button>
+      <button onclick="showTab(event,'keyword')">&#128273; Cẩm nang từ khóa</button>
+      <button onclick="showTab(event,'vr')">&#129509; VR / AR / 3D</button>
+      <button onclick="showTab(event,'flashcard')">&#127183; Flashcard</button>
+      <button onclick="showTab(event,'activity')">&#127908; Dự án</button>
+    </div>
+
+    <div class="lesson-area">
+
+      <!-- 1. VIDEO -->
+      <div id="video" class="lesson-content">
+        <div class="tab-card">
+          <div class="tab-card-header">
+            <span class="tab-card-icon">&#127916;</span>
+            <div>
+              <div class="tab-card-eyebrow">Bài giảng chính</div>
+              <div class="tab-card-title">Video giảng bài chi tiết — Bài 6</div>
+            </div>
+          </div>
+          <div class="tab-card-body">
+            <div class="video-main-frame">
+              <iframe src="https://www.youtube.com/embed/aTPwYfAIGSk" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. SLIDE -->
+      <div id="ppt" class="lesson-content">
+        <div class="tab-card">
+          <div class="tab-card-header">
+            <span class="tab-card-icon">&#128209;</span>
+            <div>
+              <div class="tab-card-eyebrow">Bài giảng điện tử</div>
+              <div class="tab-card-title">Slide bài giảng — Bài 6</div>
+            </div>
+          </div>
+          <div class="tab-card-body">
+            <div class="canva-wrap">
+              <iframe src="https://www.canva.com/design/DAHEYJqbHnE/9YpP2lr5HY4xUcwUzyZZMQ/view?embed" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="canva-note">
+              &#128161; Dùng phím &#8592; &#8594; để chuyển slide. Nhấn nút toàn màn hình để xem đầy đủ.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. MINDMAP -->
+      <div id="mindmap" class="lesson-content">
+        <div class="tab-card">
+          <div class="tab-card-header">
+            <span class="tab-card-icon">&#129504;</span>
+            <div>
+              <div class="tab-card-eyebrow">Tổng kết kiến thức</div>
+              <div class="tab-card-title">Sơ đồ tư duy — Bài 6</div>
+            </div>
+          </div>
+          <div class="tab-card-body">
+            <div class="mindmap-cta">
+              <div class="mindmap-cta-icon">&#129504;</div>
+              <div class="mindmap-cta-title">Sơ đồ tư duy — Bài 6</div>
+              <p class="mindmap-cta-desc">Sơ đồ tư duy tổng kết toàn bộ kiến thức Cách mạng tháng Tám 1945. Nhấn nút bên dưới để mở và tương tác đầy đủ.</p>
+              <a href="https://mm.tt/map/3966389438?t=3JzPcsd9VE" target="_blank" rel="noopener" class="btn-mindmap">
+                &#128506; Mở sơ đồ tư duy đầy đủ
+              </a>
+              <div class="mindmap-cta-note">Mở trong tab mới · Miễn phí · Không cần đăng nhập</div>
+            </div>
+            <div class="canva-note">
+              &#128161; Vào MindMeister để kéo di chuyển, phóng to/thu nhỏ và xem chi tiết từng nhánh.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. TƯ LIỆU -->
+      <div id="media" class="lesson-content">
+        <div class="tab-card">
+          <div class="tab-card-header">
+            <span class="tab-card-icon">&#127902;</span>
+            <div>
+              <div class="tab-card-eyebrow">Tư liệu lịch sử</div>
+              <div class="tab-card-title">Tư liệu &amp; Kho ảnh lịch sử</div>
+            </div>
+          </div>
+          <div class="tab-card-body">
+
+            <!-- Podcast -->
+            <div class="section-label">&#127908; Podcast kể chuyện lịch sử</div>
+            <div class="spotify-card">
+              <div class="spotify-icon">&#127911;</div>
+              <div class="spotify-info">
+                <div class="spotify-label">Spotify Podcast</div>
+                <div class="spotify-title">Cách mạng tháng Tám — Kể chuyện lịch sử</div>
+                <div class="spotify-desc">Nghe podcast tường thuật lại những khoảnh khắc hào hùng của Cách mạng tháng Tám 1945 qua giọng kể sống động.</div>
+              </div>
+              <a href="https://open.spotify.com/episode/03cBglFvjjtcImiT23rhUi?si=yyeHvEkdQZOFzkjJfc12yQ&amp;t=163" target="_blank" rel="noopener" class="btn-spotify">
+                &#9654; Nghe ngay
+              </a>
+            </div>
+
+            <!-- Videos 3 cột -->
+            <div class="section-label">&#128241; Clip ngắn — Tóm tắt diễn biến</div>
+            <div class="videos-3col">
+              <div class="video-card">
+                <div class="video-card-badge">Tóm tắt</div>
+                <h4>Tóm tắt Cách mạng tháng Tám</h4>
+                <div class="video-ratio">
+                  <video controls>
+                    <source src="../../assets/tomtat.mp4" type="video/mp4"/>
+                  </video>
+                </div>
+              </div>
+              <div class="video-card">
+                <div class="video-card-badge">Tư liệu gốc</div>
+                <h4>Mốc lịch sử Cách mạng tháng Tám</h4>
+                <div class="video-ratio">
+                  <video controls>
+                    <source src="../../assets/moclichsu.mp4" type="video/mp4"/>
+                  </video>
+                </div>
+              </div>
+              <div class="video-card">
+                <div class="video-card-badge">Tư liệu gốc</div>
+                <h4>Bác Hồ đọc Tuyên ngôn Độc lập 2/9/1945</h4>
+                <div class="video-ratio">
+                  <video controls>
+                    <source src="../../assets/tuyenngon.mp4" type="video/mp4"/>
+                  </video>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3 ảnh tư liệu -->
+            <div class="section-label">&#128247; Ảnh tư liệu lịch sử</div>
+            <div class="photos-3col">
+              <div class="photo-item">
+                <img src="../../assets/tuyen-ngon-1.jpeg" alt="Chủ tịch HCM đọc Tuyên ngôn Độc Lập"/>
+                <div class="photo-caption">Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc Lập tại Quảng trường Ba Đình</div>
+              </div>
+              <div class="photo-item">
+                <img src="../../assets/images.jpeg" alt="Nhân dân Hà Nội chiếm Phủ Khâm sai"/>
+                <div class="photo-caption">Nhân dân Hà Nội chiếm Phủ Khâm sai (19-8-1945)</div>
+              </div>
+              <div class="photo-item">
+                <img src="../../assets/2a-5550.jpg" alt="Nhân dân Sài Gòn mít tinh"/>
+                <div class="photo-caption">Nhân dân Sài Gòn mít tinh mừng khởi nghĩa thắng lợi (25-8-1945)</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. TỪ KHÓA -->
+      <div id="keyword" class="lesson-content">
+        <div class="tab-card">
+          <div class="tab-card-header">
+            <span class="tab-card-icon">&#128273;</span>
+            <div>
+              <div class="tab-card-eyebrow">Ôn thi nhanh</div>
+              <div class="tab-card-title">Cẩm nang từ khóa vàng — Bài 6</div>
+            </div>
+          </div>
+          <div class="tab-card-body">
+            <div class="keyword-table-wrap">
+              <table class="keyword-table">
+                <thead>
+                  <tr>
+                    <th>Từ khóa / Nội dung</th>
+                    <th>Kiến thức cần nhớ</th>
+                    <th>&#9888;&#65039; Lưu ý tránh bẫy</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="kw-hot">Thời cơ khách quan</span></td>
+                    <td>Nhật đầu hàng Đồng minh không điều kiện (15/8/1945).</td>
+                    <td>Không phải lúc Nhật đảo chính Pháp (9/3).</td>
+                  </tr>
+                  <tr>
+                    <td><span class="kw-hot">Thời cơ chủ quan</span></td>
+                    <td>Chuẩn bị 15 năm; Khối liên minh công - nông; Đảng lãnh đạo.</td>
+                    <td>Đây là nhân tố quyết định nhất.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="kw-hot">Hội nghị toàn quốc</span></td>
+                    <td>Quyết định Tổng khởi nghĩa; Thành lập Ủy ban khởi nghĩa toàn quốc.</td>
+                    <td>Diễn ra <strong>trước</strong> Đại hội Quốc dân.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="kw-hot">Đại hội Quốc dân Tân Trào</span></td>
+                    <td>Tán thành Tổng khởi nghĩa; Cử ra Ủy ban dân tộc giải phóng.</td>
+                    <td>Do Hồ Chí Minh làm Chủ tịch.</td>
+                  </tr>
+                  <tr>
+                    <td>Hình thức đấu tranh</td>
+                    <td>Kết hợp đấu tranh chính trị với vũ trang.</td>
+                    <td>Đấu tranh chính trị đóng vai trò quyết định thắng lợi.</td>
+                  </tr>
+                  <tr>
+                    <td>Địa bàn khởi nghĩa</td>
+                    <td>Kết hợp nông thôn với thành thị.</td>
+                    <td>Diễn ra nhịp nhàng, không tách rời.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="kw-hot">Tính chất cách mạng</span></td>
+                    <td>Cách mạng giải phóng dân tộc (Tính chất điển hình).</td>
+                    <td>Có tính dân chủ nhưng GPDT là hàng đầu.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="kw-hot">Bài học kinh nghiệm</span></td>
+                    <td>Nghệ thuật chớp thời cơ; Tập hợp lực lượng (Mặt trận Việt Minh).</td>
+                    <td>Từ khóa <strong>"Thời cơ"</strong> xuất hiện nhiều nhất trong đề thi.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. VR / AR / 3D -->
+      <div id="vr" class="lesson-content">
+        <div class="tab-card">
+          <div class="tab-card-header">
+            <span class="tab-card-icon">&#129509;</span>
+            <div>
+              <div class="tab-card-eyebrow">Công nghệ cao</div>
+              <div class="tab-card-title">Trải nghiệm VR / AR / 3D</div>
+            </div>
+          </div>
+          <div class="tab-card-body">
+
+            <!-- Picker -->
+            <div id="vrPicker">
+              <div class="vr-pick-title">Chọn trải nghiệm bạn muốn khám phá:</div>
+              <p class="vr-pick-desc">Nhấn vào một trong các thẻ bên dưới để bắt đầu tải trải nghiệm thực tế ảo.</p>
+              <div class="vr-pick-grid">
+
+                <!-- VR 360 Ba Đình -->
+                <div class="vr-pick-card vr-red" onclick="loadVR('vr360')">
+                  <div class="vr-qr">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&data=https%3A%2F%2Fvr360.yoolife.vn%2Fquang-truong-ba-dinh-zbdsc2149u275784%2F&bgcolor=ffffff&color=800000" width="70" height="70" alt="QR"/>
+                    <div class="vr-qr-label">&#128241; Quét QR</div>
+                  </div>
+                  <div class="vr-pick-icon">&#129509;</div>
+                  <div class="vr-pick-name">Thực tế ảo 360°</div>
+                  <div class="vr-pick-desc2">Thời khắc Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập tại Quảng trường Ba Đình ngày 2/9/1945</div>
+                  <div class="vr-pick-btn vr-btn-red">&#9654; Bắt đầu trải nghiệm</div>
+                  <div class="vr-pick-hint">&#128225; Kết nối internet · Khuyến nghị tai nghe</div>
+                </div>
+
+                <!-- 3D Kỳ Đài -->
+                <div class="vr-pick-card vr-blue" onclick="loadVR('ar3d')">
+                  <div class="vr-qr">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&data=https%3A%2F%2Fvr360.yoolife.vn%2Far%2Fmodels%2F1756098951314-3541.glb&bgcolor=ffffff&color=1565c0" width="70" height="70" alt="QR"/>
+                    <div class="vr-qr-label" style="color:#1565c0;">&#128241; Quét QR</div>
+                  </div>
+                  <div class="vr-pick-icon">&#127963;</div>
+                  <div class="vr-pick-name">Mô hình 3D — Kỳ Đài Độc Lập</div>
+                  <div class="vr-pick-desc2">Khám phá Kỳ đài nơi lá cờ đỏ sao vàng được kéo lên lần đầu tiên 2/9/1945 — xoay 360°</div>
+                  <div class="vr-pick-btn vr-btn-blue">&#9654; Xem mô hình 3D</div>
+                  <div class="vr-pick-hint">&#128432; Kéo chuột để xoay · Cuộn để zoom</div>
+                </div>
+
+                <!-- 48 Hàng Ngang -->
+                <div class="vr-pick-card vr-green" onclick="loadVR('hangngang')">
+                  <div class="vr-qr">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&data=https%3A%2F%2F48hangngang.hochiminh.vn%2F&bgcolor=ffffff&color=2e7d32" width="70" height="70" alt="QR"/>
+                    <div class="vr-qr-label" style="color:#2e7d32;">&#128241; Quét QR</div>
+                  </div>
+                  <div class="vr-pick-icon">&#127968;</div>
+                  <div class="vr-pick-name">Di tích 48 Hàng Ngang</div>
+                  <div class="vr-pick-desc2">Nơi Chủ tịch Hồ Chí Minh viết bản Tuyên ngôn Độc lập — tham quan thực tế ảo 360°</div>
+                  <div class="vr-pick-btn vr-btn-green">&#9654; Tham quan di tích</div>
+                  <div class="vr-pick-hint">&#128225; Kết nối internet · Kéo chuột để nhìn xung quanh</div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Player -->
+            <div id="vrPlayer" style="display:none;">
+              <div class="vr-player-bar">
+                <div id="vrPlayerLabel" class="vr-player-label"></div>
+                <button class="vr-back-btn" onclick="closeVR()">&#8592; Quay lại chọn</button>
+              </div>
+              <div class="vr-frame-wrap">
+                <iframe id="vrIframe" src="" allowfullscreen loading="lazy" title="VR/AR viewer"></iframe>
+              </div>
+              <div id="vrNote" class="canva-note" style="margin-top:12px;"></div>
+            </div>
+
+            <!-- Sắp ra mắt -->
+            <div class="vr-coming">
+              <span class="vr-coming-icon">&#128506;</span>
+              <div>
+                <div class="vr-coming-title">Bản đồ AR tổng khởi nghĩa toàn quốc</div>
+                <div class="vr-coming-desc">Theo dõi diễn biến từ Hà Nội &#8594; Huế &#8594; Sài Gòn trên bản đồ tương tác.</div>
+              </div>
+              <span class="badge-soon">Sắp ra mắt</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. FLASHCARD -->
+      <div id="flashcard" class="lesson-content">
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Quân lệnh số 1 được ban bố vào thời điểm nào?</div><div class="flashcard-back">Sáng 13/8/1945</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Sự kiện nào đánh dấu thời cơ "ngàn năm có một"?</div><div class="flashcard-back">Nhật Bản đầu hàng Đồng minh không điều kiện.</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Ai là Chủ tịch Ủy ban Dân tộc giải phóng Việt Nam?</div><div class="flashcard-back">Hồ Chí Minh</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Đơn vị giải phóng quân Võ Nguyên Giáp tiến về thị xã nào đầu tiên?</div><div class="flashcard-back">Thị xã Thái Nguyên (16/8/1945)</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">4 tỉnh giành chính quyền sớm nhất cả nước?</div><div class="flashcard-back">Bắc Giang, Hải Dương, Hà Tĩnh, Quảng Nam</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Ngày giành chính quyền tại Hà Nội?</div><div class="flashcard-back">19/8/1945</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Ngày giành chính quyền tại Huế?</div><div class="flashcard-back">23/8/1945</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Ngày giành chính quyền tại Sài Gòn?</div><div class="flashcard-back">25/8/1945</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Ý nghĩa văn kiện "Tuyên ngôn Độc lập" là gì?</div><div class="flashcard-back">Khai sinh nước Việt Nam Dân chủ Cộng hòa</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Nhân tố khách quan quan trọng nhất giúp CM tháng Tám thành công?</div><div class="flashcard-back">Chiến thắng của Đồng minh tiêu diệt phát xít Nhật</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Nhân tố chủ quan quyết định nhất?</div><div class="flashcard-back">Sự lãnh đạo đúng đắn của Đảng và Hồ Chí Minh</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Lực lượng đóng vai trò nòng cốt trong Cách mạng tháng Tám?</div><div class="flashcard-back">Khối liên minh công - nông</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Hình thức giành chính quyền là gì?</div><div class="flashcard-back">Khởi nghĩa vũ trang</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">CM tháng Tám lật đổ chế độ nào tồn tại hơn 1000 năm?</div><div class="flashcard-back">Chế độ phong kiến</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Văn kiện nào thông qua 10 chính sách của Việt Minh?</div><div class="flashcard-back">Đại hội Quốc dân Tân Trào</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Kẻ thù chính từ tháng 3/1945 đến tháng 8/1945?</div><div class="flashcard-back">Phát xít Nhật</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Ý nghĩa quốc tế lớn nhất của CM tháng Tám?</div><div class="flashcard-back">Góp phần làm tan rã hệ thống thuộc địa của chủ nghĩa thực dân</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Bài học về xây dựng lực lượng là bài học về gì?</div><div class="flashcard-back">Khối đại đoàn kết dân tộc (Mặt trận Việt Minh)</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">Tên gọi của Việt Nam sau cách mạng tháng Tám?</div><div class="flashcard-back">Việt Nam Dân chủ Cộng hòa</div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flip')"><div class="flashcard-inner"><div class="flashcard-front">"Chọc thủng khâu yếu nhất trong hệ thống thuộc địa" nói về sự kiện nào?</div><div class="flashcard-back">Cách mạng tháng Tám 1945</div></div></div>
+      </div>
+
+      <!-- 8. DỰ ÁN -->
+      <div id="activity" class="lesson-content">
+        <div class="tab-card">
+          <div class="tab-card-header">
+            <span class="tab-card-icon">&#127908;</span>
+            <div>
+              <div class="tab-card-eyebrow">Học sâu · Trải nghiệm</div>
+              <div class="tab-card-title">Dự án &amp; Hoạt động trải nghiệm</div>
+            </div>
+          </div>
+          <div class="tab-card-body">
+            <div class="activity-grid">
+              <div class="activity-card">
+                <span class="activity-icon">&#127897;</span>
+                <h4>Podcast Lịch sử</h4>
+                <p>Thu âm một tập podcast kể lại Cách mạng tháng Tám qua lời nhân chứng tưởng tượng.</p>
+                <span class="activity-badge">Cá nhân / Nhóm</span>
+              </div>
+              <div class="activity-card">
+                <span class="activity-icon">&#128240;</span>
+                <h4>Tập làm phóng viên</h4>
+                <p>Viết bài báo tường thuật sự kiện ngày 2/9/1945 như một phóng viên tại chỗ.</p>
+                <span class="activity-badge">Cá nhân</span>
+              </div>
+              <div class="activity-card">
+                <span class="activity-icon">&#128211;</span>
+                <h4>Nhật ký lịch sử</h4>
+                <p>Viết nhật ký từ góc nhìn của một thanh niên Hà Nội trong những ngày tháng Tám 1945.</p>
+                <span class="activity-badge">Cá nhân</span>
+              </div>
+              <div class="activity-card activity-card-full">
+                <span class="activity-icon">&#128444;</span>
+                <h4>Template Poster — Tự tóm tắt bài theo cách riêng</h4>
+                <p>Tải template poster Bài 6, điền thông tin và trang trí theo phong cách của bạn. Một cách sáng tạo để ghi nhớ kiến thức!</p>
+                <div class="poster-row">
+                  <div class="poster-preview">
+                    <img id="posterImg" src="../../assets/poster6.png" alt="Template Poster Bài 6"/>
+                  </div>
+                  <div class="poster-info">
+                    <div class="poster-desc">In ra hoặc dùng trực tiếp trên máy tính — điền vào các ô kiến thức quan trọng của Bài 6.</div>
+                    <a href="../../assets/poster6.png" download="Poster_Bai6_CachMangThang8.png" class="btn-download">
+                      &#8595; Tải poster về
+                    </a>
+                  </div>
+                </div>
+                <span class="activity-badge">Cá nhân / Cả lớp</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../../js/lesson.js"></script>
+<script src="../../js/load_profile.js"></script>
+<script>
+function showTab(e, id) {
+  document.querySelectorAll('.lesson-content').forEach(function(el) {
+    el.classList.remove('visible');
+    el.style.display = 'none';
+  });
+  document.querySelectorAll('.lesson-tools button').forEach(function(b) {
+    b.classList.remove('active');
+  });
+  var t = document.getElementById(id);
+  if (t) {
+    t.style.display = (id === 'flashcard') ? 'grid' : 'block';
+    void t.offsetWidth;
+    t.classList.add('visible');
+  }
+  if (e && e.currentTarget) e.currentTarget.classList.add('active');
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  var firstBtn = document.querySelector('.lesson-tools button');
+  if (firstBtn) firstBtn.click();
+});
+
+var VR_DATA = {
+  vr360: {
+    src:   'https://vr360.yoolife.vn/quang-truong-ba-dinh-zbdsc2149u275784/',
+    label: 'Thực tế ảo 360° — Quảng trường Ba Đình 2/9/1945',
+    note:  'Kéo chuột để nhìn xung quanh · Cuộn để zoom · Nhấn toàn màn hình để trải nghiệm đầy đủ.'
+  },
+  ar3d: {
+    src:   'https://vr360.yoolife.vn/ar/models/1756098951314-3541.glb',
+    label: 'Mô hình 3D — Kỳ Đài Độc Lập tại Quảng trường Ba Đình',
+    note:  'Kéo chuột để xoay mô hình · Cuộn để phóng to/thu nhỏ.'
+  },
+  hangngang: {
+    src:   'https://48hangngang.hochiminh.vn/',
+    label: 'Di tích 48 Hàng Ngang — Nơi Bác Hồ viết Tuyên ngôn Độc lập',
+    note:  'Kéo chuột để nhìn xung quanh không gian di tích · Nhấn vào các điểm nóng để xem thêm.'
+  }
+};
+
+function loadVR(type) {
+  var d = VR_DATA[type];
+  document.getElementById('vrPicker').style.display = 'none';
+  document.getElementById('vrPlayer').style.display = 'block';
+  document.getElementById('vrIframe').src = d.src;
+  document.getElementById('vrPlayerLabel').textContent = d.label;
+  document.getElementById('vrNote').textContent = d.note;
+}
+
+function closeVR() {
+  document.getElementById('vrPlayer').style.display = 'none';
+  document.getElementById('vrPicker').style.display = 'block';
+  document.getElementById('vrIframe').src = '';
+}
+</script>
+<script>
+// --- HỆ THỐNG THEO DÕI TỰ ĐỘNG (BẢN CHUẨN) ---
+let currentSessionId = null;
+let startTime = Date.now();
+let isCompleted = false;
+
+const lessonMatch = window.location.pathname.match(/lesson(\d+)/);
+const LESSON_NUM = lessonMatch ? lessonMatch[1] : '6';
+
+// 1. Bắt đầu phiên học
+fetch('/DUAN_LICHSU/php/track.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'session_start', lesson_id: LESSON_NUM })
+})
+.then(res => res.json())
+.then(data => {
+    if (data.ok) currentSessionId = data.session_id;
+});
+
+// 2. Theo dõi cuộn trang
+window.addEventListener('scroll', () => {
+    if (isCompleted) return;
+    let winScroll = window.scrollY;
+    let height = document.documentElement.scrollHeight - window.innerHeight;
+    let scrolled = Math.round((winScroll / height) * 100);
+    if (scrolled >= 90) {
+        isCompleted = true;
+        fetch('/DUAN_LICHSU/php/track.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'update_progress', lesson_id: LESSON_NUM, progress: 100 })
+        });
+    }
+}, { passive: true });
+
+// 3. Gửi thời gian học khi thoát trang
+window.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden' && currentSessionId) {
+        let duration = Math.round((Date.now() - startTime) / 1000);
+        const endData = JSON.stringify({
+            action: 'session_end',
+            session_id: currentSessionId,
+            duration_s: duration
+        });
+        navigator.sendBeacon('/DUAN_LICHSU/php/track.php', endData);
+    }
+});
+
+// 4. --- HỆ THỐNG GHI NHẬN ÔN TẬP FLASHCARD (ĐÃ FIX LỖI ĐÓNG NGOẶC) ---
+document.querySelectorAll('.flashcard').forEach(card => {
+    card.addEventListener('click', function() {
+        // Chỉ tính điểm lần đầu tiên lật thẻ trong phiên học này
+        if (!this.classList.contains('counted')) {
+            this.classList.add('counted');
+            
+            console.log("Đang gửi lệnh lưu Flashcard..."); // Xem ở tab Console
+
+           fetch('/php/save_flashcard.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    lesson_id: LESSON_NUM,
+                    cards_done: 1
+                })
+            })
+            .then(res => res.json())
+            .then(data => console.log("Lưu Flashcard thành công:", data))
+            .catch(err => console.error("Lỗi lưu Flashcard:", err));
+        }
+    });
+});
+</script>
+<script>
+  var AI_LESSON_ID    = 6; 
+  var AI_LESSON_NAME  = "Bài 6 — Cách mạng tháng Tám năm 1945";
+  var AI_STUDENT_NAME = document.getElementById('nameEl') ? document.getElementById('nameEl').textContent : "Chi";
+</script>
+<script src="../../js/ai-chat.js"></script>
+</body>
+</html>

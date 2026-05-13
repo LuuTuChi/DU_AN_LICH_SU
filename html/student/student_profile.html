@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Hồ sơ cá nhân — Sử Việt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+<link rel="stylesheet" href="../../css/dashboard.css">
+<style>
+/* ── COVER + AVATAR ── */
+.profile-header-card {
+  background: var(--white); border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border); overflow: hidden;
+  margin-bottom: 24px; box-shadow: var(--shadow-md);
+}
+.profile-cover {
+  height: 130px;
+  background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 60%, #2d0000 100%);
+  position: relative;
+}
+.profile-cover::after {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L35 20 L50 20 L38 30 L43 45 L30 35 L17 45 L22 30 L10 20 L25 20Z' fill='rgba(212,175,55,0.06)'/%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+}
+.profile-body { padding: 0 36px 32px; display: flex; align-items: flex-end; gap: 26px; margin-top: -56px; flex-wrap: wrap; }
+.pf-avatar-wrap { position: relative; flex-shrink: 0; }
+.pf-avatar {
+  width: 112px; height: 112px; border-radius: 50%;
+  border: 5px solid var(--white); background: var(--maroon);
+  color: white; display: flex; align-items: center; justify-content: center;
+  font-size: 2.2rem; font-weight: 800; overflow: hidden;
+  box-shadow: 0 8px 24px rgba(128,0,0,0.25);
+}
+.pf-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.pf-rank {
+  position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+  background: var(--gold); color: #1a0000; padding: 4px 14px;
+  border-radius: 99px; font-size: 11px; font-weight: 800;
+  white-space: nowrap; border: 2px solid var(--white);
+  box-shadow: 0 3px 10px rgba(212,175,55,0.4);
+}
+.pf-text { flex: 1; min-width: 240px; padding-bottom: 8px; }
+.pf-text h2 { font-family: 'Playfair Display',serif; font-size: 24px; font-weight: 800; color: var(--maroon); margin-bottom: 4px; }
+.pf-motto { font-size: 13px; color: var(--text-muted); font-style: italic; margin-bottom: 14px; }
+.pf-stats { display: flex; gap: 18px; flex-wrap: wrap; }
+.pf-stat { text-align: center; background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 10px 18px; min-width: 72px; }
+.pf-stat b { display: block; font-family: 'Playfair Display',serif; font-size: 22px; font-weight: 800; color: var(--maroon); line-height: 1; }
+.pf-stat span { font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-top: 3px; display: block; }
+
+/* ── GRID ── */
+.pf-grid { display: grid; grid-template-columns: 320px 1fr; gap: 20px; align-items: start; }
+@media(max-width:900px){ .pf-grid { grid-template-columns: 1fr; } }
+
+/* ── INFO CARD ── */
+.pf-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg); padding: 24px 26px;
+  box-shadow: var(--shadow-sm);
+}
+.pf-card-title {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Playfair Display',serif; font-size: 16px; font-weight: 800;
+  color: var(--maroon); margin-bottom: 18px; padding-bottom: 12px;
+  border-bottom: 1.5px solid var(--border);
+}
+.pf-card-title .material-symbols-outlined { font-size: 19px; color: var(--gold); font-variation-settings:'FILL' 1; }
+.edit-link { margin-left: auto; font-size: 12.5px; font-weight: 700; color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 4px; }
+.edit-link .material-symbols-outlined { font-size: 15px; }
+.edit-link:hover { color: var(--maroon); }
+
+.info-list { list-style: none; }
+.info-list li { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--border); font-size: 13.5px; gap: 10px; }
+.info-list li:last-child { border-bottom: none; }
+.info-list li .lbl { color: var(--text-muted); font-weight: 600; flex-shrink: 0; }
+.info-list li .val { color: var(--text-dark); font-weight: 700; text-align: right; }
+.val-highlight { color: var(--maroon) !important; }
+
+/* ── BADGE GALLERY ── */
+.badge-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px,1fr)); gap: 14px; }
+.b-item {
+  text-align: center; padding: 14px 10px; border-radius: var(--radius-md);
+  background: var(--cream); border: 1.5px solid var(--border);
+  opacity: 0.35; filter: grayscale(1); transition: all 0.25s;
+}
+.b-item.earned {
+  opacity: 1; filter: none; background: var(--gold-pale);
+  border-color: var(--gold); box-shadow: var(--shadow-sm);
+}
+.b-item.earned:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.b-icon { font-size: 1.8rem; display: block; margin-bottom: 7px; }
+.b-label { font-size: 11.5px; font-weight: 800; color: var(--text-muted); line-height: 1.3; }
+.b-item.earned .b-label { color: var(--maroon); }
+
+/* ── LEARNING CARD ── */
+.learn-row { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.learn-row:last-child { border-bottom: none; }
+.learn-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px; }
+.learn-icon.red { background: rgba(128,0,0,0.1); }
+.learn-icon.gold { background: var(--gold-pale); }
+.learn-icon.green { background: var(--green-bg); }
+.learn-body { flex: 1; }
+.learn-title { font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 3px; }
+.learn-sub { font-size: 11.5px; color: var(--text-muted); }
+.learn-val { font-family: 'Playfair Display',serif; font-size: 18px; font-weight: 800; color: var(--maroon); }
+
+/* ── LOADING ── */
+.pf-loading { text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- SIDEBAR ICONS — đúng chuẩn như student_dashboard -->
+ <div class="sidebar-icons">
+    <div class="icon-btn" onclick="location.href='student_dashboard.html'">
+        <span class="material-symbols-outlined">home</span>
+    </div>
+
+    <div class="icon-btn active" onclick="location.href='student_profile.html'">
+        <span class="material-symbols-outlined">groups</span>
+    </div>
+
+    <div class="icon-btn" onclick="location.href='student_settings.html'">
+        <span class="material-symbols-outlined">settings</span>
+    </div>
+    <div class="logout">
+         <a href="../login.html" class="icon-btn">
+           <span class="material-symbols-outlined">logout</span>
+         </a>
+       </div>
+</div>
+  <!-- SIDEBAR MENU — đúng chuẩn, id avatarEl + nameEl cho load_profile.js -->
+  <div class="sidebar-menu">
+    <div class="profile">
+      <div class="avatar" id="avatarEl">ẢNH</div>
+      <div class="name" id="nameEl">HỌ VÀ TÊN</div>
+    </div>
+    <ul class="menu">
+      <li class="active"><a href="student_profile.html">Hồ sơ cá nhân</a></li>
+    </ul>
+  </div>
+
+  <!-- CENTER -->
+  <div class="center">
+    <h2 class="page-title">HỒ SƠ CÁ NHÂN</h2>
+
+    <!-- Header card -->
+    <div class="profile-header-card">
+      <div class="profile-cover"></div>
+      <div class="profile-body">
+        <div class="pf-avatar-wrap">
+          <div class="pf-avatar" id="pfAvatar">?</div>
+          <div class="pf-rank" id="pfRank">Đang tải...</div>
+        </div>
+        <div class="pf-text">
+          <h2 id="pfName">Học sinh</h2>
+          <p class="pf-motto">"Dân ta phải biết sử ta, cho tường gốc tích nước nhà Việt Nam."</p>
+          <div class="pf-stats">
+            <div class="pf-stat"><b id="pfStatLessons">—</b><span>Bài học</span></div>
+            <div class="pf-stat"><b id="pfStatFlash">—</b><span>Flashcard</span></div>
+            <div class="pf-stat"><b id="pfStatAvg">—</b><span>Điểm TB</span></div>
+            <div class="pf-stat"><b id="pfStatStreak">—</b><span>Streak</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="pf-grid">
+
+      <!-- Cột trái: thông tin định danh + học tập -->
+      <div>
+        <div class="pf-card" style="margin-bottom:20px;">
+          <div class="pf-card-title">
+            <span class="material-symbols-outlined">shield_person</span>
+            Thông tin cá nhân
+            <a href="student_settings.html" class="edit-link">
+              <span class="material-symbols-outlined">edit_square</span>Chỉnh sửa
+            </a>
+          </div>
+          <ul class="info-list">
+            <li><span class="lbl">Tên đăng nhập</span><span class="val" id="infoUsername">@user</span></li>
+            <li><span class="lbl">Họ và tên</span><span class="val" id="infoFullname">—</span></li>
+            <li><span class="lbl">Giới tính</span><span class="val" id="infoGender">—</span></li>
+            <li><span class="lbl">Ngày sinh</span><span class="val" id="infoBirthday">—</span></li>
+            <li><span class="lbl">Trường học</span><span class="val" id="infoSchool">—</span></li>
+            <li><span class="lbl">Lớp</span><span class="val" id="infoGrade">—</span></li>
+            <li><span class="lbl">Tỉnh / Thành</span><span class="val" id="infoCity">—</span></li>
+            <li><span class="lbl">Mục tiêu</span><span class="val val-highlight" id="infoTarget">—</span></li>
+            <li><span class="lbl">Ngày gia nhập</span><span class="val" id="infoJoined">—</span></li>
+          </ul>
+        </div>
+
+        <div class="pf-card">
+          <div class="pf-card-title">
+            <span class="material-symbols-outlined">school</span>
+            Năng lực học tập
+          </div>
+          <div class="learn-row">
+            <div class="learn-icon red"><span class="material-symbols-outlined" style="font-size:18px;color:var(--maroon);">history_edu</span></div>
+            <div class="learn-body">
+              <div class="learn-title">Điểm Lịch sử lớp 11</div>
+              <div class="learn-sub">Điểm trung bình trước khi vào Sử Việt</div>
+            </div>
+            <div class="learn-val" id="learnAvg11">—</div>
+          </div>
+          <div class="learn-row">
+            <div class="learn-icon gold"><span class="material-symbols-outlined" style="font-size:18px;color:#7d5800;">quiz</span></div>
+            <div class="learn-body">
+              <div class="learn-title">Điểm thi gần nhất</div>
+              <div class="learn-sub">Bài kiểm tra gần nhất trước khi đăng ký</div>
+            </div>
+            <div class="learn-val" id="learnLastScore">—</div>
+          </div>
+          <div class="learn-row">
+            <div class="learn-icon green"><span class="material-symbols-outlined" style="font-size:18px;color:var(--green);">trending_up</span></div>
+            <div class="learn-body">
+              <div class="learn-title">Tự đánh giá năng lực</div>
+              <div class="learn-sub">Mức độ học sinh tự nhận khi đăng ký</div>
+            </div>
+            <div class="learn-val" style="font-size:13px;text-align:right;" id="learnSelfLevel">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cột phải: huy hiệu + thói quen -->
+      <div>
+        <div class="pf-card" style="margin-bottom:20px;">
+          <div class="pf-card-title">
+            <span class="material-symbols-outlined">military_tech</span>
+            Huy hiệu thành tích
+          </div>
+          <div class="badge-gallery" id="pfBadges">
+            <div class="pf-loading">Đang tải...</div>
+          </div>
+        </div>
+
+        <div class="pf-card">
+          <div class="pf-card-title">
+            <span class="material-symbols-outlined">calendar_month</span>
+            Thói quen học tập
+          </div>
+          <div class="learn-row">
+            <div class="learn-icon red"><span class="material-symbols-outlined" style="font-size:18px;color:var(--maroon);">event_repeat</span></div>
+            <div class="learn-body">
+              <div class="learn-title">Số buổi học mỗi tuần</div>
+              <div class="learn-sub">Tự khai khi đăng ký hồ sơ</div>
+            </div>
+            <div class="learn-val" id="habitSessions">—</div>
+          </div>
+          <div class="learn-row">
+            <div class="learn-icon gold"><span class="material-symbols-outlined" style="font-size:18px;color:#7d5800;">schedule</span></div>
+            <div class="learn-body">
+              <div class="learn-title">Thời gian mỗi buổi</div>
+              <div class="learn-sub">Thời lượng học trung bình</div>
+            </div>
+            <div class="learn-val" style="font-size:13px;text-align:right;" id="habitTime">—</div>
+          </div>
+          <div class="learn-row">
+            <div class="learn-icon green"><span class="material-symbols-outlined" style="font-size:18px;color:var(--green);">wb_sunny</span></div>
+            <div class="learn-body">
+              <div class="learn-title">Thời điểm học</div>
+              <div class="learn-sub">Sáng / Chiều / Tối / Khuya</div>
+            </div>
+            <div class="learn-val" style="font-size:13px;text-align:right;" id="habitTimeOfDay">—</div>
+          </div>
+          <div class="learn-row">
+            <div class="learn-icon red"><span class="material-symbols-outlined" style="font-size:18px;color:var(--maroon);">checklist</span></div>
+            <div class="learn-body">
+              <div class="learn-title">Có lập kế hoạch học?</div>
+              <div class="learn-sub">Phương pháp tổ chức học tập</div>
+            </div>
+            <div class="learn-val" style="font-size:13px;" id="habitPlan">—</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.pf-grid -->
+    <div style="height:32px;"></div>
+  </div><!-- /.center -->
+</div><!-- /.container -->
+
+<script src="../../js/load_profile.js"></script>
+<script>
+// --- HELPERS CẢI TIẾN ---
+function val(v, fallback) {
+    if (v === null || v === undefined || v === '' || v === '0' || v === 0) return fallback || '—';
+    return v;
+}
+
+// 1. LẤY THÔNG TIN TỪ GET_PROFILE.PHP (Thông tin cá nhân + Avatar)
+fetch('../../php/get_profile.php')
+  .then(r => r.json())
+  .then(p => {
+    if (p.status !== 'success') return;
+
+    // 1. Hiện Avatar lớn (SỬA LỖI AVATAR)
+    // 1. Hiện Avatar lớn và đồng bộ Sidebar
+const pfAv = document.getElementById('pfAvatar'); // Avatar giữa trang
+const sidebarAvatar = document.getElementById('avatarEl'); // Avatar sidebar (ID đúng của Chi là avatarEl)
+
+if (p.avatar) {
+    // Đường dẫn đúng từ html/student/ lùi ra ngoài vào uploads
+    const fullPath = '../../uploads/' + p.avatar; 
+    const imgHtml = `<img src="${fullPath}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+    
+    if (pfAv) pfAv.innerHTML = imgHtml;
+    if (sidebarAvatar) sidebarAvatar.innerHTML = imgHtml;
+} else {
+    // Nếu không có ảnh thì mới hiện chữ cái đầu
+    const initial = (p.fullname || 'S').charAt(0).toUpperCase();
+    if (pfAv) pfAv.textContent = initial;
+    if (sidebarAvatar) sidebarAvatar.textContent = initial;
+}
+
+    // 2. Hiện tên và Rank
+    document.getElementById('pfName').textContent = p.fullname || p.username;
+    
+    // 3. Thông tin định danh (Khớp với p.biến_ở_PHP)
+    document.getElementById('infoUsername').textContent = '@' + p.username;
+    document.getElementById('infoFullname').textContent = p.fullname || '—';
+    document.getElementById('infoGender').textContent = p.gender || '—';
+    document.getElementById('infoBirthday').textContent = p.birthday || '—';
+    document.getElementById('infoSchool').textContent = p.school || '—';
+    document.getElementById('infoGrade').textContent = p.grade || '—';
+    document.getElementById('infoCity').textContent = p.city || '—';
+    document.getElementById('infoTarget').textContent = p.target_score ? p.target_score + ' điểm' : 'Chưa đặt';
+    document.getElementById('infoJoined').textContent = p.created_at ? p.created_at.split(' ')[0] : '—';
+
+    // 4. Năng lực học tập
+    document.getElementById('learnAvg11').textContent = (p.avg_history_11 || '—') + (p.avg_history_11 ? ' điểm' : '');
+    document.getElementById('learnLastScore').textContent = (p.last_test_score || '—') + (p.last_test_score ? ' điểm' : '');
+    document.getElementById('learnSelfLevel').textContent = p.self_level || '—';
+
+    // 5. Thói quen
+    document.getElementById('habitSessions').textContent = (p.study_sessions_per_week || '—') + (p.study_sessions_per_week ? ' buổi' : '');
+    document.getElementById('habitTime').textContent = p.study_time_per_session || '—';
+    document.getElementById('habitTimeOfDay').textContent = p.study_time_of_day || '—';
+    document.getElementById('habitPlan').textContent = (p.has_study_plan === 'co' || p.has_study_plan === 'yes') ? 'Có 📋' : 'Chưa có';
+  })
+  .catch(e => console.error("Lỗi get_profile:", e));
+
+// 2. LẤY THỐNG KÊ TỪ PROGRESS.PHP (Huy hiệu + Số thẻ)
+fetch('../../php/progress.php')
+  .then(r => r.json())
+  .then(d => {
+    console.log("Dữ liệu Progress nhận được:", d);
+    const ov = d.overview || {};
+    const streak = d.streak || {};
+    const quizzes = d.quizzes || {};
+
+    // Header Stats
+    document.getElementById('pfStatLessons').textContent = ov.completed_lessons || 0;
+    document.getElementById('pfStatFlash').textContent = ov.flash_this_week || 0;
+    document.getElementById('pfStatAvg').textContent = ov.avg_score || '—';
+    document.getElementById('pfStatStreak').textContent = (streak.days || 0) + ' ngày';
+
+    // Rank
+    let rank = 'Sử Gia Tập Sự';
+    if (ov.completed_lessons >= 3) rank = 'Sử Gia Ưu Tú';
+    if (ov.avg_score >= 8.5) rank = 'Hàn Lâm Sử Học';
+    document.getElementById('pfRank').textContent = '🏆 ' + rank;
+
+    // Render Huy hiệu
+    const badges = [
+      { icon: '🏅', label: 'Nhập Môn', earned: ov.completed_lessons >= 1 },
+      { icon: '✏️', label: 'Sĩ Tử', earned: Object.keys(quizzes).length >= 1 },
+      { icon: '🔥', label: 'Chăm Chỉ', earned: (streak.days || 0) >= 3 },
+      { icon: '🃏', label: 'Thông Thái', earned: (ov.flash_this_week || 0) >= 20 },
+      { icon: '🏆', label: 'Trạng Nguyên', earned: Object.values(quizzes).some(q => q.score >= 8) },
+      { icon: '📚', label: 'Toàn Thư', earned: ov.completed_lessons >= 3 },
+    ];
+
+    document.getElementById('pfBadges').innerHTML = badges.map(b => `
+        <div class="b-item ${b.earned ? 'earned' : ''}">
+            <span class="b-icon">${b.icon}</span>
+            <span class="b-label">${b.label}</span>
+        </div>
+    `).join('');
+  })
+  .catch(e => console.error("Lỗi progress:", e));
+</script>
+</body>
+</html>
